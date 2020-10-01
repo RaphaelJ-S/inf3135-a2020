@@ -2,7 +2,7 @@
 #include "Basic.h"       // mode de base
 //#include "Automated.h"
 //#include "Console.h"
-#include "max.h"         // declaration de mes fonctions
+#include "tcv.h"         // declaration de mes fonctions
 #include <stdio.h>       // printf
 
 /*****  LES fonctions qui initialise et detruit la "Suite de test" ******/

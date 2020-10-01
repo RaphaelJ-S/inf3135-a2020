@@ -1,5 +1,5 @@
 tp1: tp1.c
-	gcc -std=c11 -Wall -Werror=vla -pedantic -o tp1 tp1.c
+	gcc -std=c11 -Wall -Werror=vla -pedantic -I/usr/include/CUnit -L/usr/lib/x86_64-linux-gnu -o tp1 tp1.c tcv.o -lcunit
 
 test: tp1
 	./tp1
