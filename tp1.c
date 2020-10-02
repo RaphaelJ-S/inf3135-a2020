@@ -28,7 +28,20 @@ void test_case_exemple(void)
 */
 //Insérer le code du Tp1 ici.!!!
 
-  
+void validerTH_1_test_int(void){
+  CU_ASSERT_FALSE(validerTH_1(50));
+  CU_ASSERT_FALSE(validerTH_1(169));
+  CU_ASSERT_TRUE(validerTH_1(170));
+  CU_ASSERT_TRUE(validerTH_1(171)); 
+  CU_ASSERT_TRUE(validerTH_1(221));
+  CU_ASSERT_TRUE(validerTH_1(273));
+  CU_ASSERT_TRUE(validerTH_1(365));
+  CU_ASSERT_TRUE(validerTH_1(399));
+  CU_ASSERT_TRUE(validerTH_1(400)); 
+  CU_ASSERT_FALSE(validerTH_1(401));
+  CU_ASSERT_FALSE(validerTH_1(526));
+
+}  
 
 /************* Nous debutons l'execution des tests **************/
 
@@ -41,16 +54,14 @@ int main ( void )
       return CU_get_error();
 
    /* add a suite to the registry */
-   pSuite = CU_add_suite( "max_test_suite", init_suite, clean_suite );
+   pSuite = CU_add_suite( "tp1_test_suite", init_suite, clean_suite );
    if ( NULL == pSuite ) {
       CU_cleanup_registry();
       return CU_get_error();
    }
 
    /* add the tests to the suite */
-   if ( (NULL == CU_add_test(pSuite, "max_test_1", max_test_un)) ||
-        (NULL == CU_add_test(pSuite, "max_test_2", max_test_deux)) ||
-        (NULL == CU_add_test(pSuite, "max_test_3", max_test_trois))
+   if ( (NULL == CU_add_test(pSuite, "validerTH_1_int", validerTH_1_test_int)) 
       )
    {
       CU_cleanup_registry();
