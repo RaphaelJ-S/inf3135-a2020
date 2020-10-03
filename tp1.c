@@ -28,21 +28,28 @@ void test_case_exemple(void)
 */
 //Insérer le code du Tp1 ici.!!!
 
-void validerTH_1_test_int(void){
+void test_validerTH_1(void) {
+
+  CU_ASSERT_FALSE(validerTH_1(-171));
+  CU_ASSERT_FALSE(validerTH_1(-169));
+  CU_ASSERT_FALSE(validerTH_1(-1));
+  CU_ASSERT_FALSE(validerTH_1(0));
   CU_ASSERT_FALSE(validerTH_1(50));
-  CU_ASSERT_FALSE(validerTH_1(169));
+  CU_ASSERT_FALSE(validerTH_1(169));   
   CU_ASSERT_TRUE(validerTH_1(170));
   CU_ASSERT_TRUE(validerTH_1(171)); 
   CU_ASSERT_TRUE(validerTH_1(221));
   CU_ASSERT_TRUE(validerTH_1(273));
-  CU_ASSERT_TRUE(validerTH_1(365));
+  CU_ASSERT_TRUE(validerTH_1(365));   
   CU_ASSERT_TRUE(validerTH_1(399));
-  CU_ASSERT_TRUE(validerTH_1(400)); 
+  CU_ASSERT_TRUE(validerTH_1(400));  
   CU_ASSERT_FALSE(validerTH_1(401));
   CU_ASSERT_FALSE(validerTH_1(526));
+} 
 
-}  
-
+void test_validerTH_2(void) {
+  CU_ASSERT_TRUE(validerTH_2((char)170));
+}
 /************* Nous debutons l'execution des tests **************/
 
 int main ( void )
@@ -61,7 +68,9 @@ int main ( void )
    }
 
    /* add the tests to the suite */
-   if ( (NULL == CU_add_test(pSuite, "validerTH_1_int", validerTH_1_test_int)) 
+   if ( (NULL == CU_add_test(pSuite, "validerTH_1_int", test_validerTH_1)) ||
+        (NULL == CU_add_test(pSuite, "validerTH_1_char", test_validerTH_2))	
+		   
       )
    {
       CU_cleanup_registry();
