@@ -34,6 +34,8 @@ void test_validerTH_1(void) {
   CU_ASSERT_FALSE(validerTH_1(-169));
   CU_ASSERT_FALSE(validerTH_1(-1));
   CU_ASSERT_FALSE(validerTH_1(0));
+  CU_ASSERT_FALSE(validerTH_1(16));
+  CU_ASSERT_FALSE(validerTH_1(17));
   CU_ASSERT_FALSE(validerTH_1(50));
   CU_ASSERT_FALSE(validerTH_1(169));   
   CU_ASSERT_TRUE(validerTH_1(170));
@@ -48,7 +50,23 @@ void test_validerTH_1(void) {
 } 
 
 void test_validerTH_2(void) {
+  CU_ASSERT_FALSE(validerTH_2((char)-170));
+  CU_ASSERT_FALSE(validerTH_2((char)-400));
+  CU_ASSERT_FALSE(validerTH_2((char)16));
+  CU_ASSERT_FALSE(validerTH_2((char)17));
+  CU_ASSERT_FALSE(validerTH_2((char)18)); 
+  CU_ASSERT_FALSE(validerTH_2((char)27));
+  CU_ASSERT_FALSE(validerTH_2((char)39));
+  CU_ASSERT_FALSE(validerTH_2((char)40));
+  CU_ASSERT_FALSE(validerTH_2((char)169));
   CU_ASSERT_TRUE(validerTH_2((char)170));
+  CU_ASSERT_TRUE(validerTH_2((char)171));
+  CU_ASSERT_TRUE(validerTH_2((char)300));
+  CU_ASSERT_TRUE(validerTH_2((char)350));
+  CU_ASSERT_TRUE(validerTH_2((char)399));
+  CU_ASSERT_TRUE(validerTH_2((char)400));
+  CU_ASSERT_FALSE(validerTH_2((char)401));
+  CU_ASSERT_FALSE(validerTH_2((char)536));
 }
 /************* Nous debutons l'execution des tests **************/
 
