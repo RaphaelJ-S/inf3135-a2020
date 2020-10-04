@@ -1,8 +1,7 @@
 #include <stdio.h>
 
 int main() {
-  for(int i = 0 ; i < 500 ; i++) {
-    printf("%c ", (char)i);
-  }
+  int test = 170;
+  printf("%ld ", sizeof((short)170));
   return 0;
 }

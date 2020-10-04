@@ -68,6 +68,26 @@ void test_validerTH_2(void) {
   CU_ASSERT_FALSE(validerTH_2((char)401));
   CU_ASSERT_FALSE(validerTH_2((char)536));
 }
+
+void test_validerTH_3(void) {
+  CU_ASSERT_FALSE(validerTH_3((short)-171));
+  CU_ASSERT_FALSE(validerTH_3((short)0));
+  CU_ASSERT_FALSE(validerTH_3((short)50));
+  CU_ASSERT_FALSE(validerTH_3((short)169));
+  CU_ASSERT_TRUE(validerTH_3((short)170));
+  CU_ASSERT_TRUE(validerTH_3((short)171));
+  CU_ASSERT_TRUE(validerTH_3((short)224));
+  CU_ASSERT_TRUE(validerTH_3((short)356));
+  CU_ASSERT_TRUE(validerTH_3((short)399));
+  CU_ASSERT_TRUE(validerTH_3((short)400));
+  CU_ASSERT_FALSE(validerTH_3((short)401));
+  CU_ASSERT_FALSE(validerTH_3((short)435));
+  CU_ASSERT_FALSE(validerTH_3((short)546));
+}
+
+void test_validerTA_1(void) {
+  CU_ASSERT_FALSE(validerTA_1((169)));
+}
 /************* Nous debutons l'execution des tests **************/
 
 int main ( void )
@@ -87,8 +107,9 @@ int main ( void )
 
    /* add the tests to the suite */
    if ( (NULL == CU_add_test(pSuite, "validerTH_1_int", test_validerTH_1)) ||
-        (NULL == CU_add_test(pSuite, "validerTH_1_char", test_validerTH_2))	
-		   
+        (NULL == CU_add_test(pSuite, "validerTH_2_char", test_validerTH_2)) ||	
+	(NULL == CU_add_test(pSuite, "validerTH_3_short", test_validerTH_3)) ||
+        (NULL == CU_add_test(pSuite, "validerTa_1_int", test_validerTA_1))
       )
    {
       CU_cleanup_registry();
