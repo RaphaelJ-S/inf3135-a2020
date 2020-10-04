@@ -86,7 +86,56 @@ void test_validerTH_3(void) {
 }
 
 void test_validerTA_1(void) {
-  CU_ASSERT_FALSE(validerTA_1((169)));
+
+  CU_ASSERT_FALSE(validerTA_1(-500));
+  CU_ASSERT_FALSE(validerTA_1(-401));
+  CU_ASSERT_TRUE(validerTA_1(-400));
+  CU_ASSERT_TRUE(validerTA_1(-399));
+  CU_ASSERT_TRUE(validerTA_1(-224));
+  CU_ASSERT_TRUE(validerTA_1(-98));
+  CU_ASSERT_TRUE(validerTA_1(0));
+  CU_ASSERT_TRUE(validerTA_1(40));
+  CU_ASSERT_TRUE(validerTA_1(275));
+  CU_ASSERT_TRUE(validerTA_1(399));
+  CU_ASSERT_TRUE(validerTA_1(400));
+  CU_ASSERT_FALSE(validerTA_1(401));
+  CU_ASSERT_FALSE(validerTA_1(560));
+}
+
+void test_validerTA_2(void) {
+
+  CU_ASSERT_FALSE(validerTA_2((char)-672));
+  CU_ASSERT_FALSE(validerTA_2((char)-401));
+  CU_ASSERT_TRUE(validerTA_2((char)-400));
+  CU_ASSERT_TRUE(validerTA_2((char)-399));
+  CU_ASSERT_TRUE(validerTA_2((char)-289));
+  CU_ASSERT_TRUE(validerTA_2((char)-112));
+  CU_ASSERT_TRUE(validerTA_2((char)0));
+  CU_ASSERT_TRUE(validerTA_2((char)40));
+  CU_ASSERT_TRUE(validerTA_2((char)178));
+  CU_ASSERT_TRUE(validerTA_2((char)267));
+  CU_ASSERT_TRUE(validerTA_2((char)399));
+  CU_ASSERT_TRUE(validerTA_2((char)400));
+  CU_ASSERT_FALSE(validerTA_2((char)401));
+  CU_ASSERT_FALSE(validerTA_2((char)492));
+}
+
+void test_validerTA_3(void) {
+  CU_ASSERT_FALSE(validerTA_3((short)-543));
+  CU_ASSERT_FALSE(validerTA_3((short)-401));
+  CU_ASSERT_TRUE(validerTA_3((short)-399));
+  CU_ASSERT_TRUE(validerTA_3((short)-299));
+  CU_ASSERT_TRUE(validerTA_3((short)-190));
+  CU_ASSERT_TRUE(validerTA_3((short)-40));
+  CU_ASSERT_TRUE(validerTA_3((short)0));
+  CU_ASSERT_TRUE(validerTA_3((short)40));
+  CU_ASSERT_TRUE(validerTA_3((short)171));
+  CU_ASSERT_TRUE(validerTA_3((short)270));
+  CU_ASSERT_TRUE(validerTA_3((short)334));
+  CU_ASSERT_TRUE(validerTA_3((short)399));
+  CU_ASSERT_TRUE(validerTA_3((short)400));
+  CU_ASSERT_FALSE(validerTA_3((short)401));
+  CU_ASSERT_FALSE(validerTA_3((short)456));
 }
 /************* Nous debutons l'execution des tests **************/
 
@@ -109,7 +158,9 @@ int main ( void )
    if ( (NULL == CU_add_test(pSuite, "validerTH_1_int", test_validerTH_1)) ||
         (NULL == CU_add_test(pSuite, "validerTH_2_char", test_validerTH_2)) ||	
 	(NULL == CU_add_test(pSuite, "validerTH_3_short", test_validerTH_3)) ||
-        (NULL == CU_add_test(pSuite, "validerTa_1_int", test_validerTA_1))
+        (NULL == CU_add_test(pSuite, "validerTA_1_int", test_validerTA_1)) ||
+	(NULL == CU_add_test(pSuite, "validerTA_2_char", test_validerTA_2)) ||
+	(NULL == CU_add_test(pSuite, "validerTA_3_short", test_validerTA_3))
       )
    {
       CU_cleanup_registry();
