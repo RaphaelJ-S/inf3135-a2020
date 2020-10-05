@@ -1,1 +1,4 @@
-*.out
+*.bin
+*.o
+tp1
+a.out
