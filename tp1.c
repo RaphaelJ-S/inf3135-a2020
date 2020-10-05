@@ -106,7 +106,7 @@ void test_validerTA_1(void) {
 
 void test_validerTA_2(void) {
 
-for(unsigned char i = 0 ; i < 255 ; i++) {
+for(int i = -40 ; i < 41 ; i++ ) {
   CU_ASSERT_FALSE(validerTA_2(i));
 }
  /* CU_ASSERT_FALSE(validerTA_2((char)-672));
