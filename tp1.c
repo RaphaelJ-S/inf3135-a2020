@@ -29,7 +29,7 @@ void test_case_exemple(void)
 //Insérer le code du Tp1 ici.!!!
 
 void test_validerTH_1(void) {
-
+//Le type de donné char a une grandeur de 1 octet donc il peut prendre des valeurs entre -128 et 127. Par conséquent, un char n'a pas assez de valeurs pour couvrir l'interval requis. De plus cette fonction retourne toujours vraix.
   CU_ASSERT_FALSE(validerTH_1(-171));
   CU_ASSERT_FALSE(validerTH_1(-169));
   CU_ASSERT_FALSE(validerTH_1(-1));
@@ -105,11 +105,8 @@ void test_validerTA_1(void) {
 }
 
 void test_validerTA_2(void) {
-
-for(int i = -40 ; i < 41 ; i++ ) {
-  CU_ASSERT_FALSE(validerTA_2(i));
-}
- /* CU_ASSERT_FALSE(validerTA_2((char)-672));
+//Le type de donné char a une grandeur de 1 octet donc il peut prendre des valeurs entre -128 et 127. Par conséquent, un char n'a pas assez de valeurs pour couvrir l'interval requis. De plus cette fonction retourne toujours vraix.
+  CU_ASSERT_FALSE(validerTA_2((char)-672));
   CU_ASSERT_FALSE(validerTA_2((char)-401));
   CU_ASSERT_TRUE(validerTA_2((char)-400));
   CU_ASSERT_TRUE(validerTA_2((char)-399));
@@ -123,7 +120,7 @@ for(int i = -40 ; i < 41 ; i++ ) {
   CU_ASSERT_TRUE(validerTA_2((char)400));
   CU_ASSERT_FALSE(validerTA_2((char)401));
   CU_ASSERT_FALSE(validerTA_2((char)492));
-*/
+
 }
 
 void test_validerTA_3(void) {
