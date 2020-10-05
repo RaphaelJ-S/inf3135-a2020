@@ -152,6 +152,34 @@ void test_validerPulsation_1(void) {
   CU_ASSERT_FALSE(validerPulsation_1(356));
   CU_ASSERT_FALSE(validerPulsation_1(500));
 }
+
+void test_validerPulsation_2(void) {
+  CU_ASSERT_FALSE(validerPulsation_2((char)49));
+  CU_ASSERT_TRUE(validerPulsation_2((char)50));
+  CU_ASSERT_TRUE(validerPulsation_2((char)51));
+  CU_ASSERT_TRUE(validerPulsation_2((char)57));
+  CU_ASSERT_TRUE(validerPulsation_2((char)79));
+  CU_ASSERT_TRUE(validerPulsation_2((char)124));
+  CU_ASSERT_TRUE(validerPulsation_2((char)178));
+  CU_ASSERT_TRUE(validerPulsation_2((char)199));
+  CU_ASSERT_TRUE(validerPulsation_2((char)200));
+  CU_ASSERT_FALSE(validerPulsation_2((char)201));
+}
+
+void test_validerPulsation_3(void) {
+  CU_ASSERT_FALSE(validerPulsation_3((short)-154));
+  CU_ASSERT_FALSE(validerPulsation_3((short)0));
+  CU_ASSERT_FALSE(validerPulsation_3((short)49));
+  CU_ASSERT_TRUE(validerPulsation_3((short)50));
+  CU_ASSERT_TRUE(validerPulsation_3((short)51));
+  CU_ASSERT_TRUE(validerPulsation_3((short)69));
+  CU_ASSERT_TRUE(validerPulsation_3((short)156));
+  CU_ASSERT_TRUE(validerPulsation_3((short)199));
+  CU_ASSERT_TRUE(validerPulsation_3((short)200));
+  CU_ASSERT_FALSE(validerPulsation_3((short)201));
+  CU_ASSERT_FALSE(validerPulsation_3((short)250));
+
+}
 /************* Nous debutons l'execution des tests **************/
 
 int main ( void )
@@ -176,7 +204,9 @@ int main ( void )
         (NULL == CU_add_test(pSuite, "validerTA_1", test_validerTA_1)) ||
 	(NULL == CU_add_test(pSuite, "validerTA_2", test_validerTA_2)) ||
 	(NULL == CU_add_test(pSuite, "validerTA_3", test_validerTA_3)) ||
-        (NULL == CU_add_test(pSuite, "validerPulsation_1", test_validerPulsation_1))
+        (NULL == CU_add_test(pSuite, "validerPulsation_1", test_validerPulsation_1)) ||
+	(NULL == CU_add_test(pSuite, "validerPulsation_2", test_validerPulsation_2)) ||
+	(NULL == CU_add_test(pSuite, "validerPulsation_3", test_validerPulsation_3))
 	)
    {
       CU_cleanup_registry();
