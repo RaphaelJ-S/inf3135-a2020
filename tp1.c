@@ -139,7 +139,18 @@ void test_validerTA_3(void) {
 }
 
 void test_validerPulsation_1(void) {
-  CU_ASSERT_TRUE(validerPulsation_1(
+  CU_ASSERT_FALSE(validerPulsation_1(-50));
+  CU_ASSERT_FALSE(validerPulsation_1(0));
+  CU_ASSERT_FALSE(validerPulsation_1(49));
+  CU_ASSERT_TRUE(validerPulsation_1(50));
+  CU_ASSERT_TRUE(validerPulsation_1(51));
+  CU_ASSERT_TRUE(validerPulsation_1(78));
+  CU_ASSERT_TRUE(validerPulsation_1(150));
+  CU_ASSERT_TRUE(validerPulsation_1(199));
+  CU_ASSERT_TRUE(validerPulsation_1(200));
+  CU_ASSERT_FALSE(validerPulsation_1(201));
+  CU_ASSERT_FALSE(validerPulsation_1(356));
+  CU_ASSERT_FALSE(validerPulsation_1(500));
 }
 /************* Nous debutons l'execution des tests **************/
 
@@ -164,8 +175,9 @@ int main ( void )
 	(NULL == CU_add_test(pSuite, "validerTH_3", test_validerTH_3)) ||
         (NULL == CU_add_test(pSuite, "validerTA_1", test_validerTA_1)) ||
 	(NULL == CU_add_test(pSuite, "validerTA_2", test_validerTA_2)) ||
-	(NULL == CU_add_test(pSuite, "validerTA_3", test_validerTA_3))
-      )
+	(NULL == CU_add_test(pSuite, "validerTA_3", test_validerTA_3)) ||
+        (NULL == CU_add_test(pSuite, "validerPulsation_1", test_validerPulsation_1))
+	)
    {
       CU_cleanup_registry();
       return CU_get_error();
