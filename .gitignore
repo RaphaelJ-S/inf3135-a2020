@@ -1,4 +1,5 @@
-*.bin
 *.o
+*.bin
+*.out
 tp1
-a.out
+
