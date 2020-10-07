@@ -2,29 +2,65 @@
 
 ## Description
 
-<description du porjet en quelques phrases>
-<mentionner le context (cours, sigle, université, etx.)>
+Ce projet est réalisé pour le cours Construction et maintenance de logiciels (INF3135) de l'automne 2020 à l'université du québec à montréal (UQAM). Ce projet est le premier livrable du cours et est à remettre au plus tard le 14 octobre 2020. 
+
+Le but du projet tp1 est de tester les fonctions d'un autre projet à l'aide de la librairie CUnit et d'identifier les fonctions qui fonctionnent selon les intervalles données.
 
 ## Auteur
 
-<prénom et nom> (<code permanent>)
+nom prénom : Raphaël Jacob-Simard
+Code permanent : JACR26038907
 
 ## Fonctionnement
 
-<expliquez beièvement comment faire fonctinner votre prjet, en inscrivant au moins deux exemples d'utilisation (commande lancée et résultat affiché)>
+Le projet tp1 a besoin de quelques fichiers pour fonctionner.
+
+Pour commancer, il faut s'assurer d'avoir dans le dossier racine du projets les fichers 'tcv.o' et 'tcv.h' 
+
+On peut entrer la commande `make lib` à la console pour télécharger ces fichiers dans un dossier ./data qui va être créer losque l'on entre la commande. Il faut ensuite décompresser le dossier obtenu et déplacer les fichers vers la racine du projet. 
+
+le fichier 'tp1.c' devrait déjà être présent mais pas l'exécutable 'tp1', il faut donc compiler le fichier 'tp1.c'.
+
+On entre donc la commande `make` ou `make tp1` à la console pour compiler le fichier code source 'tp1.c'.
+
+L'exécutable 'tp1' devrait maintenant être à la racine du projet et on peut l'exécuter de quelques manières : 
+
+> `make test`
+
+> `./tp1`
+
+Dans les deux cas, le résultat est le même et les résultats des tests sur les fonctions sont affichés.
+
+On peut aussi afficher uniquement le nom des fonctions qui ont réussies en entrant la commande : 
+
+> `./tp1 | ./liste.sh`
 
 ## Contenu du projet
 
-<décrivez brièvement chacun des fichiers contenus dans le projet (une phrase par fichier)>
+> README.md : Le fichier contenant les informations à propos du projet et sa présentation.
+
+> Makefile : Le fichier contenant les raccourcis pour des commandes. Les raccourcis sont : 
+
+1. `make` : Exécute la première commande du fichier, dans ce cas ci, 'make tp1'.
+2. `make tp1` : Compile le fichier code source 'tp1.c' et crée l'exécutable 'tp1'.
+3. `make test` : Exécute l'exécutable 'tp1'.
+4. `make lib` : Crée le dossier ./data et y télécharge le dossier compressé contenant les dossiers 'tcv.o' et 'tcv.h'.
+5. `make clean` : Efface l'exécutable 'tp1', les fichiers terminant par .o et .h et le dossier ./data.
+
+> liste.sh : Exécute une commande de filtrage pour afficher les fonction qui ont passées les tests de 'tp1'.
+
+> tp1.c : Fichier de code source du projet. Contient les tests à effectuer sur les fonctions données.
+
+> cp.txt : Contient le code permanent en majuscule.
 
 ## Références
 
-<citez vos sources ici>
+1. [le site du cours](https://github.com/guyfrancoeur/INF3135_A2020.com)
 
 ## Statut
 
-<indiquez si le projet est complété ou s'il y a des bogues>
+Le projet est complété.
 
 ## Autoévaluation
 
-<mon travail vaut quelques points en fonction du barème>
+

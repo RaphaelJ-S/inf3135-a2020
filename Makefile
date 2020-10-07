@@ -8,7 +8,6 @@ lib:
 	wget https://github.com/guyfrancoeur/INF3135_A2020/raw/master/tp/tp1.zip
 	mkdir data && mv tp1.zip ./data
 clean: 
-	rm -rf ./data
-	rm -f tp1
+	rm -rf ./data ; rm "tp1" ; rm *.o ; rm *.h
 
 .PHONY: clean lib
