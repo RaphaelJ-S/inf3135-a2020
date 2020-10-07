@@ -34,7 +34,7 @@ Dans les deux cas, le résultat est le même et les résultats des tests sur les
 
 On peut aussi afficher uniquement le nom des fonctions qui ont réussies en entrant la commande : 
 
-> `./tp1 | ./liste.sh`
+* `./tp1 | ./liste.sh`
 
 ## Contenu du projet
 
