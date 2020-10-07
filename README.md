@@ -56,7 +56,7 @@ On peut aussi afficher uniquement le nom des fonctions qui ont réussies en entr
 
 ## Références
 
-1. [le site du cours](https://github.com/guyfrancoeur/INF3135_A2020.com)
+1. [le site du cours](https://github.com/guyfrancoeur/INF3135_A2020)
 
 ## Statut
 
@@ -64,4 +64,13 @@ Le projet est complété.
 
 ## Autoévaluation
 
+Je pense que j'ai bien répondu aux attentes formulées dans l'énoncé du TP1 :
 
+1. Les tests pour les intervalles de toutes les variantes des fonctions.
+2. Le Makefile avec les raccourcis demandés.
+3. L'exécutable 'liste.sh'.
+4. Respect des contrainte sur le code source, les fichiers à utiliser, l'environnement de développement, Git et la manière de poser des question.
+5. Les fichiers demandés sont tous présents dans la bonne branche du git.
+6. README.md complété.
+
+Bien que les tests ne soient probablement pas parfaits, je pense qu'ils répondent bien aux attentes du tp comme je les ai compris et je m'accorde une note de 90% au minimum.
