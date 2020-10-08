@@ -62,6 +62,16 @@ On peut aussi afficher uniquement le nom des fonctions qui ont réussies en entr
 
 Le projet est complété.
 
+### Question 1 
+
+> Les valeurs décimales sont nocives pour l'ordinateur, pourquoi?
+
+
+### Question 2
+
+> Vous devez respecter les limites des types de données, pourquoi?
+
+
 ## Autoévaluation
 
 Je pense que j'ai bien répondu aux attentes formulées dans l'énoncé du TP1 :
