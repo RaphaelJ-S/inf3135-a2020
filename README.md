@@ -54,23 +54,26 @@ On peut aussi afficher uniquement le nom des fonctions qui ont réussies en entr
 
 * cp.txt : Contient le code permanent en majuscule.
 
+### Question 1 
+
+> Les valeurs décimales sont nocives pour l'ordinateur, pourquoi?
+
+Premièrement, une valeur décimale prend plus de place en mémoire puisqu'on doit suivre deux nombre(les valeurs entieres et les décimaux). Un autre problème est que des calculations résultant en des nombres décimaux vont souvent donner des nombres prenant plus de place en mémoire(souvent infini) que la calculation initiale ce qui force l'ordinateur à donner un résultat approximatif et à arrondir pour rentrer dans la mémoire.  Ces raisons peuvent donner des résultats absurde pour un humain. Par exemple, pour un ordinateur 1/3 + 1/3 + 1/3 = 0.99999...
+
+### Question 2
+
+> Vous devez respecter les limites des types de données, pourquoi?
+
+Lorsqu'on dépasse un limite d'un type de donnée, il y a une perte de données. Par exemple, si on a un type de donnée ayant une capacité de 1 octet il y a 2^8 - 1 différentes valeurs possibles(signé ou non). La représentation binaire de 2^8 est 100000000 mais un type de donnée de 1 octet ne prend que les 8 premier bits alors 2^8 est sauvé comme 00000000, ce qui n'est pas le résultat voulu.
+
 ## Références
+
 
 1. [le site du cours](https://github.com/guyfrancoeur/INF3135_A2020)
 
 ## Statut
 
 Le projet est complété.
-
-### Question 1 
-
-> Les valeurs décimales sont nocives pour l'ordinateur, pourquoi?
-
-
-### Question 2
-
-> Vous devez respecter les limites des types de données, pourquoi?
-
 
 ## Autoévaluation
 
