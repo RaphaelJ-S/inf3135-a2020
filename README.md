@@ -45,10 +45,10 @@ On peut aussi afficher uniquement le nom des fonctions qui ont réussies en entr
   1. `make` : Exécute la première commande du fichier, dans ce cas ci, 'make tp1'.
   2. `make tp1` : Compile le fichier code source 'tp1.c' et crée l'exécutable 'tp1'.
   3. `make test` : Exécute l'exécutable 'tp1'.
-  4. `make lib` : Crée le dossier ./data et y télécharge le dossier compressé contenant les dossiers 'tcv.o' et 'tcv.h'.
+  4. `make lib` : Crée le dossier ./data et y télécharge le dossier compressé contenant les fichiers 'tcv.o' et 'tcv.h'.
   5. `make clean` : Efface l'exécutable 'tp1', les fichiers terminant par .o et .h et le dossier ./data.
 
-* liste.sh : Exécute une commande de filtrage pour afficher les fonction qui ont passées les tests de 'tp1'.
+* liste.sh : Exécute une commande de filtrage pour afficher les fonction qui ont passé les tests. 
 
 * tp1.c : Fichier de code source du projet. Contient les tests à effectuer sur les fonctions données.
 
