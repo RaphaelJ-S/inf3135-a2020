@@ -142,43 +142,43 @@ void test_validerPulsation_3(void) {
 }
 
 void test_validerSignal_1(void) {
-//toujours faux
   
-  int valInt;
+int valInt;
+ 
   valInt = -85;
-  CU_ASSERT_FALSE(validerSignal_1(valInt));
+  CU_ASSERT_TRUE(validerSignal_1(valInt));
   valInt = -84;
-  CU_ASSERT_FALSE(validerSignal_1(valInt));
+  CU_ASSERT_TRUE(validerSignal_1(valInt));
   valInt = -26;
-  CU_ASSERT_FALSE(validerSignal_1(valInt));
+  CU_ASSERT_TRUE(validerSignal_1(valInt));
   valInt = -25;
-  CU_ASSERT_FALSE(validerSignal_1(valInt));
+  CU_ASSERT_TRUE(validerSignal_1(valInt));
 }
 
 void test_validerSignal_2(void) {
 //retourne faux dans l'interval -85 a -25
   char valChar;
   valChar = -85;
-  CU_ASSERT_FALSE(validerSignal_2(valChar));
+  CU_ASSERT_TRUE(validerSignal_2(valChar));
   valChar = -84;
-  CU_ASSERT_FALSE(validerSignal_2(valChar));
+  CU_ASSERT_TRUE(validerSignal_2(valChar));
   valChar = -26;
-  CU_ASSERT_FALSE(validerSignal_2(valChar));
+  CU_ASSERT_TRUE(validerSignal_2(valChar));
   valChar = -25;
-  CU_ASSERT_FALSE(validerSignal_2(valChar));
+  CU_ASSERT_TRUE(validerSignal_2(valChar));
 
 }
 
 void test_validerSignal_3(void) {
   short valShort;
   valShort = -85;
-  CU_ASSERT_FALSE(validerSignal_3(valShort));
+  CU_ASSERT_TRUE(validerSignal_3(valShort));
   valShort = -84;
-  CU_ASSERT_FALSE(validerSignal_3(valShort));
+  CU_ASSERT_TRUE(validerSignal_3(valShort));
   valShort = -26;
-  CU_ASSERT_FALSE(validerSignal_3(valShort));
+  CU_ASSERT_TRUE(validerSignal_3(valShort));
   valShort = -25;
-  CU_ASSERT_FALSE(validerSignal_3(valShort));
+  CU_ASSERT_TRUE(validerSignal_3(valShort));
 
 }
 /************* Nous debutons l'execution des tests **************/

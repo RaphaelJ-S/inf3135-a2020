@@ -4,9 +4,13 @@ tp1: tp1.c
 test: tp1
 	./tp1
 
+liste : liste.sh tp1
+	./tp1 | ./liste.sh
+
 lib: 
 	wget https://github.com/guyfrancoeur/INF3135_A2020/raw/master/tp/tp1.zip
 	mkdir data && mv tp1.zip ./data
+
 clean: 
 	rm -rf ./data ; rm "tp1" ; rm *.o ; rm *.h
 
