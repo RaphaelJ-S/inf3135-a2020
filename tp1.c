@@ -29,122 +29,156 @@ void test_case_exemple(void)
 //Insérer le code du Tp1 ici.!!!
 
 void test_validerTH_1(void) {
-  
-  CU_ASSERT_FALSE(validerTH_1(169));   
-  CU_ASSERT_TRUE(validerTH_1(170));
-  CU_ASSERT_TRUE(validerTH_1(171)); 
-  CU_ASSERT_TRUE(validerTH_1(399));
-  CU_ASSERT_TRUE(validerTH_1(400));  
-  CU_ASSERT_FALSE(validerTH_1(401));
+  int valInt;
+  valInt = 170;  
+  CU_ASSERT_TRUE(validerTH_1(valInt));
+  valInt = 171;
+  CU_ASSERT_TRUE(validerTH_1(valInt)); 
+  valInt = 399;
+  CU_ASSERT_TRUE(validerTH_1(valInt));
+  valInt = 400;
+  CU_ASSERT_TRUE(validerTH_1(valInt));  
 } 
 
 void test_validerTH_2(void) {
- //Le type de donné char a une grandeur de 1 octet donc il peut prendre des valeurs entre -128 et 127 ou  entre 0 et 255. Par conséquent, un char n'a pas assez de valeurs pour couvrir l'interval requis. De plus cette fonction retourne toujours faux. 
-  CU_ASSERT_FALSE(validerTH_2((char)169));
-  CU_ASSERT_TRUE(validerTH_2((char)170));
-  CU_ASSERT_TRUE(validerTH_2((char)171));
-  CU_ASSERT_TRUE(validerTH_2((char)254));
-  CU_ASSERT_TRUE(validerTH_2((char)255));
+ //Le type de donné char a une grandeur de 1 octet donc il peut prendre des valeurs entre -128 et 127. Par conséquent, un char n'a pas assez de valeurs pour couvrir l'interval requis. De plus cette fonction retourne toujours faux. 
+  char valChar;
+  valChar = -128;
+  CU_ASSERT_FALSE(validerTH_2(valChar));
+  valChar = -127;
+  CU_ASSERT_FALSE(validerTH_2(valChar));
+  valChar = 126;
+  CU_ASSERT_FALSE(validerTH_2(valChar));
+  valChar = 127;
+  CU_ASSERT_FALSE(validerTH_2(valChar));
 }
-
 void test_validerTH_3(void) {
-
-  CU_ASSERT_FALSE(validerTH_3((short)169));
-  CU_ASSERT_TRUE(validerTH_3((short)170));
-  CU_ASSERT_TRUE(validerTH_3((short)171));
-  CU_ASSERT_TRUE(validerTH_3((short)399));
-  CU_ASSERT_TRUE(validerTH_3((short)400));
-  CU_ASSERT_FALSE(validerTH_3((short)401));
+  short valShort;
+  valShort = 170;
+  CU_ASSERT_TRUE(validerTH_3(valShort));
+  valShort = 171;
+  CU_ASSERT_TRUE(validerTH_3(valShort));
+  valShort = 399;
+  CU_ASSERT_TRUE(validerTH_3(valShort));
+  valShort = 400;
+  CU_ASSERT_TRUE(validerTH_3(valShort));
 }
 
 void test_validerTA_1(void) {
-
-  CU_ASSERT_FALSE(validerTA_1(-401));
-  CU_ASSERT_TRUE(validerTA_1(-400));
-  CU_ASSERT_TRUE(validerTA_1(-399));
-  CU_ASSERT_TRUE(validerTA_1(399));
-  CU_ASSERT_TRUE(validerTA_1(400));
-  CU_ASSERT_FALSE(validerTA_1(401));
+  int valInt;
+  valInt = -400; 
+  CU_ASSERT_TRUE(validerTA_1(valInt));
+  valInt = -399; 
+  CU_ASSERT_TRUE(validerTA_1(valInt));
+  valInt = 399;
+  CU_ASSERT_TRUE(validerTA_1(valInt));
+  valInt = 400;
+  CU_ASSERT_TRUE(validerTA_1(valInt));
 }
 
 void test_validerTA_2(void) {
-//Le type de donné char a une grandeur de 1 octet donc il peut prendre des valeurs entre -128 et 127 ou entre 0 et 255. Par conséquent, un char n'a pas assez de valeurs pour couvrir l'interval requis. De plus cette fonction retourne toujours vrais.
-  CU_ASSERT_TRUE(validerTA_2((char)-128));
-  CU_ASSERT_TRUE(validerTA_2((char)-127));
-  CU_ASSERT_TRUE(validerTA_2((char)126));
-  CU_ASSERT_TRUE(validerTA_2((char)127));
+//Le type de donné char a une grandeur de 1 octet donc il peut prendre des valeurs entre -128 et 127. Par conséquent, un char n'a pas assez de valeurs pour couvrir l'interval requis. De plus cette fonction retourne toujours vrais.
+  char valChar;
+  valChar = -128; 
+  CU_ASSERT_TRUE(validerTA_2(valChar));
+  valChar = -127;
+  CU_ASSERT_TRUE(validerTA_2(valChar));
+  valChar = 126;
+  CU_ASSERT_TRUE(validerTA_2(valChar));
+  valChar = 127;
+  CU_ASSERT_TRUE(validerTA_2(valChar));
 
 }
 
 void test_validerTA_3(void) {
-
-  CU_ASSERT_FALSE(validerTA_3((short)-401));
-  CU_ASSERT_TRUE(validerTA_3((short)-400));
-  CU_ASSERT_TRUE(validerTA_3((short)-399));
-  CU_ASSERT_TRUE(validerTA_3((short)399));
-  CU_ASSERT_TRUE(validerTA_3((short)400));
-  CU_ASSERT_FALSE(validerTA_3((short)401));
+  short valShort;
+  valShort = -400;
+  CU_ASSERT_TRUE(validerTA_3(valShort));
+  valShort = -399;
+  CU_ASSERT_TRUE(validerTA_3(valShort));
+  valShort = 399;
+  CU_ASSERT_TRUE(validerTA_3(valShort));
+  valShort = 400;
+  CU_ASSERT_TRUE(validerTA_3(valShort));
 }
 
 void test_validerPulsation_1(void) {
-  
-  CU_ASSERT_FALSE(validerPulsation_1(49));
-  CU_ASSERT_TRUE(validerPulsation_1(50));
-  CU_ASSERT_TRUE(validerPulsation_1(51));
-  CU_ASSERT_TRUE(validerPulsation_1(199));
-  CU_ASSERT_TRUE(validerPulsation_1(200));
-  CU_ASSERT_FALSE(validerPulsation_1(201));
+  int valInt;
+  valInt = 50;
+  CU_ASSERT_TRUE(validerPulsation_1(valInt));
+  valInt = 51;
+  CU_ASSERT_TRUE(validerPulsation_1(valInt));
+  valInt = 199;
+  CU_ASSERT_TRUE(validerPulsation_1(valInt));
+  valInt = 200;
+  CU_ASSERT_TRUE(validerPulsation_1(valInt));
 }
 
 void test_validerPulsation_2(void) {
-//toujours fauxl.
-  CU_ASSERT_FALSE(validerPulsation_2((char)49));
-  CU_ASSERT_TRUE(validerPulsation_2((char)50));
-  CU_ASSERT_TRUE(validerPulsation_2((char)51));
-  CU_ASSERT_TRUE(validerPulsation_2((char)126));
-  CU_ASSERT_TRUE(validerPulsation_2((char)127));
+//toujours faux.
+  char valChar;
+  valChar = 50;
+  CU_ASSERT_TRUE(validerPulsation_2(valChar));
+  valChar = 51;
+  CU_ASSERT_TRUE(validerPulsation_2(valChar));
+  valChar = 126;
+  CU_ASSERT_TRUE(validerPulsation_2(valChar));
+  valChar = 127;
+  CU_ASSERT_TRUE(validerPulsation_2(valChar));
 }
 
 void test_validerPulsation_3(void) {
 //toujours vrais  
-  CU_ASSERT_FALSE(validerPulsation_3((short)49));
-  CU_ASSERT_TRUE(validerPulsation_3((short)50));
-  CU_ASSERT_TRUE(validerPulsation_3((short)51));
-  CU_ASSERT_TRUE(validerPulsation_3((short)199));
-  CU_ASSERT_TRUE(validerPulsation_3((short)200));
-  CU_ASSERT_FALSE(validerPulsation_3((short)201));
+  short valShort;
+  valShort = 50;
+  CU_ASSERT_TRUE(validerPulsation_3(valShort));
+  valShort = 51;
+  CU_ASSERT_TRUE(validerPulsation_3(valShort));
+  valShort = 199;
+  CU_ASSERT_TRUE(validerPulsation_3(valShort));
+  valShort = 200;
+  CU_ASSERT_TRUE(validerPulsation_3(valShort));
 
 }
 
 void test_validerSignal_1(void) {
 //toujours faux
-  CU_ASSERT_FALSE(validerSignal_1(-86));
-  CU_ASSERT_TRUE(validerSignal_1(-85));
-  CU_ASSERT_TRUE(validerSignal_1(-84));
-  CU_ASSERT_TRUE(validerSignal_1(-26));
-  CU_ASSERT_TRUE(validerSignal_1(-25));
-  CU_ASSERT_FALSE(validerSignal_1(-24));
+  
+  int valInt;
+  valInt = -85;
+  CU_ASSERT_FALSE(validerSignal_1(valInt));
+  valInt = -84;
+  CU_ASSERT_FALSE(validerSignal_1(valInt));
+  valInt = -26;
+  CU_ASSERT_FALSE(validerSignal_1(valInt));
+  valInt = -25;
+  CU_ASSERT_FALSE(validerSignal_1(valInt));
 }
 
 void test_validerSignal_2(void) {
-//retourne faux dans l'interval -85 a -25 
-  CU_ASSERT_FALSE(validerSignal_2((char)-86)); 
-  CU_ASSERT_TRUE(validerSignal_2((char)-85));
-  CU_ASSERT_TRUE(validerSignal_2((char)-84));
-  CU_ASSERT_TRUE(validerSignal_2((char)-26));
-  CU_ASSERT_TRUE(validerSignal_2((char)-25));
-  CU_ASSERT_FALSE(validerSignal_2((char)-24));
+//retourne faux dans l'interval -85 a -25
+  char valChar;
+  valChar = -85;
+  CU_ASSERT_FALSE(validerSignal_2(valChar));
+  valChar = -84;
+  CU_ASSERT_FALSE(validerSignal_2(valChar));
+  valChar = -26;
+  CU_ASSERT_FALSE(validerSignal_2(valChar));
+  valChar = -25;
+  CU_ASSERT_FALSE(validerSignal_2(valChar));
 
 }
 
 void test_validerSignal_3(void) {
-//toujours faux dans l'interval -100 a 100.
-  CU_ASSERT_FALSE(validerSignal_3((short)-86));
-  CU_ASSERT_TRUE(validerSignal_3((short)-85));
-  CU_ASSERT_TRUE(validerSignal_3((short)-84));
-  CU_ASSERT_TRUE(validerSignal_3((short)-26));
-  CU_ASSERT_TRUE(validerSignal_3((short)-25));
-  CU_ASSERT_FALSE(validerSignal_3((short)-24));
+  short valShort;
+  valShort = -85;
+  CU_ASSERT_FALSE(validerSignal_3(valShort));
+  valShort = -84;
+  CU_ASSERT_FALSE(validerSignal_3(valShort));
+  valShort = -26;
+  CU_ASSERT_FALSE(validerSignal_3(valShort));
+  valShort = -25;
+  CU_ASSERT_FALSE(validerSignal_3(valShort));
 
 }
 /************* Nous debutons l'execution des tests **************/
