@@ -14,8 +14,8 @@ Pile* create();
 
 void push(int element, Pile *stack);
 
-void pop(Pile *stack);
+int pop(Pile *stack);
 
-struct elem_s* peek(Pile *stack);
+int peek(Pile *stack);
 
 void destroy(Pile* stack);

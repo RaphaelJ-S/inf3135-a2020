@@ -56,10 +56,13 @@ void push(int element, Pile *stack) {
   printf("\nLa nouvelle valeur top : %d et le nombre de node est : %d \n", stack->top->element, stack->size);
 }
 
-void pop(Pile *stack) {
+int pop(Pile *stack) {
+  int valeur = 0;
+
   if(stack->size != 0) {
 
     printf("\nLa valeur popper est : %d et le nombre de node est : %d \n", stack->top->element, stack->size - 1);
+    valeur = stack->top->element; 
     if(stack->size == 1) {
       free(stack->top);
       stack->top = NULL;
@@ -73,9 +76,10 @@ void pop(Pile *stack) {
   }else {
     printf("\nLa pile est vide!\n");
   }
+  return valeur;
 }
 
 
-struct elem_s* peek(Pile *stack) {
-  return stack->top;
+int peek(Pile *stack) {
+  return stack->top->element;
 }
