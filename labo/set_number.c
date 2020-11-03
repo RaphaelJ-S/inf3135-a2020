@@ -62,6 +62,7 @@ void discard(int elem,struct set_s* ensemble) {
     ensemble->size = nouveau->size;
     ensemble->capacite = nouveau->capacite;
     ensemble->tab = nouveau->tab;
+    free(nouveau);
   }else printf("\nL'ensemble ne contient pas cet element. \n");
 }
 
