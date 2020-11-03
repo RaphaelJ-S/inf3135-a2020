@@ -1,8 +1,20 @@
-tp1: tp1.c
-	gcc -std=c11 -Wall -Werror=vla -pedantic -I/usr/include/CUnit -L/usr/lib/x86_64-linux-gnu -o tp1 tp1.c tcv.o -lcunit
+option=gcc std=c11 -Wall -Werror=vla -pedantic
 
-test: tp1
+default: tp2
+
+tp2: tp2.c
+	$(option) -o tp2 tp2.c
+tp1: tp1.c
+	$(option) -I/usr/include/CUnit -L/usr/lib/x86_64-linux-gnu -o tp1 tp1.c tcv.o -lcunit
+
+test-tp1a: tp1
 	./tp1
+
+test-tp1b: tp1
+	./tp1 | ./liste.sh
+
+test-tp2: tp2
+	./tp2
 
 liste : liste.sh tp1
 	./tp1 | ./liste.sh
@@ -14,4 +26,4 @@ lib:
 clean: 
 	rm -rf ./data ; rm "tp1" ; rm *.o ; rm *.h
 
-.PHONY: clean lib
+.PHONY: clean lib default
