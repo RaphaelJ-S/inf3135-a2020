@@ -1,10 +1,13 @@
 .PHONY: all allbuild alltest cle
 
-allbuild:labo03-1 labo03-2 labo03-3 labo06-1 labo06-3 labo06-4 labo06-5 labo07-1
+allbuild:labo03-1 labo03-2 labo03-3 labo06-1 labo06-3 labo06-4 labo06-5 set_number stack 
 
 alltest: lab3-1_test labo3-2_test labo3-3_test
 
-labo07-1: stack.c
+set_number: set_number.c
+	gcc set_number.c -o set_number
+
+stack: stack.c
 	gcc stack.c -lm -o stack
 
 labo06-5: labo06-5.c
