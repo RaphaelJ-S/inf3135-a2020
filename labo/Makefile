@@ -1,8 +1,13 @@
+option= gcc -Wall -Werror=vla -std=c11 -pedantic
+
 .PHONY: all allbuild alltest cle
 
-allbuild:labo03-1 labo03-2 labo03-3 labo06-1 labo06-3 labo06-4 labo06-5 set_number stack 
+allbuild:labo03-1 labo03-2 labo03-3 labo06-1 labo06-3 labo06-4 labo06-5 set_number stack set_string
 
-alltest: lab3-1_test labo3-2_test labo3-3_test
+alltest: allbuild lab3-1_test labo3-2_test labo3-3_test
+
+set_string: set_string.h set_string.c 
+	$(option) -o set_string set_string.c
 
 set_number: set_number.c
 	gcc set_number.c -o set_number

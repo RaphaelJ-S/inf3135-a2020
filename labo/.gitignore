@@ -5,3 +5,5 @@
 labo*[0-1][1-9]-[1-9]
 stack
 set_number
+set_string
+set_main
