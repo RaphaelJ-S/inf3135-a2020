@@ -3,5 +3,8 @@
 *.out
 tp1
 tp2
+tcv.c
+tcv.h
 /labo
+/data
 
