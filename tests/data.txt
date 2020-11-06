@@ -1,0 +1,7 @@
+bonjour 00 01
+Salut 10 11
+Allo 20 21
+Manger 30 31
+Boire 2000 01
+Voir 100
+
