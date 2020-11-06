@@ -1,5 +1,6 @@
-*.o
+
 *.bin
+*.guy
+*.o
 *.out
 tp1
-
