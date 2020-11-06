@@ -3,7 +3,8 @@
 #include "malib.h"
 
 int main(int argc, char** argv) {
-  int a = retourne(5);
-  printf("\n%d \n", a);
+  Identite un;
+  un.id = 1234;
+  printf("\n %ld \n", un.id); 
   return 0;
 }
