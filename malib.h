@@ -1,11 +1,25 @@
 #ifndef MALIB_H
 #define MALIB_H
 typedef struct {
+  size_t timestamp;
+  size_t id;
+  char* evenement;
+  unsigned char puissance;
+  short puisRSSI;
+  union {
+    char* erreur;
+    float degOuPulse ;
+  };
+  size_t* idPN; 
+} Entree;
+
+
+typedef struct {
   size_t valInvalide;
   size_t manifErr;
   size_t cumulErr;
-} compteur;
-
+} Compteur;
+/*
 typedef struct {
   size_t timestamp;
   size_t id;
@@ -52,6 +66,8 @@ typedef struct {
   size_t id;
   size_t* idPN; 
 } Echange;
-
-int retourne(int);
+*/
+void lireLigne(char*);
+bool validerLigne(char*);
+Entree* creerEntree(char*, Entree*);
 #endif
