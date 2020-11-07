@@ -5,10 +5,27 @@
 #include "malib.h"
 
 void lireEntree(char* ligne) {
-
+  char* inter = strtok(ligne, " ");
+//  int dimX = 0;
+ // int dimY = 0;
+  //char** param;
+  
+  while(inter != NULL) {
+    
+  }
 }
 
-bool validerEntree(char* ligne) {
+int dimensionX(char*ligne) {
+  char* partie = strtok(ligne, " ");
+  int x = 0;
+  while(partie != NULL) {
+    partie = strtok(NULL, " ");
+    ++x;
+  }
+  return x;
+}
+
+bool validerEntree(char** param) {
   return true;
 }
 

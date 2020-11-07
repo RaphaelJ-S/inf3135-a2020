@@ -67,7 +67,8 @@ typedef struct {
   size_t* idPN; 
 } Echange;
 */
+int dimensionX(char*);
 void lireLigne(char*);
-bool validerLigne(char*);
+bool validerLigne(char**);
 Entree* creerEntree(char*, Entree*);
 #endif
