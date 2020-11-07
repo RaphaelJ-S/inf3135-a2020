@@ -5,17 +5,14 @@
 #include "malib.h"
 
 int main(int argc, char** argv) {
- 
-  char* str = malloc(sizeof("123456 01 2314 error\n"));
-
-  str = "123345 01 2314 error\n";
-  printf("\n %s ", str);
-  char* inter;
-  inter  = strtok(str, "\n");
- // printf("\n %s \n", inter);
-  //char* string = strtok(inter, " ");
-  //printf("\n %s \n", string);
-  // int x  = dimensionX("12351 01 324 error\n");
-  //printf("\n %d \n", x);
+  int i =0;
+  char str[] = "123456 01 2314 error\n";
+  char** tableau = creerTab(str);
+  printf("\n");
+  while(i < dimensionX(str)) {
+    printf("- %s -", tableau[i]);
+    i++;
+  } 
+  printf("\n"); 
   return 0;
 }

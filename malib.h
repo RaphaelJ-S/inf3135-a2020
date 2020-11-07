@@ -67,6 +67,8 @@ typedef struct {
   size_t* idPN; 
 } Echange;
 */
+char** creerTab(char*);
+int dimensionY(char*);
 int dimensionX(char*);
 void lireLigne(char*);
 bool validerLigne(char**);
