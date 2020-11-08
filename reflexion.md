@@ -25,4 +25,12 @@ Les fonctions nécessaires :
 * identification des actions requises dépendant de la transaction
 * affichage des sorties 
 
-###
+### 08/11/2020
+
+* J'ai décidé de sauver les données dans un tableau 2d avant de le transformer en structure.
+* L'identification et la validation de l'évenement se passera avec le tableau
+* structure contenant les compteurs en variable globale? peut-être(je vais esseyer de trouver une autre solution)
+* validation du nombre d'arguments donnés avant la création de la structure
+* Une structure pour tous les types d'entrées? pas sur mais rend la création d'une fonction qui valide les entrée plus facile
+* Pas sur de la taille initiale du tableau utilisé dans fgets, semble impossible de le faire variable. Je le mets à 300 pour le moment puisque un des énénement accepte un nombre potentiellement infini de "size_t".
+

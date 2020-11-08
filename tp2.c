@@ -1,18 +1,26 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+
 #include "tcv.h"
 #include "malib.h"
 
 int main(int argc, char** argv) {
-  int i =0;
-  char str[] = "123456 01 2314 error\n";
-  char** tableau = creerTab(str);
-  printf("\n");
-  while(i < dimensionX(str)) {
-    printf("- %s -", tableau[i]);
-    i++;
-  } 
-  printf("\n"); 
+  char str[200];
+  char* ptr;
+  char** entreeTab;
+  size_t prevTimestamp = 0;
+  while(fgets(str,200, stdin) != NULL) {
+     
+    ptr = strtok(str, "\n");
+    ptr = trim(ptr);
+    int size = dimensionX(ptr);
+    entreeTab = creerTab(ptr);
+    if(validerTab(entreeTab, size, prevTimestamp)) {
+
+      printf("Valide\n");
+    }
+    prevTimestamp = atoll(entreeTab[0]); 
+  }
   return 0;
 }

@@ -67,10 +67,11 @@ typedef struct {
   size_t* idPN; 
 } Echange;
 */
+char* trim(char*);
 char** creerTab(char*);
 int dimensionY(char*);
 int dimensionX(char*);
-void lireLigne(char*);
-bool validerLigne(char**);
+void lireLigne(char*, Entree*);
+bool validerTab(char**, int, size_t);
 Entree* creerEntree(char*, Entree*);
 #endif

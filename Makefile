@@ -9,6 +9,9 @@ tp2: tp2.c malib.c tcv.o
 tp1: tp1.c
 	gcc -std=c11 -Wall -Werror=vla -pedantic -I/usr/include/CUnit -L/usr/lib/x86_64-linux-gnu -o tp1 tp1.c tcv.o -lcunit
 
+test_tp2: test_tp2.c
+	$(option) -I/usr/include/CUnit -L/usr/lib/x86_64-linux-gnu -o test_tp2 test_tp2.c tcv.o malib.c -lcunit
+
 test-tp1a: tp1
 	./tp1
 
