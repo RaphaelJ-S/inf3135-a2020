@@ -27,16 +27,26 @@ void test_case_exemple(void)
    CU_ASSERT_STRING_EQUAL("string #1", "string #2");
 }
 */
-void test_trim() {
-  CU_ASSERT_TRUE(strcmp((char*)trim("   123 321  123  \n"), "123 321 123 ")== 0);
+
+/*
+void test_creerTab() {
+  char test1[4][10] = {{"allo"}, {"Salut"}, {"carrack"}, {"Turc"}};
+printf("E1\n");
+  char test2[4][10] = creerTab("allo Salut carrack Turc");
+printf("E2\n");
+  for(int i = 0; i< 4; ++i) {
+    CU_ASSERT_TRUE(strcmp(test1[i], test2[i])); 
+printf("F%d\n", i);
+  }
 
 }
+*/
 void test_dimensionX() {
-  CU_ASSERT_TRUE(dimensionX("15345 15 2342\n") == 3);
-  CU_ASSERT_TRUE(dimensionX("123sdfre\n") == 1 ); 
-  CU_ASSERT_TRUE(dimensionX("\n") == 0);
-  CU_ASSERT_TRUE(dimensionX(" 1234   123   11234 12 \n") == 4);
-  CU_ASSERT_TRUE(dimensionX("   123413 123  14134   \n") == 3);   
+  CU_ASSERT_TRUE(dimensionX("15345 15 2342") == 3);
+  CU_ASSERT_TRUE(dimensionX("123sdfre") == 1 ); 
+  CU_ASSERT_TRUE(dimensionX("") == 0);
+  CU_ASSERT_TRUE(dimensionX("1234   123   11234 12") == 4);
+  CU_ASSERT_TRUE(dimensionX("123413 123  14134") == 3);   
 }
 /************* Nous debutons l'execution des tests **************/
 
@@ -57,7 +67,7 @@ int main ( void )
 
    /* add the tests to the suite */
    if ( (NULL == CU_add_test(pSuite, "dimensionX", test_dimensionX)) ||
-        (NULL == CU_add_test(pSuite, "trim", test_trim))
+        (NULL == CU_add_test(pSuite, "Creation tableau 2d", test_creerTab))
       )
    {
       CU_cleanup_registry();

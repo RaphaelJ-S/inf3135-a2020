@@ -11,16 +11,21 @@ int main(int argc, char** argv) {
   char** entreeTab;
   size_t prevTimestamp = 0;
   while(fgets(str,200, stdin) != NULL) {
-     
     ptr = strtok(str, "\n");
+    
+    printf("\nData:*%s*\n",ptr);
+
     ptr = trim(ptr);
     int size = dimensionX(ptr);
     entreeTab = creerTab(ptr);
-    if(validerTab(entreeTab, size, prevTimestamp)) {
+    if(entreeTab != NULL) {
 
-      printf("Valide\n");
+      for(int i = 0; i < size; ++i) printf("tableau2d[%d]:*%s*\n", i, entreeTab[i]);
+    
+      if(validerTab(entreeTab, size, prevTimestamp)) printf("%s est valide\n", str);
+      else printf("%s n'est pas valide\n", str);
+      if(entreeTab[0] != NULL) prevTimestamp = atoll(entreeTab[0]); 
     }
-    prevTimestamp = atoll(entreeTab[0]); 
   }
   return 0;
 }
