@@ -1,6 +1,5 @@
-#include <stdio.h>
-#include "simple.c"
-
+#ifndefine _SIMPLE_H_
+#define _SIMPLE_H_
 
 enum {
 
@@ -36,4 +35,4 @@ void test_validerPulsation_3();
 void test_validerSignal_1();
 void test_validerSignal_2();
 void test_validersignal_3();
-
+#endif
