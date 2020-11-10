@@ -21,10 +21,13 @@ int main(int argc, char** argv) {
     if(entreeTab != NULL) {
 
       for(int i = 0; i < size; ++i) printf("tableau2d[%d]:*%s*\n", i, entreeTab[i]);
-    
-      if(validerTab(entreeTab, size, prevTimestamp)) printf("%s est valide\n", str);
-      else printf("%s n'est pas valide\n", str);
-      if(entreeTab[0] != NULL) prevTimestamp = atoll(entreeTab[0]); 
+
+      if(entreeTab[0] != NULL)  {    
+        printf("Timestamp prev : %ld , curr: %ld\n", prevTimestamp, atol(entreeTab[0]));
+        if(validerTab(entreeTab, size, prevTimestamp))printf("Cette entrée est valide\n");
+        else printf("Cette entrée n'est pas valide\n");
+        prevTimestamp = actualiserTimestamp(entreeTab, prevTimestamp);
+      }
     }
   }
   return 0;

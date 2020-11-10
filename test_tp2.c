@@ -4,6 +4,8 @@
 //#include "Console.h"
 #include "tcv.h"         // declaration de mes fonction
 #include "malib.h"
+
+#include <stdlib.h>
 #include <stdio.h>       // printf
 #include <string.h>
 /*****  LES fonctions qui initialise et detruit la "Suite de test" ******/
@@ -27,20 +29,41 @@ void test_case_exemple(void)
    CU_ASSERT_STRING_EQUAL("string #1", "string #2");
 }
 */
-
-/*
-void test_creerTab() {
-  char test1[4][10] = {{"allo"}, {"Salut"}, {"carrack"}, {"Turc"}};
-printf("E1\n");
-  char test2[4][10] = creerTab("allo Salut carrack Turc");
-printf("E2\n");
-  for(int i = 0; i< 4; ++i) {
-    CU_ASSERT_TRUE(strcmp(test1[i], test2[i])); 
-printf("F%d\n", i);
-  }
-
+void test_trim() {
+  char str[] = "   0001 02 erreur   ";
+  char* string = trim(str);
+  CU_ASSERT_STRING_EQUAL(string, "0001 02 erreur");
+  strcpy(str, "002 03 143 12  ");
+  string = trim(str);
+  CU_ASSERT_STRING_EQUAL(string, "002 03 143 12");
+  strcpy(str, "  003  02");
+  string = trim(str);
+  CU_ASSERT_STRING_EQUAL(string, "003  02");
+  strcpy(str, "0004   04 125");
+  string = trim(str);
+  CU_ASSERT_STRING_EQUAL(string, "0004   04 125");
 }
-*/
+
+void test_creerTab() {
+  char str[] = "0001 02 erreur erreur";
+  char** test1;
+  test1 = creerTab(str);
+  CU_ASSERT_STRING_EQUAL(test1[0], "0001");
+  CU_ASSERT_STRING_EQUAL(test1[1], "02");
+  CU_ASSERT_STRING_EQUAL(test1[2], "erreur");
+  CU_ASSERT_STRING_EQUAL(test1[3], "erreur");
+  
+  strcpy(str, "0324134");
+  test1 = creerTab(str);
+  CU_ASSERT_STRING_EQUAL(test1[0], "0324134");
+
+  strcpy(str, "0004 03 2543");
+  test1 = creerTab(str);
+  CU_ASSERT_STRING_EQUAL(test1[0], "0004");
+  CU_ASSERT_STRING_EQUAL(test1[1], "03");
+  CU_ASSERT_STRING_EQUAL(test1[2], "2543");
+}
+
 void test_dimensionX() {
   CU_ASSERT_TRUE(dimensionX("15345 15 2342") == 3);
   CU_ASSERT_TRUE(dimensionX("123sdfre") == 1 ); 
@@ -66,8 +89,9 @@ int main ( void )
    }
 
    /* add the tests to the suite */
-   if ( (NULL == CU_add_test(pSuite, "dimensionX", test_dimensionX)) ||
-        (NULL == CU_add_test(pSuite, "Creation tableau 2d", test_creerTab))
+   if ( (NULL == CU_add_test(pSuite, "Nombre d'elements dans tableau 2d", test_dimensionX)) ||
+        (NULL == CU_add_test(pSuite, "Creation tableau 2d", test_creerTab)) ||
+	(NULL == CU_add_test(pSuite, "Trim des extremitees", test_trim))
       )
    {
       CU_cleanup_registry();

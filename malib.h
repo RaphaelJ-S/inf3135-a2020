@@ -19,59 +19,15 @@ typedef struct {
   size_t manifErr;
   size_t cumulErr;
 } Compteur;
-/*
-typedef struct {
-  size_t timestamp;
-  size_t id;
-  char* evenement;
-  unsigned char puissance;
-} Identite; 
 
-typedef struct {
-  size_t timestamp;
-  char* evenement;
-  union {
-    float celcius;
-    char* erreur;
-  };
-} TmpHum;
-typedef struct {
-  size_t timestamp;
-  char* evenement;
-  union {
-    float celcius;
-    char* erreur;
-  };
-} TmpAmb;
-
-typedef struct {
-  size_t timestamp;
-  char* evenement;
-  union {
-    float pulse;
-    char* erreur;
-  };
-} Pulsation;
-
-typedef struct {
-  size_t timestamp;
-  char* evenement;
-  short puissRSSI;
-  size_t id;
-} Signal;
-
-typedef struct {
-  size_t timestamp;
-  char* evenement;
-  size_t id;
-  size_t* idPN; 
-} Echange;
-*/
 char* trim(char*);
 char** creerTab(char*);
-int dimensionY(char*);
 int dimensionX(char*);
 void lireLigne(char*, Entree*);
-bool validerTab(char**, int, size_t);
+bool validerTab(char**, int , size_t);
+bool validerNbrParam(int, int);
+bool validerEvenement(char**);
+bool validerTimestamp(char**, size_t);
+size_t actualiserTimestamp(char**, size_t);
 Entree* creerEntree(char*, Entree*);
 #endif
