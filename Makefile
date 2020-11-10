@@ -1,17 +1,19 @@
+CHEMIN=`realpath *inf3135*`
+
 tp1: tp1.c
 	gcc -std=c11 -Wall -Werror=vla -pedantic -I/usr/include/CUnit -L/usr/lib/x86_64-linux-gnu -o tp1 tp1.c tcv.o -lcunit
 
 test: tp1
-	./tp1
+	${CHEMIN}/tp1
 
 liste : liste.sh tp1
-	./tp1 | ./liste.sh
+	${CHEMIN}/tp1 | ${CHEMIN}/liste.sh
 
 lib: 
 	wget https://github.com/guyfrancoeur/INF3135_A2020/raw/master/tp/tp1.zip
-	mkdir data && mv tp1.zip ./data
+	mkdir ${CHEMIN}/data && mv ${CHEMIN}/tp1.zip ${CHEMIN}/data && unzip ${CHEMIN}/data/tp1.zip 
 
 clean: 
-	rm -rf ./data ; rm "tp1" ; rm *.o ; rm *.h
+	ls ${CHEMIN}/data ; ls ${CHEMIN}/tp1 ; ls ${CHEMIN}/*.o ; ls ${CHEMIN}/*.h
 
 .PHONY: clean lib
