@@ -6,7 +6,7 @@ test: tp1a tcv.h tcv.o simple.c simple.h
 	./tp1a
 
 liste : liste.sh tp1a
-	./tp1 | ./liste.sh
+	./tp1a | ./liste.sh
 
 lib: 
 	wget https://github.com/guyfrancoeur/INF3135_A2020/raw/master/tp/tp1.zip

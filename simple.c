@@ -14,10 +14,9 @@ void test_validerTH_1(void) {
   CU_ASSERT_TRUE(validerTH_1((int)BORNE_MAX_TH));  
 } 
 void test_validerTH_2(void) {
-  CU_ASSERT_FALSE(validerTH_2((char)BORNE_MIN_S_CHAR));
-  CU_ASSERT_FALSE(validerTH_2((char)BORNE_MIN_S_CHAR + 1));
-  CU_ASSERT_FALSE(validerTH_2((char)BORNE_MAX_S_CHAR - 1));
-  CU_ASSERT_FALSE(validerTH_2((char)BORNE_MAX_S_CHAR));
+  CU_ASSERT_TRUE(validerTH_2((unsigned char)BORNE_MIN_U_CHAR));
+  CU_ASSERT_TRUE(validerTH_2((unsigned char)BORNE_MIN_U_CHAR + 1));
+  CU_ASSERT_TRUE(validerTH_2((unsigned char)BORNE_MAX_U_CHAR));
 }
 void test_validerTH_3(void) {
   CU_ASSERT_TRUE(validerTH_3((short)BORNE_MIN_TH));
@@ -83,5 +82,5 @@ void test_validerSignal_3(void) {
   CU_ASSERT_TRUE(validerSignal_3((short)BORNE_MIN_SIGNAL));
   CU_ASSERT_TRUE(validerSignal_3((short)BORNE_MIN_SIGNAL + 1));
   CU_ASSERT_TRUE(validerSignal_3((short)BORNE_MAX_SIGNAL - 1));
-  CU_ASSERT_TRUE(validerSignal_3(short)BORNE_MAX_SIGNAL);
+  CU_ASSERT_TRUE(validerSignal_3((short)BORNE_MAX_SIGNAL));
 }
