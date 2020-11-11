@@ -1,9 +1,7 @@
 *.o
 *.bin
 *.out
-tp1a
-tp2
-test_tp2
+t*[a2]
 tcv.[oh]
 /data
 
