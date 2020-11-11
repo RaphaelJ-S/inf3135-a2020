@@ -1,10 +1,9 @@
 *.o
 *.bin
 *.out
-tp1
+tp1a
 tp2
-tcv.c
-tcv.h
-/labo
+test_tp2
+tcv.[oh]
 /data
 
