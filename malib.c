@@ -8,19 +8,6 @@
 #include "tcv.h"  
 
 
-char* trim(char* ligne) {
-  if(ligne != NULL) {
-    char* fin;
-    while(isspace((unsigned char)*ligne)) ligne++;
-    if(*ligne== '\0') return ligne;
-    fin = ligne + strlen(ligne) -1;
-    while(fin > ligne && isspace((unsigned char)*fin)) fin--;
-    fin[1] = '\0';
-  }
-
-  return ligne;
-
-}
 
 char** creerTab(char* ligne) {
   char** tab = (char**) malloc(dimensionX(ligne) * sizeof(char*));
@@ -105,7 +92,3 @@ bool validerNbrParam(int evenement, int size) {
          : false);
 }
 
-Entree* creerEntree(char*ligne, Entree* vide) {
-  
-  return vide;
-}

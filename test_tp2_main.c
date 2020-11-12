@@ -24,7 +24,6 @@ int main ( void )
    /* add the tests to the suite */
    if ( (NULL == CU_add_test(pSuite, "Nombre d'elements dans tableau 2d", test_dimensionX)) ||
         (NULL == CU_add_test(pSuite, "Creation tableau 2d", test_creerTab)) ||
-	(NULL == CU_add_test(pSuite, "Trim des extremitees", test_trim)) ||
         (NULL == CU_add_test(pSuite, "validation format evenement", test_validerEvenement)) ||
         (NULL == CU_add_test(pSuite, "validation comparaison timestamp", test_validerTimestamp))
       )

@@ -4,7 +4,6 @@
 int init_suite();
 int clean_suite();
 
-void test_trim();
 void test_creerTab();
 void test_dimensionX();
 void test_validerEvenement();

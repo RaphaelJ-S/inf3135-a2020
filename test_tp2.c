@@ -10,18 +10,6 @@
 int init_suite(void) { return 0; }
 int clean_suite(void) { return 0; }
 
-char* suppTrim(char aTrans[]) {
-  char str[40];
-  strcpy(str,aTrans);
-  return trim(str);
-}
-
-void test_trim() {
-  CU_ASSERT_STRING_EQUAL(suppTrim("   0001 02 erreur   "), "0001 02 erreur");
-  CU_ASSERT_STRING_EQUAL(suppTrim("002 03 143 12"), "002 03 143 12");
-  CU_ASSERT_EQUAL(trim(NULL), NULL);
-  CU_ASSERT_STRING_EQUAL(suppTrim(" "), "");
-}
 
 void test_creerTab() {
   char str[] = "0001 02 erreur erruer";

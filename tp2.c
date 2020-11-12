@@ -15,7 +15,6 @@ int main(int argc, char** argv) {
     
     printf("\nData:*%s*\n",ptr);
 
-    ptr = trim(ptr);
     int size = dimensionX(ptr);
     entreeTab = creerTab(ptr);
     if(entreeTab != NULL) {

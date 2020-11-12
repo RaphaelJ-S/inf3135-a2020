@@ -32,10 +32,10 @@ void test_validerTA_1(void) {
   CU_ASSERT_TRUE(validerTA_1((int)BORNE_MAX_TA));
 }
 void test_validerTA_2(void) {
-  CU_ASSERT_TRUE(validerTA_2((char)BORNE_MIN_S_CHAR));
-  CU_ASSERT_TRUE(validerTA_2((char)BORNE_MIN_S_CHAR + 1));
-  CU_ASSERT_TRUE(validerTA_2((char)BORNE_MAX_S_CHAR - 1));
-  CU_ASSERT_TRUE(validerTA_2((char)BORNE_MAX_S_CHAR));
+  CU_ASSERT_TRUE(validerTA_2((unsigned char)BORNE_MIN_U_CHAR));
+  CU_ASSERT_TRUE(validerTA_2((unsigned char)BORNE_MIN_U_CHAR + 1));
+  CU_ASSERT_TRUE(validerTA_2((unsigned char)BORNE_MAX_U_CHAR - 1));
+  CU_ASSERT_TRUE(validerTA_2((unsigned char)BORNE_MAX_U_CHAR));
 }
 void test_validerTA_3(void) {
   CU_ASSERT_TRUE(validerTA_3((short)BORNE_MIN_TA));
