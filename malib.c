@@ -26,9 +26,7 @@ char** creerTab(char* ligne) {
     }else return NULL;
   }else return NULL;
    
-    
   return tab;
-
 }
 
 int dimensionX(char*ligne) {
@@ -66,8 +64,8 @@ bool validerTimestamp(size_t timeStamp, size_t prevTimestamp) {
   return timeStamp > prevTimestamp;
 }
 
-size_t actualiserTimestamp(size_t timeStamp, size_t prevTimestamp) {
-  if (timeStamp > prevTimestamp) return timeStamp;
+size_t actualiserTimestamp(size_t timestamp, size_t prevTimestamp) {
+  if (validerTimestamp(timestamp, prevTimestamp)) return timestamp;
   else return prevTimestamp; 
 }
 

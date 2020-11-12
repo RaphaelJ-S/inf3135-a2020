@@ -25,7 +25,10 @@ int main ( void )
    if ( (NULL == CU_add_test(pSuite, "Nombre d'elements dans tableau 2d", test_dimensionX)) ||
         (NULL == CU_add_test(pSuite, "Creation tableau 2d", test_creerTab)) ||
         (NULL == CU_add_test(pSuite, "validation format evenement", test_validerEvenement)) ||
-        (NULL == CU_add_test(pSuite, "validation comparaison timestamp", test_validerTimestamp))
+        (NULL == CU_add_test(pSuite, "validation comparaison timestamp", test_validerTimestamp)) ||
+        (NULL == CU_add_test(pSuite, "Validation de l'ordre timestamp", test_actualiserTimestamp))||
+        (NULL == CU_add_test(pSuite, "Validation du format du tableau 2d", test_validerTab)) ||
+        (NULL == CU_add_test(pSuite, "Validation du nombre de paramètre", test_validerNbrParam))
       )
    {
       CU_cleanup_registry();

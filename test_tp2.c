@@ -25,6 +25,7 @@ void test_creerTab() {
   test1 = (char**)creerTab(NULL);
   CU_ASSERT_EQUAL(test1, NULL);
 }
+
 void test_dimensionX() {
   CU_ASSERT_TRUE(dimensionX("1234 02 142")== 3);
   CU_ASSERT_TRUE(dimensionX("123sdfre") == 1 ); 
@@ -48,6 +49,45 @@ void test_validerTimestamp() {
   CU_ASSERT_FALSE(validerTimestamp((size_t)0001, (size_t)001));
   CU_ASSERT_FALSE(validerTimestamp((size_t)1, (size_t)002));
 }
+
+void test_actualiserTimestamp() {
+  CU_ASSERT_TRUE(actualiserTimestamp((size_t)1423, (size_t)1422)==  1423);
+  CU_ASSERT_TRUE(actualiserTimestamp((size_t)8475, (size_t)12)==  8475);
+  CU_ASSERT_TRUE(actualiserTimestamp((size_t)453215, (size_t)25435)==  453215);
+  CU_ASSERT_TRUE(actualiserTimestamp((size_t)1422, (size_t)1423)==  1423);
+  CU_ASSERT_TRUE(actualiserTimestamp((size_t)5453, (size_t)68498)==  68498);
+
+}
 void test_validerTab() {
-  
+  char str[50] = "1342 02 error";
+  int dimension = dimensionX(str);
+  char** test = creerTab(str);
+  CU_ASSERT_TRUE(validerTab(test, dimension, 1341));
+
+  strcpy(str, "145130 05 1341 1543 43634");
+  dimension = dimensionX(str);
+  test = creerTab(str);
+  CU_ASSERT_TRUE(validerTab(test, dimension, 15675));
+
+  strcpy(str, "412 07");
+  dimension = dimensionX(str);
+  test = creerTab(str);
+  CU_ASSERT_FALSE(validerTab(test, dimension, 324));
+
+  strcpy(str, "");
+  dimension = dimensionX(str);
+  test = creerTab(str);
+  CU_ASSERT_FALSE(validerTab(test, dimension, 0));
+}
+void test_validerNbrParam() {
+  CU_ASSERT_TRUE(validerNbrParam(0,4));
+  CU_ASSERT_TRUE(validerNbrParam(4,4));
+  CU_ASSERT_TRUE(validerNbrParam(1,3));
+  CU_ASSERT_TRUE(validerNbrParam(2,3));
+  CU_ASSERT_TRUE(validerNbrParam(3,3));
+  CU_ASSERT_TRUE(validerNbrParam(5,10));
+  CU_ASSERT_FALSE(validerNbrParam(0,3));
+  CU_ASSERT_FALSE(validerNbrParam(5,3));
+  CU_ASSERT_FALSE(validerNbrParam(2,4));
+  CU_ASSERT_FALSE(validerNbrParam(3,5));
 }
