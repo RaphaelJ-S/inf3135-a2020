@@ -5,7 +5,7 @@
 #include <ctype.h>
 
 #include "malib.h"
-  
+#include "tcv.h"  
 
 
 char* trim(char* ligne) {
@@ -36,9 +36,9 @@ char** creerTab(char* ligne) {
         partie = strtok(NULL,delim);
         ++i;
       }
-    }
+    }else return NULL;
   }else return NULL;
- 
+   
     
   return tab;
 
@@ -61,44 +61,36 @@ int dimensionX(char*ligne) {
 
 bool validerTab(char** param, int size, size_t prevTimestamp) {
   int evenement ;
+  size_t timeStamp;
    
   if(size > 2) {
     evenement = atoi(param[1]);
-
-    if(!validerEvenement(param)) {
-      printf("Erreur! le No evenement %s n'est pas valide. Doit être entre 00 et 05\n", param[1]); 
-      return false;
-    }
-    if(!validerNbrParam(evenement, size)){
-      printf("Erreur! L'evenement %s n'a pas le bon nombre de parametre", param[1]);
-      return false; 
-    } 
-    if(!validerTimestamp(param, prevTimestamp)) {
-      printf("Erreur! Le timestamp de cet entrée est <= à la précédente\n");
-      return false;
-    }
+    timeStamp = atol(param[0]);
+ 
+    if(!validerEvenement(param[1]))return false;
+    if(!validerNbrParam(evenement, size)) return false;
+    if(!validerTimestamp(timeStamp, prevTimestamp)) return false;
     return true; 
-  } else printf("Erreur! le nombre de paramètre est invalide. Doit être > 2\n"); 
-
+  }
   return false;
 }
-//Retourne le timestamp de param si il est supérieur au précédent, sinon retourne le timestamp précédent
-bool validerTimestamp(char** param, size_t prevTimestamp) {
-  return atol(param[0]) > prevTimestamp;
+
+bool validerTimestamp(size_t timeStamp, size_t prevTimestamp) {
+  return timeStamp > prevTimestamp;
 }
 
-size_t actualiserTimestamp(char** param, size_t prevTimestamp) {
-  if(atol(param[0]) > prevTimestamp) return atol(param[0]);
+size_t actualiserTimestamp(size_t timeStamp, size_t prevTimestamp) {
+  if (timeStamp > prevTimestamp) return timeStamp;
   else return prevTimestamp; 
 }
 
-bool validerEvenement(char** param) {
+bool validerEvenement(char* param) {
   int i = 0;
   char eveneVal[6][2] = {{"00"},{"01"},{"02"},{"03"},{"04"},{"05"}};
 
-  if(strlen(param[1]) == 2) {
+  if(strlen(param) == 2) {
     while(i < 6) {
-       if((int)param[1][0] == (int)eveneVal[i][0] && (int)param[1][1] == (int)eveneVal[i][1]) return true; 
+       if((int)param[0] == (int)eveneVal[i][0] && (int)param[1] == (int)eveneVal[i][1]) return true; 
        ++i;
     }
   }

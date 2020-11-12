@@ -26,8 +26,8 @@ int dimensionX(char*);
 void lireLigne(char*, Entree*);
 bool validerTab(char**, int , size_t);
 bool validerNbrParam(int, int);
-bool validerEvenement(char**);
-bool validerTimestamp(char**, size_t);
-size_t actualiserTimestamp(char**, size_t);
+bool validerEvenement(char*);
+bool validerTimestamp(size_t,size_t);
+size_t actualiserTimestamp(size_t, size_t);
 Entree* creerEntree(char*, Entree*);
 #endif

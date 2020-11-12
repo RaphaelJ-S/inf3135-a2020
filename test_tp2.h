@@ -1,0 +1,12 @@
+#ifndef _TEST_TP2_H_
+#define _TEST_TP2_H_
+
+int init_suite();
+int clean_suite();
+
+void test_trim();
+void test_creerTab();
+void test_dimensionX();
+void test_validerEvenement();
+void test_validerTimestamp();
+#endif

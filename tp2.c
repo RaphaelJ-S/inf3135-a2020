@@ -26,7 +26,7 @@ int main(int argc, char** argv) {
         printf("Timestamp prev : %ld , curr: %ld\n", prevTimestamp, atol(entreeTab[0]));
         if(validerTab(entreeTab, size, prevTimestamp))printf("Cette entrée est valide\n");
         else printf("Cette entrée n'est pas valide\n");
-        prevTimestamp = actualiserTimestamp(entreeTab, prevTimestamp);
+        prevTimestamp = actualiserTimestamp(atol(entreeTab[0]), prevTimestamp);
       }
     }
   }
