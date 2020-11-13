@@ -11,6 +11,9 @@ int main(int argc, char** argv) {
   char** entreeTab;
   size_t prevTimestamp = 0;
   identifiant_t identification = {9000, 2};
+  version_t pres;
+  getVersion(&pres);
+  printf("version #: 0.1.%d\n", pres.build);
   while(fgets(str,200, stdin) != NULL) {
     ptr = strtok(str, "\n");
     

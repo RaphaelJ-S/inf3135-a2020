@@ -10,15 +10,42 @@
 int init_suite(void) { return 0; }
 int clean_suite(void) { return 0; }
 
+void test_opEvent03() {
+  char ligne[50] = "50.0";
+  CU_ASSERT_TRUE(opEvent03(ligne) == (float)50.0);
+  strcpy(ligne, "49.9");
+  CU_ASSERT_TRUE(opEvent03(ligne) == (float)-500);
+  strcpy(ligne, "201.1");
+  CU_ASSERT_TRUE(opEvent03(ligne) == (float)-500);
+  strcpy(ligne, "200.0");
+  CU_ASSERT_TRUE(opEvent03(ligne) == (float)200.0);
+  strcpy(ligne, "ERREUR");
+  CU_ASSERT_TRUE(opEvent03(ligne) == (float)500);
+}
+
+void test_opEvent02() {
+  char ligne[50] = "-40.0";
+  CU_ASSERT_TRUE(opEvent02(ligne) == (float)-40.0);
+  strcpy(ligne, "-40.1");
+  CU_ASSERT_TRUE(opEvent02(ligne) == (float)-500);
+  strcpy(ligne, "40.1");
+  CU_ASSERT_TRUE(opEvent02(ligne) == (float)-500);
+  strcpy(ligne, "40.0");
+  CU_ASSERT_TRUE(opEvent02(ligne) == (float)40.0);
+  strcpy(ligne, "ERREUR");
+  CU_ASSERT_TRUE(opEvent02(ligne) == (float)500);
+}
 void test_opEvent01(){
-  char ligne[50] = "38.2";
-  CU_ASSERT_TRUE(opEvent01(ligne) == (float)38.2);
-  strcpy(ligne,"16.5");
-  CU_ASSERT_TRUE(opEvent01(ligne) == (float)-1);
-  strcpy(ligne,"39.9");
-  CU_ASSERT_TRUE(opEvent01(ligne) == (float)39.9);
+  char ligne[50] = "17.0";
+  CU_ASSERT_TRUE(opEvent01(ligne) == (float)17.0);
+  strcpy(ligne,"16.9");
+  CU_ASSERT_TRUE(opEvent01(ligne) == (float)-500);
+  strcpy(ligne,"40.1");
+  CU_ASSERT_TRUE(opEvent01(ligne) == (float)-500);
+  strcpy(ligne,"40.0");
+  CU_ASSERT_TRUE(opEvent01(ligne) == (float)40.0);
   strcpy(ligne,"ERREUR");
-  CU_ASSERT_TRUE(opEvent01(ligne) == (float)0);
+  CU_ASSERT_TRUE(opEvent01(ligne) == (float)500);
 
 }
 

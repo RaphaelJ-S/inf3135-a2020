@@ -7,12 +7,38 @@
 #include "malib.h"
 #include "tcv.h"  
 
+static void opEvent04(char** tab, identifiant_t* identification) {
+  short sig = atoi(temperature);
+  char signal = sig;
+  
+  if(validerSignal_2(signal)) {
+    size_t timestamp = atol(tab[0]);
+    size_t id = atol(tab[3]);
+    float metre = pwr(10, ((-69 - (sig))/(10*identification->puissance))); 
+    printf("14 %ld %ld %.1f\n", timestamp, id, metre); 
+  } 
+}
+float opEvent03(char* temperature) {
+  short pulse = atoi(temperature);
+
+  if(strcmp(temperature, "ERREUR") == 0) return 500;
+  else if(validerPulsation_3(pulse)) return pulse;
+  else return -500;
+}
+
+float opEvent02(char* temperature) {
+  short tempA = atof(temperature) * 10;
+  
+  if(strcmp(temperature, "ERREUR") == 0) return 500;
+  else if(validerTA_3(tempA)) return tempA/10.0;
+  else return -500;
+}
 float opEvent01(char* temperature) {
   int tempH = atof(temperature)* 10; 
    
-  if(strcmp(temperature, "ERREUR") == 0) return 0; 
+  if(strcmp(temperature, "ERREUR") == 0) return 500; 
   else if (validerTH_1(tempH)) return (float)(tempH/10.0);
-  else return -1;
+  else return -500;
 }
 
 static void opEvent00(char** tab, identifiant_t* precedent) {
