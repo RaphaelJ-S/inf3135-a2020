@@ -9,9 +9,11 @@
 
 static void opEvent00(char** tab, identifiant_t* precedent) {
   unsigned char puissance= tab[3][0];
-  precedent->id = atol(tab[2]);
-  precedent->puissance = puissance;
-  printf("10 %ld %ld %c\n",atol(tab[0]), atol(tab[2]), puissance);
+  if(puissance == '2' || puissance == '3' || puissance == '4') {
+    precedent->id = atol(tab[2]);
+    precedent->puissance = puissance;
+    printf("10 %ld %ld %c\n",atol(tab[0]), atol(tab[2]), puissance);
+  {
 }
 
 
