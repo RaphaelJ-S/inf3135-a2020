@@ -30,7 +30,7 @@ int opAiguillage(char** tab, identifiant_t* identification) {
       break;
     case(4):
       break;
-    case(5)::wq
+    case(5):
 
   } 
   return ret;
