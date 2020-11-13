@@ -31,7 +31,7 @@ int opAiguillage(char** tab, identifiant_t* identification) {
     case(4):
       break;
     case(5):
-
+      break;
   } 
   return ret;
 }
