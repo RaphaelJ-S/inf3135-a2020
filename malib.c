@@ -7,7 +7,34 @@
 #include "malib.h"
 #include "tcv.h"  
 
+static void opEvent00(char** tab, identifiant_t* precedent) {
+  unsigned char puissance= tab[3][0];
+  precedent->id = atol(tab[2]);
+  precedent->puissance = puissance;
+  printf("10 %ld %ld %c\n",atol(tab[0]), atol(tab[2]), puissance);
+}
 
+
+int opAiguillage(char** tab, identifiant_t* identification) {
+  size_t event = atol(tab[1]);
+  int ret = 0;
+  switch(event) {
+    case(0):
+      opEvent00(tab, identification);
+      break;
+    case(1):
+      break;
+    case(2):
+      break;
+    case(3):
+      break;
+    case(4):
+      break;
+    case(5)::wq
+
+  } 
+  return ret;
+}
 
 char** creerTab(char* ligne) {
   char** tab = (char**) malloc(dimensionX(ligne) * sizeof(char*));

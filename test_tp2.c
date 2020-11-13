@@ -10,7 +10,6 @@
 int init_suite(void) { return 0; }
 int clean_suite(void) { return 0; }
 
-
 void test_creerTab() {
   char str[] = "0001 02 erreur erruer";
   char** test1 = creerTab(str);
