@@ -11,6 +11,7 @@ typedef struct {
   size_t manifErr;
   size_t cumulErr;
 } Compteur_t;
+float opEvent01(char*);
 int opAiguillage(char**, identifiant_t*);
 char** creerTab(char*);
 int dimensionX(char*);

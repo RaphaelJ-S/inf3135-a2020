@@ -10,6 +10,18 @@
 int init_suite(void) { return 0; }
 int clean_suite(void) { return 0; }
 
+void test_opEvent01(){
+  char ligne[50] = "38.2";
+  CU_ASSERT_TRUE(opEvent01(ligne) == (float)38.2);
+  strcpy(ligne,"16.5");
+  CU_ASSERT_TRUE(opEvent01(ligne) == (float)-1);
+  strcpy(ligne,"39.9");
+  CU_ASSERT_TRUE(opEvent01(ligne) == (float)39.9);
+  strcpy(ligne,"ERREUR");
+  CU_ASSERT_TRUE(opEvent01(ligne) == (float)0);
+
+}
+
 void test_creerTab() {
   char str[] = "0001 02 erreur erruer";
   char** test1 = creerTab(str);

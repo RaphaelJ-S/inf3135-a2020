@@ -3,17 +3,25 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <ctype.h>
-
+#include <math.h>
 #include "malib.h"
 #include "tcv.h"  
 
+float opEvent01(char* temperature) {
+  int tempH = atof(temperature)* 10; 
+   
+  if(strcmp(temperature, "ERREUR") == 0) return 0; 
+  else if (validerTH_1(tempH)) return (float)(tempH/10.0);
+  else return -1;
+}
+
 static void opEvent00(char** tab, identifiant_t* precedent) {
   unsigned char puissance= tab[3][0];
-  if(puissance == '2' || puissance == '3' || puissance == '4') {
+  if((puissance == '2')||(puissance == '3')||(puissance == '4')) {
     precedent->id = atol(tab[2]);
     precedent->puissance = puissance;
     printf("10 %ld %ld %c\n",atol(tab[0]), atol(tab[2]), puissance);
-  {
+  }
 }
 
 

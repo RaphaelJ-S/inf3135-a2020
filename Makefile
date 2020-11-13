@@ -6,10 +6,10 @@ default: tp2
 all: tp2 tp1 test_tp2
 
 tp2: lib tp2.c malib.c malib.h 
-	@$(OPT_GCC) -o tp2 tp2.c malib.c tcv.o
+	@$(OPT_GCC) -o tp2 tp2.c malib.c tcv.o -lm
 
 test_tp2: test_tp2.c test_tp2.h test_tp2_main.c tp2
-	@$(OPT_GCC) $(OPT_CUNIT) -o test_tp2 test_tp2_main.c test_tp2.c tcv.o malib.c -lcunit
+	@$(OPT_GCC) $(OPT_CUNIT) -o test_tp2 test_tp2_main.c test_tp2.c tcv.o malib.c -lcunit -lm
 
 test-tp2: tp2
 	@cat data.txt | ./tp2

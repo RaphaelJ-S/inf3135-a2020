@@ -28,7 +28,8 @@ int main ( void )
         (NULL == CU_add_test(pSuite, "Validation comparaison timestamp", test_validerTimestamp)) ||
         (NULL == CU_add_test(pSuite, "Validation de l'ordre timestamp", test_actualiserTimestamp))||
         (NULL == CU_add_test(pSuite, "Validation du format du tableau 2d", test_validerTab)) ||
-        (NULL == CU_add_test(pSuite, "Validation du nombre de paramètre", test_validerNbrParam)) 
+        (NULL == CU_add_test(pSuite, "Validation du nombre de paramètre", test_validerNbrParam)) ||
+        (NULL == CU_add_test(pSuite, "Operation evenement 01", test_opEvent01))
       )
    {
       CU_cleanup_registry();
