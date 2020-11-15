@@ -7,38 +7,75 @@
 #include "malib.h"
 #include "tcv.h"  
 
+void affichage(Compteur_t* compte) {
+  float moyTA = 0;
+  float moyTH = 0;
+  size_t moyP = 0;
+
+  if(compte->nbrTA != 0) moyTA = compte->sumTA/compte->nbrTA;
+  if(compte->nbrTH != 0) moyTH = compte->sumTH/compte->nbrTH;
+  if(compte->nbrPulse != 0 ) moyP = round(compte->sumPulse/compte->nbrPulse);
+
+  printf("21 %.1f %.1f %ld\n",moyTH, moyTA, moyP);
+
+  printf("22 %ld %ld %ld\n", compte->valInvTH, compte->valInvTA, compte->valInvPulse);
+ 
+  printf("23 %ld %ld %ld\n", compte->cumulErrTH, compte->cumulErrTA, compte->cumulErrPulse); 
+}
 static void opEvent04(char** tab, identifiant_t* identification) {
-  short sig = atoi(temperature);
+  short sig = atoi(tab[2]);
   char signal = sig;
   
   if(validerSignal_2(signal)) {
     size_t timestamp = atol(tab[0]);
     size_t id = atol(tab[3]);
-    float metre = pwr(10, ((-69 - (sig))/(10*identification->puissance))); 
+    float metre = pow(10, ((-69 - (sig))/(10*identification->puissance))); 
     printf("14 %ld %ld %.1f\n", timestamp, id, metre); 
   } 
 }
-float opEvent03(char* temperature) {
+static void opEvent03(char* temperature, Compteur_t* compte) {
   short pulse = atoi(temperature);
 
-  if(strcmp(temperature, "ERREUR") == 0) return 500;
-  else if(validerPulsation_3(pulse)) return pulse;
-  else return -500;
+  if(strcmp(temperature, "ERREUR") == 0) {
+    compte->manifErrPulse += 1;
+    if(compte->manifErrPulse == 3) {
+      compte->manifErrPulse = 0;
+      compte->cumulErrPulse += 1;
+    }
+  } else if(validerPulsation_3(pulse)) {
+      compte->sumPulse += pulse;
+      compte->nbrPulse += 1;
+  } else compte->valInvPulse += 1;
 }
 
-float opEvent02(char* temperature) {
+static void opEvent02(char* temperature, Compteur_t* compte) {
   short tempA = atof(temperature) * 10;
   
-  if(strcmp(temperature, "ERREUR") == 0) return 500;
-  else if(validerTA_3(tempA)) return tempA/10.0;
-  else return -500;
+  if(strcmp(temperature, "ERREUR") == 0) {
+    compte->manifErrTA +=1;
+    if(compte->manifErrTA == 3) {
+      compte->manifErrTA = 0;
+      compte->cumulErrTA += 1;
+    }
+  } else if(validerTA_3(tempA)) {
+      compte->sumTA += (float)tempA/10.0;
+      compte->nbrTA += 1;
+  } else compte->valInvTA += 1; 
 }
-float opEvent01(char* temperature) {
+static void opEvent01(char* temperature, Compteur_t* compte) {
   int tempH = atof(temperature)* 10; 
    
-  if(strcmp(temperature, "ERREUR") == 0) return 500; 
-  else if (validerTH_1(tempH)) return (float)(tempH/10.0);
-  else return -500;
+  if(strcmp(temperature, "ERREUR") == 0){
+    compte->manifErrTH += 1;
+    if(compte->manifErrTH == 3) {
+      compte->manifErrTH = 0;
+      compte->cumulErrTH += 1;
+    }
+  } else if (validerTH_1(tempH)) {
+      compte->sumTH += (float)(tempH/10.0);
+      compte->nbrTH += 1;
+  } else compte->valInvTH += 1;
+   
 }
 
 static void opEvent00(char** tab, identifiant_t* precedent) {
@@ -50,26 +87,27 @@ static void opEvent00(char** tab, identifiant_t* precedent) {
   }
 }
 
-
-int opAiguillage(char** tab, identifiant_t* identification) {
-  size_t event = atol(tab[1]);
-  int ret = 0;
-  switch(event) {
+void opAiguillage(char** tab, identifiant_t* identification, Compteur_t* compte) {
+  char* mesure = tab[2];
+  switch (atol(tab[1])) {
     case(0):
       opEvent00(tab, identification);
       break;
     case(1):
+      opEvent01(mesure, compte);     
       break;
     case(2):
+      opEvent02(mesure, compte);
       break;
     case(3):
+      opEvent03(mesure, compte);
       break;
     case(4):
+      opEvent04(tab, identification);
       break;
     case(5):
       break;
   } 
-  return ret;
 }
 
 char** creerTab(char* ligne) {

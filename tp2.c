@@ -10,10 +10,13 @@ int main(int argc, char** argv) {
   char* ptr;
   char** entreeTab;
   size_t prevTimestamp = 0;
-  identifiant_t identification = {9000, 2};
+  identifiant_t identification = {9999, 2};
+  Compteur_t compte = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+
   version_t pres;
   getVersion(&pres);
   printf("version #: 0.1.%d\n", pres.build);
+
   while(fgets(str,200, stdin) != NULL) {
     ptr = strtok(str, "\n");
     
@@ -29,7 +32,7 @@ int main(int argc, char** argv) {
         printf("Timestamp prev : %ld , curr: %ld\n", prevTimestamp, atol(entreeTab[0]));
         if(validerTab(entreeTab, size, prevTimestamp)){
           printf("Cette entrée est valide\n");
-          opAiguillage(entreeTab, &identification);
+          opAiguillage(entreeTab, &identification, &compte);
         } else printf("Cette entrée n'est pas valide\n");
         prevTimestamp = actualiserTimestamp(atol(entreeTab[0]), prevTimestamp);
         
@@ -37,5 +40,6 @@ int main(int argc, char** argv) {
       }
     }
   }
+  affichage(&compte); 
   return 0;
 }

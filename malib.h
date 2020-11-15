@@ -7,15 +7,25 @@ typedef struct {
 } identifiant_t;
 
 typedef struct {
-  size_t valInvalide;
-  size_t manifErr;
-  size_t cumulErr;
+  size_t sumPulse;
+  float sumTA;
+  float sumTH;
+  size_t nbrPulse;
+  size_t nbrTA; 
+  size_t nbrTH;
+  size_t valInvPulse;
+  size_t manifErrPulse;
+  size_t cumulErrPulse;
+  size_t valInvTA;
+  size_t manifErrTA;
+  size_t cumulErrTA;
+  size_t valInvTH;
+  size_t manifErrTH;
+  size_t cumulErrTH;
 } Compteur_t;
-short opEvent04(char*);
-float opEvent03(char*);
-float opEvent02(char*);
-float opEvent01(char*);
-int opAiguillage(char**, identifiant_t*);
+
+void affichage(Compteur_t*);
+void opAiguillage(char**, identifiant_t*, Compteur_t*);
 char** creerTab(char*);
 int dimensionX(char*);
 bool validerTab(char**, int , size_t);
