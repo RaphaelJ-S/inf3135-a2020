@@ -52,3 +52,5 @@ Les fonctions nécessaires :
 * Oh wow l'événement 5 ne fonctionne pas du tout comment je pensais. Un autre exemple de l'importance de lire l'énoncé.
 * Je ne sais pas pourquoi je n'arrive pas à free mon tableau 2d de string à partir du main...
 * Le reste des fonctions fonctionnent très bien, reste juste à tester avec plus que 10 entrées.
+* Je n'arrive pas à free toute la mémoire que j'ai alloué...Ce n'est pas bcp mais je vais devoir travailler sur ça.
+* Travailler sur une structure aurait probablement rendu les free plus facile.

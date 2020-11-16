@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <ctype.h>
+#include <assert.h>
 #include <math.h>
 #include "malib.h"
 #include "tcv.h"  
@@ -79,9 +80,9 @@ static void opEvent02(char* temperature, Compteur_t* compte) {
       compte->nbrTA += 1;
   } else compte->valInvTA += 1; 
 }
+
 static void opEvent01(char* temperature, Compteur_t* compte) {
   int tempH = atof(temperature)* 10; 
-   
   if(strcmp(temperature, "ERREUR") == 0){
     compte->manifErrTH += 1;
     if(compte->manifErrTH == 3) {
@@ -92,22 +93,24 @@ static void opEvent01(char* temperature, Compteur_t* compte) {
       compte->sumTH += (float)(tempH/10.0);
       compte->nbrTH += 1;
   } else compte->valInvTH += 1;
-   
 }
 
-static void opEvent00(char** tab, identifiant_t* precedent) {
+static void opEvent00(char** tab, identifiant_t* precedent, idPN_t* idPN) {
   int puissance= atoi(tab[3]);
   if((puissance == 2)||(puissance == 3)||(puissance == 4)) {
     precedent->id = atol(tab[2]);
     precedent->puissance = puissance;
     printf("10 %ld %ld %d\n",atol(tab[0]), atol(tab[2]), puissance);
+    free(idPN->tab);
+    idPN->tab = malloc(sizeof(size_t));
+    idPN->size = 0;
   }
 }
 void opAiguillage(char** tab, identifiant_t* identification, Compteur_t* compte, idPN_t* idPN) {
   char* mesure = tab[2];
   switch (atol(tab[1])) {
     case(0):
-      opEvent00(tab, identification);
+      opEvent00(tab, identification, idPN);
       break;
     case(1):
       opEvent01(mesure, compte);     
@@ -127,8 +130,9 @@ void opAiguillage(char** tab, identifiant_t* identification, Compteur_t* compte,
   } 
 }
 
-char** creerTab(char* ligne) {
-  char** tab = (char**) malloc(dimensionX(ligne) * sizeof(char*));
+char** creerTab(char* ligne, char** entreeTab, int size) {
+  char** tmpTab = (char**)realloc(entreeTab,size *sizeof(*entreeTab));
+  assert(tmpTab);
   if(ligne != NULL) {
     char* delim =" ";
     int i = 0;
@@ -136,15 +140,14 @@ char** creerTab(char* ligne) {
     if(*ligne != '\0') {
       char* partie = strtok(ligne,delim);
       while(partie != NULL) {
-        tab[i] =(char*) malloc(strlen(partie) + 1);
-        tab[i] = partie;
+        tmpTab[i] =(char*) malloc(strlen(partie));
+        tmpTab[i] = partie;
         partie = strtok(NULL,delim);
         ++i;
       }
-    }else return NULL;
-  }else return NULL;
-   
-  return tab;
+    }
+  }
+  return tmpTab;
 }
 
 int dimensionX(char*ligne) {

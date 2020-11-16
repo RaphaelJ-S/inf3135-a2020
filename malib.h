@@ -31,7 +31,7 @@ typedef struct {
 
 void affichage(Compteur_t*);
 void opAiguillage(char**, identifiant_t*, Compteur_t*, idPN_t*);
-char** creerTab(char*);
+char** creerTab(char*, char**, int);
 int dimensionX(char*);
 bool validerTab(char**, int , size_t);
 bool validerNbrParam(int, int);

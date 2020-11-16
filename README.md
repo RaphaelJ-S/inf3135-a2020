@@ -2,9 +2,9 @@
 
 ## Description
 
-Ce projet est réalisé pour le cours Construction et maintenance de logiciels (INF3135) de l'automne 2020 à l'université du québec à montréal (UQAM). Ce projet est le premier livrable du cours et est à remettre au plus tard le 14 octobre 2020. 
+Ce projet est réalisé pour le cours Construction et maintenance de logiciels (INF3135) de l'automne 2020 à l'université du québec à montréal (UQAM). Ce projet est le premier livrable du cours et est à remettre au plus tard le 22 novembre 2020. 
 
-Le but du projet tp1 est de tester les fonctions d'un autre projet à l'aide de la librairie CUnit et d'identifier les fonctions qui fonctionnent selon les intervalles données.
+Le but du projet tp2 est de construire un logiciel qui prend les données venant de stdin (un fichier, une commande ou l'entrée manuelle) et afficher les information résultantes. Ce logiciel simule le fonctionnement d'une puce utilisée dans la détection de la COVID-19.
 
 ## Auteur
 
@@ -14,76 +14,60 @@ Code permanent : JACR26038907
 
 ## Fonctionnement
 
-Le projet tp1 a besoin de quelques fichiers pour fonctionner.
+Il y a deux manière de faire fonctionner ce programme. 
 
-Pour commancer, il faut s'assurer d'avoir dans le dossier racine du projets les fichers 'tcv.o' et 'tcv.h' 
+* En tapant `./tp2` et en entrant les données manuellement. 
 
-On peut entrer la commande `make lib` à la console pour télécharger ces fichiers dans un dossier ./data qui va être créer losque l'on entre la commande. Il faut ensuite décompresser le dossier obtenu et déplacer les fichers vers la racine du projet. 
+* En utilisant une pipe pour donner des données au logiciel avec, par exemple `cat data.txt | ./tp2`.
 
-le fichier 'tp1.c' devrait déjà être présent mais pas l'exécutable 'tp1', il faut donc compiler le fichier 'tp1.c'.
-
-On entre donc la commande `make` ou `make tp1` à la console pour compiler le fichier code source 'tp1.c'.
-
-L'exécutable 'tp1' devrait maintenant être à la racine du projet et on peut l'exécuter de quelques manières : 
-
-* `make test`
-
-* `./tp1`
-
-Dans les deux cas, le résultat est le même et les résultats des tests sur les fonctions sont affichés.
-
-On peut aussi afficher uniquement le nom des fonctions qui ont réussies en entrant la commande : 
-
-* `./tp1 | ./liste.sh`
+Dans les deux cas, le fichier "tp2" et ses dépendances doivent exister. Cela est réaliser avec la commande `make` ou `make tp2`
 
 ## Contenu du projet
 
 * README.md : Le fichier contenant les informations à propos du projet et sa présentation.
-
 * Makefile : Le fichier contenant les raccourcis pour des commandes. Les raccourcis sont : 
 
-  1. `make` : Exécute la première commande du fichier, dans ce cas ci, 'make tp1'.
-  2. `make tp1` : Compile le fichier code source 'tp1.c' et crée l'exécutable 'tp1'.
-  3. `make test` : Exécute l'exécutable 'tp1'.
-  4. `make lib` : Crée le dossier ./data et y télécharge le dossier compressé contenant les fichiers 'tcv.o' et 'tcv.h'.
-  5. `make clean` : Efface l'exécutable 'tp1', les fichiers terminant par .o et .h et le dossier ./data.
+  1. `default` : Dépend de la commande `make tp2`.
+  2. `make tp1` : Crée l'exécutable 'tp1' et ses dépendances.
+  3. `make tp2` : Crée l'exécutable 'tp2' et ses dépendances.
+  4. `make test-tp1a` : Exécute l'exécutable 'tp1'.
+  5. `make test-tp1b` : Exécute l'exécutable 'tp1' avec liste.sh pour lister les fonctions valides.
+  6. `make test-tp2` : Exécute l'exécutable 'tp2'.
+  7. `make lib` : Crée le dossier ./data et y télécharge le dossier compressé contenant les fichiers 'tcv.o' et 'tcv.h'. Ensuite, décompresse le fichier télécharger dans le dossier courant.
+  8. `make clean` : Efface les exécutables, les fichiers "tcv.o" et "tcv.h" et le dossier ./data.
 
-* liste.sh : Exécute une commande de filtrage pour afficher les fonction qui ont passé les tests. 
-
-* tp1.c : Fichier de code source du projet. Contient les tests à effectuer sur les fonctions données.
-
+* simple.c : Contient les fonction du tp1.
+* simple.h : Contient les entetes du tp1.
+* malib.c : Contient les fonctions du tp2.
+* malic.h : Contient les entetes du tp2.
+* tp1.c : Contient le main du tp1. 
+* tp2.c : Contient le main du tp2.
+* liste.sh : Exécute une commande de filtrage pour afficher les fonction qui ont passées les tests du tp1. 
 * cp.txt : Contient le code permanent en majuscule.
+* reflexion.md : Contient mes reflexions lors de l'écriture du tp2.
 
-### Question 1 
+## Processus de réflexion et démarche
 
-> Les valeurs décimales sont nocives pour l'ordinateur, pourquoi?
-
-Premièrement, une valeur décimale prend plus de place en mémoire puisqu'on doit suivre deux nombre(les valeurs entieres et les décimaux). Un autre problème est que des calculations résultant en des nombres décimaux vont souvent donner des nombres prenant plus de place en mémoire(souvent infini) que la calculation initiale ce qui force l'ordinateur à donner un résultat approximatif et à arrondir pour rentrer dans la mémoire.  Ces raisons peuvent donner des résultats absurde pour un humain. Par exemple, pour un ordinateur 1/3 + 1/3 + 1/3 = 0.99999...
-
-### Question 2
-
-> Vous devez respecter les limites des types de données, pourquoi?
-
-Lorsqu'on dépasse un limite d'un type de donnée, il y a une perte de données. Par exemple, si on a un type de donnée ayant une capacité de 1 octet il y a 2^8 - 1 différentes valeurs possibles(signé ou non). La représentation binaire de 2^8 est 100000000 mais un type de donnée de 1 octet ne prend que les 8 premier bits alors 2^8 est sauvé comme 00000000, ce qui n'est pas le résultat voulu.
+[reflexion](./reflexion.md)
 
 ## Références
 
 
 1. [le site du cours](https://github.com/guyfrancoeur/INF3135_A2020)
+2. [Le site cplusplus](https://www.cplusplus.com)
+3. [Le site de GNU] (https://www.gnu.org/software/make/manual/html_node/Introduction.html)
 
 ## Statut
 
-Le projet est complété.
+Le projet est complété, les sorties et les calculation sont conformes aux exigences. Par contre, il y a toujours une petite fuite de mémoire.
 
 ## Autoévaluation
 
-Je pense que j'ai bien répondu aux attentes formulées dans l'énoncé du TP1 :
+Je pense que j'ai bien répondu aux attentes formulées dans l'énoncé du TP2 :
 
-1. Les tests pour les intervalles de toutes les variantes des fonctions.
-2. Le Makefile avec les raccourcis demandés.
-3. L'exécutable 'liste.sh'.
-4. Respect des contrainte sur le code source, les fichiers à utiliser, l'environnement de développement, Git et la manière de poser des question.
-5. Les fichiers demandés sont tous présents dans la bonne branche du git.
-6. README.md complété.
-
-Bien que les tests ne soient probablement pas parfaits, je pense qu'ils répondent bien aux attentes du tp comme je les ai compris et je m'accorde une note de 90% au minimum.
+* Le programme s'exécute avec les paramètres demandés.
+* Les fichiers demandés sont présents.
+* Les commandes make sont présentes.
+* Le programme utilise les fonctions définies dans tcv.h.
+* Les sorties sont conformes à l'énoncé.
+* gitignore present.
