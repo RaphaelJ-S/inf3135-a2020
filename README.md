@@ -45,6 +45,7 @@ Dans les deux cas, le fichier "tp2" et ses dépendances doivent exister. Cela es
 * liste.sh : Exécute une commande de filtrage pour afficher les fonction qui ont passées les tests du tp1. 
 * cp.txt : Contient le code permanent en majuscule.
 * reflexion.md : Contient mes reflexions lors de l'écriture du tp2.
+* tp2.yml: Contient des objets en notation YAML définissant les différents fichiers.
 
 ## Processus de réflexion et démarche
 
@@ -55,7 +56,7 @@ Dans les deux cas, le fichier "tp2" et ses dépendances doivent exister. Cela es
 
 1. [le site du cours](https://github.com/guyfrancoeur/INF3135_A2020)
 2. [Le site cplusplus](https://www.cplusplus.com)
-3. [Le site de GNU] (https://www.gnu.org/software/make/manual/html_node/Introduction.html)
+3. [Le site de GNU](https://www.gnu.org/software/make/manual/html_node/Introduction.html)
 
 ## Statut
 
