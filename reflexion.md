@@ -35,12 +35,20 @@ Les fonctions nécessaires :
 * Pas sur de la taille initiale du tableau utilisé dans fgets, semble impossible de le faire variable. Je le mets à 300 pour le moment puisque un des énénement accepte un nombre potentiellement infini de "sizet".
 
 ### 12/11/2020
+
 * Est-ce que j'ai vraiment besoin de faire une structure pour représenter les données? J'ai déjà les donnés séparées dans un tableau char**.
 * Compteurs dans le main pour pouvoir les suivre tout le long de l'exécution du programme.
 * Je pense que je vais mettre mes tests unitaires pour le tp2 dans un fichiers à part.  
 * Créer des fonctions dans le fichier de tests unitaire pour faciliter la simulation d'entrée de données.
+
 ### 13/11/2020
 
 * Bon...pas besoin de vérifier le format de la ligne d'entrée, beaucoup de temps perdu sur ça.
 * Je vais avoir besoin d'une structure pour garder l'id et la puissance de l'emetteur BT à travers plusieurs entrées.
 * Le m dans le calcul de la distance est une constante = -69...je ne sais pas pourquoi je n'avais pas réaliser ça. 
+
+### 16/11/2020
+
+* Oh wow l'événement 5 ne fonctionne pas du tout comment je pensais. Un autre exemple de l'importance de lire l'énoncé.
+* Je ne sais pas pourquoi je n'arrive pas à free mon tableau 2d de string à partir du main...
+* Le reste des fonctions fonctionnent très bien, reste juste à tester avec plus que 10 entrées.

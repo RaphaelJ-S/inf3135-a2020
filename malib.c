@@ -22,15 +22,32 @@ void affichage(Compteur_t* compte) {
  
   printf("23 %ld %ld %ld\n", compte->cumulErrTH, compte->cumulErrTA, compte->cumulErrPulse); 
 }
-static void opEvent04(char** tab, identifiant_t* identification) {
+
+static void ajouterIdPN(idPN_t* idPN, size_t nvElem) {
+  idPN->tab = realloc(idPN->tab, sizeof(size_t) * (idPN->size+1));
+  idPN->tab[idPN->size] = nvElem;
+  idPN->size += 1; 
+}
+
+static void opEvent05(char** tab, identifiant_t* identification, idPN_t* idPN) {
+  printf("15 %ld %ld ", atol(tab[0]), identification->id);
+  for(int i = 0; i < idPN->size; ++i) {
+    printf("%ld ", idPN->tab[i]);
+  }
+  printf("\n");
+}
+
+static void opEvent04(char** tab, identifiant_t* identification, idPN_t* idPN) {
   short sig = atoi(tab[2]);
   char signal = sig;
   
   if(validerSignal_2(signal)) {
     size_t timestamp = atol(tab[0]);
     size_t id = atol(tab[3]);
-    float metre = pow(10, ((-69 - (sig))/(10*identification->puissance))); 
-    printf("14 %ld %ld %.1f\n", timestamp, id, metre); 
+    float metre = pow(10.0, ((-69 - (sig))/(10.0*identification->puissance))); 
+    ajouterIdPN(idPN, id);
+    printf("14 %ld %ld %.1f\n", timestamp, id, round(metre*10)/10); 
+
   } 
 }
 static void opEvent03(char* temperature, Compteur_t* compte) {
@@ -79,15 +96,14 @@ static void opEvent01(char* temperature, Compteur_t* compte) {
 }
 
 static void opEvent00(char** tab, identifiant_t* precedent) {
-  unsigned char puissance= tab[3][0];
-  if((puissance == '2')||(puissance == '3')||(puissance == '4')) {
+  int puissance= atoi(tab[3]);
+  if((puissance == 2)||(puissance == 3)||(puissance == 4)) {
     precedent->id = atol(tab[2]);
     precedent->puissance = puissance;
-    printf("10 %ld %ld %c\n",atol(tab[0]), atol(tab[2]), puissance);
+    printf("10 %ld %ld %d\n",atol(tab[0]), atol(tab[2]), puissance);
   }
 }
-
-void opAiguillage(char** tab, identifiant_t* identification, Compteur_t* compte) {
+void opAiguillage(char** tab, identifiant_t* identification, Compteur_t* compte, idPN_t* idPN) {
   char* mesure = tab[2];
   switch (atol(tab[1])) {
     case(0):
@@ -103,9 +119,10 @@ void opAiguillage(char** tab, identifiant_t* identification, Compteur_t* compte)
       opEvent03(mesure, compte);
       break;
     case(4):
-      opEvent04(tab, identification);
+      opEvent04(tab, identification, idPN);
       break;
     case(5):
+      opEvent05(tab, identification,  idPN);
       break;
   } 
 }
@@ -162,7 +179,7 @@ bool validerTab(char** param, int size, size_t prevTimestamp) {
 }
 
 bool validerTimestamp(size_t timeStamp, size_t prevTimestamp) {
-  return timeStamp > prevTimestamp;
+  return timeStamp >= prevTimestamp;
 }
 
 size_t actualiserTimestamp(size_t timestamp, size_t prevTimestamp) {

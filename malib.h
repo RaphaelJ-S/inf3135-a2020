@@ -1,9 +1,14 @@
 #ifndef MALIB_H
 #define MALIB_H
 
+typedef struct idPN_s {
+  size_t* tab;
+  int size;
+} idPN_t;
+
 typedef struct {
   size_t id;
-  unsigned char puissance;
+  int puissance;
 } identifiant_t;
 
 typedef struct {
@@ -25,7 +30,7 @@ typedef struct {
 } Compteur_t;
 
 void affichage(Compteur_t*);
-void opAiguillage(char**, identifiant_t*, Compteur_t*);
+void opAiguillage(char**, identifiant_t*, Compteur_t*, idPN_t*);
 char** creerTab(char*);
 int dimensionX(char*);
 bool validerTab(char**, int , size_t);
