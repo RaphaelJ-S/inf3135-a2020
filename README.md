@@ -39,7 +39,7 @@ Dans les deux cas, le fichier "tp2" et ses dépendances doivent exister. Cela es
 * simple.c : Contient les fonction du tp1.
 * simple.h : Contient les entetes du tp1.
 * malib.c : Contient les fonctions du tp2.
-* malic.h : Contient les entetes du tp2.
+* malib.h : Contient les entetes du tp2.
 * tp1.c : Contient le main du tp1. 
 * tp2.c : Contient le main du tp2.
 * liste.sh : Exécute une commande de filtrage pour afficher les fonction qui ont passées les tests du tp1. 
