@@ -39,10 +39,12 @@ static void opEvent05(char** tab, identifiant_t* identification, idPN_t* idPN) {
 }
 
 static void opEvent04(char** tab, identifiant_t* identification, idPN_t* idPN) {
-  short sig = atoi(tab[2]);
-  char signal = sig;
-  
-  if(validerSignal_2(signal)) {
+  int sig = atoi(tab[2]);
+  version_t v;
+  getVersion(&v);
+  bool valide = v.build >= 1005 && v.build <= 1008 ? validerSignal_3((short)sig) 
+              : v.build <= 1003 ? validerSignal_2((char)sig) : false;  
+  if(valide) {
     size_t timestamp = atol(tab[0]);
     size_t id = atol(tab[3]);
     float metre = pow(10.0, ((-69 - (sig))/(10.0*identification->puissance))); 
@@ -52,7 +54,11 @@ static void opEvent04(char** tab, identifiant_t* identification, idPN_t* idPN) {
   } 
 }
 static void opEvent03(char* temperature, Compteur_t* compte) {
-  short pulse = atoi(temperature);
+  int pulse = atoi(temperature);
+  version_t v;
+  getVersion(&v);
+  bool valide = v.build >= 1005 && v.build <= 1008 ? validerPulsation_1(pulse) 
+              : v.build <= 1003 ? validerPulsation_3((short)pulse) : false;  
 
   if(strcmp(temperature, "ERREUR") == 0) {
     compte->manifErrPulse += 1;
@@ -60,22 +66,27 @@ static void opEvent03(char* temperature, Compteur_t* compte) {
       compte->manifErrPulse = 0;
       compte->cumulErrPulse += 1;
     }
-  } else if(validerPulsation_3(pulse)) {
+  } else if(valide) {
       compte->sumPulse += pulse;
       compte->nbrPulse += 1;
   } else compte->valInvPulse += 1;
 }
 
 static void opEvent02(char* temperature, Compteur_t* compte) {
-  short tempA = atof(temperature) * 10;
-  
+  int tempA = atof(temperature) * 10;
+  version_t v;
+  getVersion(&v);
+  bool valide = v.build >= 1005 && v.build <= 1008 ? validerTA_1(tempA) 
+              : v.build <= 1003 ? validerTA_3((short)tempA) : false;  
+
+ 
   if(strcmp(temperature, "ERREUR") == 0) {
     compte->manifErrTA +=1;
     if(compte->manifErrTA == 3) {
       compte->manifErrTA = 0;
       compte->cumulErrTA += 1;
     }
-  } else if(validerTA_3(tempA)) {
+  } else if(valide){
       compte->sumTA += (float)tempA/10.0;
       compte->nbrTA += 1;
   } else compte->valInvTA += 1; 
@@ -83,34 +94,38 @@ static void opEvent02(char* temperature, Compteur_t* compte) {
 
 static void opEvent01(char* temperature, Compteur_t* compte) {
   int tempH = atof(temperature)* 10; 
+
+  version_t v;
+  getVersion(&v);
+  bool valide = v.build >= 1005 && v.build <= 1008 ? validerTH_1(tempH) 
+              : v.build <= 1003 ? validerTH_1(tempH) : false;  
+
+
   if(strcmp(temperature, "ERREUR") == 0){
     compte->manifErrTH += 1;
     if(compte->manifErrTH == 3) {
       compte->manifErrTH = 0;
       compte->cumulErrTH += 1;
     }
-  } else if (validerTH_1(tempH)) {
+  } else if (valide) {
       compte->sumTH += (float)(tempH/10.0);
       compte->nbrTH += 1;
   } else compte->valInvTH += 1;
 }
 
-static void opEvent00(char** tab, identifiant_t* precedent, idPN_t* idPN) {
+static void opEvent00(char** tab, identifiant_t* precedent) {
   int puissance= atoi(tab[3]);
   if((puissance == 2)||(puissance == 3)||(puissance == 4)) {
     precedent->id = atol(tab[2]);
     precedent->puissance = puissance;
     printf("10 %ld %ld %d\n",atol(tab[0]), atol(tab[2]), puissance);
-    free(idPN->tab);
-    idPN->tab = malloc(sizeof(size_t));
-    idPN->size = 0;
   }
 }
 void opAiguillage(char** tab, identifiant_t* identification, Compteur_t* compte, idPN_t* idPN) {
   char* mesure = tab[2];
   switch (atol(tab[1])) {
     case(0):
-      opEvent00(tab, identification, idPN);
+      opEvent00(tab, identification);
       break;
     case(1):
       opEvent01(mesure, compte);     
