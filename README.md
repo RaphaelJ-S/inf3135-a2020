@@ -3,7 +3,7 @@
 
 ## Description
 
-Ce projet est réalisé pour le cours Construction et maintenance de logiciels (INF3135) de l'automne 2020 à l'université du québec à montréal (UQAM). Ce projet est le premier livrable du cours et est à remettre au plus tard le 22 novembre 2020. 
+Ce projet est réalisé pour le cours Construction et maintenance de logiciels (INF3135) de l'automne 2020 à l'université du québec à montréal (UQAM). Ce projet est le deuxième livrable du cours et est à remettre au plus tard le 22 novembre 2020. 
 
 Le but du projet tp2 est de construire un logiciel qui prend les données venant de stdin (un fichier, une commande ou l'entrée manuelle) et afficher les information résultantes. Ce logiciel simule le fonctionnement d'une puce utilisée dans la détection de la COVID-19.
 
@@ -21,7 +21,7 @@ Il y a deux manière de faire fonctionner ce programme.
 
 * En utilisant une pipe pour donner des données au logiciel avec, par exemple `cat data.txt | ./tp2`.
 
-Dans les deux cas, le fichier "tp2" et ses dépendances doivent exister. Cela est réaliser avec la commande `make` ou `make tp2`
+Dans les deux cas, le fichier "tp2" et ses dépendances doivent exister. Cela est réalisé avec la commande `make` ou `make tp2`
 
 ## Contenu du projet
 
