@@ -115,11 +115,9 @@ static void opEvent01(char* temperature, Compteur_t* compte) {
 
 static void opEvent00(char** tab, identifiant_t* precedent) {
   int puissance= atoi(tab[3]);
-  if((puissance == 2)||(puissance == 3)||(puissance == 4)) {
-    precedent->id = atol(tab[2]);
-    precedent->puissance = puissance;
-    printf("10 %ld %ld %d\n",atol(tab[0]), atol(tab[2]), puissance);
-  }
+  precedent->id = atol(tab[2]);
+  precedent->puissance = puissance==2||puissance==3||puissance==4 ? puissance : 2;
+  printf("10 %ld %ld %d\n",atol(tab[0]), precedent->id, precedent->puissance);
 }
 void opAiguillage(char** tab, identifiant_t* identification, Compteur_t* compte, idPN_t* idPN) {
   char* mesure = tab[2];
