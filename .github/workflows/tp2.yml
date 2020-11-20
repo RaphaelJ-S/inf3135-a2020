@@ -21,10 +21,12 @@ jobs:
         unzip tp1.zip
         sudo apt-get install -y libcunit1 libcunit1-doc libcunit1-dev
     - name: Compilation tp1
-      run: | 
+      run:  
         gcc -std=c11 -Wall -Werror=vla -pedantic -I/usr/include/CUnit -L/usr/lib/x86_64-linux-gnu -o tp1 tp1.c simple.c tcv.o -lcunit 
-        file -f tp1
     - name: Compilation tp2
       run: 
         gcc -std=c11 -Wall -Werror=vla -pedantic -o tp2 tp2.c malib.c tcv.o -lm
+    - nake: File
+      run: |
+        file -f tp1
         file -f tp2
