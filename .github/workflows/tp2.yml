@@ -26,7 +26,7 @@ jobs:
     - name: Compilation tp2
       run: 
         gcc -std=c11 -Wall -Werror=vla -pedantic -o tp2 tp2.c malib.c tcv.o -lm
-    - nake: File
+    - name: File
       run: |
         file -f tp1
         file -f tp2
