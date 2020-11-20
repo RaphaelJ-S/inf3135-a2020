@@ -3,11 +3,6 @@ on:
   push:
     branches:
       - tp2
-    paths:
-      - 'tp2.c'
-      - 'malib.c'
-      - 'tcv.o'
-      - '.github/workflows/tp2.yml'
 jobs:
   job1:
     name: Test
