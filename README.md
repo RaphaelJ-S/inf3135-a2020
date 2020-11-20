@@ -1,4 +1,5 @@
-# Travail pratique 1
+![tp2 compilation](https://github.com/RaphaelJ-S/inf3135-a2020/workflows/tp2%20compilation/badge.svg)
+# Travail pratique 2
 
 ## Description
 
