@@ -13,4 +13,7 @@ jobs:
     - name: affichage
       run: |
         echo $OSTYPE
-
+        gcc -v
+    - name: compilation
+      run: |
+        gcc -std=c11 -Wall -Werror=vla -pedantic -o tp2 tp2.c malib.c tcv.o -lm
