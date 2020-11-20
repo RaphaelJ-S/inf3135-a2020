@@ -15,8 +15,16 @@ jobs:
         echo $OSTYPE
         gcc -v
         ls -la
-    - name: compilation
+    - name: Lib/Install
       run: |
         wget https://github.com/guyfrancoeur/INF3135_A2020/raw/master/tp/tp1.zip
         unzip tp1.zip
+        sudo apt-get install -y lebcunit1 libcunit1-doc libcunit1-dev
+    - name: Compilation tp1
+      run: | 
+        gcc -std-c11 -Wall -Werror=vla -pedantic -I/usr/include/CUnit -L/usr/lib/x86_64-linux-gnu -o tp1 tp1.c simple.c tcv.o -lcunit 
+        file -f tp1
+    - name: Compilation tp2
+      run: 
         gcc -std=c11 -Wall -Werror=vla -pedantic -o tp2 tp2.c malib.c tcv.o -lm
+        file -f tp2
