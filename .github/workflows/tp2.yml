@@ -1,11 +1,11 @@
-name: tp2 compilation
+name: Tp2 compilation
 on:
   push:
     branches:
       - tp2
 jobs:
   job1:
-    name: Test
+    name: Verification
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -14,6 +14,7 @@ jobs:
       run: |
         echo $OSTYPE
         gcc -v
+        ls -la
     - name: compilation
       run: |
         wget https://github.com/guyfrancoeur/INF3135_A2020/raw/master/tp/tp1.zip
