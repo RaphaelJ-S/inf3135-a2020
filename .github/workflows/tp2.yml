@@ -1,14 +1,16 @@
----
-tp2:
-  -main: ./tp2.c
-  -fonction: ./malib.c
-  -header: ./malib.h
+name: tp2 compilation
+on:
+  push:
+    branches:
+      - tp2
+jobs:
+  job1:
+    name: Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+    - uses: actions/checkout@v2
+    - name: affichage
+      run: |
+        echo $OSTYPE
 
-lib:
-  -fonction: ./tcv.o
-  -header: ./tcv.h
-
-tp1:
-  -main: ./tp1.c
-  -fonction: ./simple.c
-  -header: ./simple.h
