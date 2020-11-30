@@ -22,17 +22,40 @@ int main(int argc, char** argv) {
     ptr = strtok(str, "\n");
     int size = dimensionX(ptr);
     entreeTab = creerTab(ptr, entreeTab, size);
+    #ifdef _ERR_
+      printf("E1 : ");
+      for(int i =0; i<size ; ++i) {
+        printf("-%s-", entreeTab[i]);
+      }
+      printf("\n");
+    #endif 
     if(entreeTab != NULL) {
 
       if(entreeTab[0] != NULL)  {    
 
         if(validerTab(entreeTab, size, prevTimestamp)){
           opAiguillage(entreeTab, &identification, &compte, &idPN );
-        }
+
+    #ifdef _ERR_
+      printf("E2 : ");
+      for(int i =0; i<size ; ++i) {
+        printf("-%s-", entreeTab[i]);
+      }
+      printf("\n");
+    #endif 
+ 
+       }
         prevTimestamp = actualiserTimestamp(atol(entreeTab[0]), prevTimestamp);
       }
-
     }
+    #ifdef _ERR_
+      printf("E3 : ");
+      for(int i =0; i<size ; ++i) {
+        printf("-%s-", entreeTab[i]);
+      }
+      printf("\n");
+    #endif 
+     
   }
   free(entreeTab);
   free(idPN.tab);

@@ -1,7 +1,6 @@
 *.o
 *.bin
 *.out
-t*[a21]
+t*[a213]
 tcv.[oh]
 /data
-

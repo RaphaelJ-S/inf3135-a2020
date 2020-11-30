@@ -2,15 +2,15 @@ OPT_GCC=gcc -std=c11 -Wall -Werror=vla -pedantic
 OPT_CUNIT=-I/usr/include/CUnit -L/usr/lib/x86_64-linux-gnu
 WEB_TCV=https://github.com/guyfrancoeur/INF3135_A2020/raw/master/tp/
 
-default: tp2 
+default: tp3 
 
-all: tp2 tp1 
+all: tp3 tp1 
 
-tp2: lib tp2.c malib.c malib.h 
-	@$(OPT_GCC) -o tp2 tp2.c malib.c tcv.o -lm
+tp3: lib tp3.c malib.c malib.h 
+	@$(OPT_GCC) -o tp3 tp3.c malib.c tcv.o -lm
 
-test-tp2: tp2
-	@./tp2
+test-tp3: tp3
+	@$(OPT_GCC) -D_ERR_ -o test_tp3 tp3.c malib.c tcv.o -lm
 
 tp1: tp1.c simple.c simple.h lib
 	@$(OPT_GCC) $(OPT_CUNIT) -o tp1 tp1.c simple.c tcv.o -lcunit
