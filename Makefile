@@ -1,5 +1,6 @@
 OPT_GCC=gcc -std=c11 -Wall -Werror=vla -pedantic
 OPT_CUNIT=-I/usr/include/CUnit -L/usr/lib/x86_64-linux-gnu
+WEB_TCV=https://github.com/guyfrancoeur/INF3135_A2020/raw/master/tp/
 
 default: tp2 
 
@@ -21,15 +22,14 @@ test-tp1b: liste.sh tp1
 	@./tp1 | ./liste.sh
 
 clean: 
-	@rm -rf ./data t*[21] tcv.[oh]
+	@rm -rf ./data/ t*[21] tcv.[oh]
 
 lib: 
 ifeq ($(wildcard ./tcv.h),) 
-	@wget -q https://github.com/guyfrancoeur/INF3135_A2020/raw/master/tp/tp1.zip
-	@mkdir -p ./data ; mv ./tp1.zip ./data ; unzip -uq ./data/tp1.zip 
+	@wget -q $(WEB_TCV)tp1.zip $(WEB_TCV)tp2.zip $(WEB_TCV)tp3.zip ; mkdir -p ./data ; mv ./tp[123].zip ./data ; unzip -uq ./data/tp[123].zip 
 else ifeq ($(wildcard ./tcv.o),)
-	@wget -q https://github.com/guyfrancoeur/INF3135_A2020/raw/master/tp/tp1.zip
-	@mkdir -p ./data ; mv ./tp1.zip ./data ; unzip -uq ./data/tp1.zip 
+	@wget -q $(WEB_TCV)tp1.zip $(WEB_TCV)tp2.zip $(WEB_TCV)tp3.zip ; mkdir -p ./data ; mv ./tp[123].zip ./data/ ; unzip -uq ./data/tp[123].zip 
 endif
+
 .PHONY:clean lib all default
 
