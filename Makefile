@@ -4,25 +4,16 @@ WEB_TCV=https://github.com/guyfrancoeur/INF3135_A2020/raw/master/tp/
 
 default: tp3 
 
-all: tp3 tp1 
+all: tp3 test_tp3 
 
 tp3: lib tp3.c malib.c malib.h 
 	@$(OPT_GCC) -o tp3 tp3.c malib.c tcv.o -lm
 
-test-tp3: tp3
+test_tp3: tp3 lib malib.c malib.h
 	@$(OPT_GCC) -D_ERR_ -o test_tp3 tp3.c malib.c tcv.o -lm
 
-tp1: tp1.c simple.c simple.h lib
-	@$(OPT_GCC) $(OPT_CUNIT) -o tp1 tp1.c simple.c tcv.o -lcunit
-
-test-tp1a: tp1
-	@./tp1
-
-test-tp1b: liste.sh tp1
-	@./tp1 | ./liste.sh
-
 clean: 
-	@rm -rf ./data/ t*[21] tcv.[oh]
+	@rm -rf ./data/ t*[321] tcv.[oh]
 
 lib: 
 ifeq ($(wildcard ./tcv.h),) 
