@@ -8,6 +8,19 @@
 #include "malib.h"
 #include "tcv.h"  
 
+int cmd(int argc, char** argv, donnees_t* data) {
+	for(int i = 1; i < argc; ++i) {
+		if(strcmp(argv[i], "-t") == 0) data->options[0] = 1;
+		else if (strcmp(argv[i], "-i") == 0) data->options[1] = 1;
+		else if (strcmp(argv[i], "-d") == 0) data->options[2] = 1;
+		else if (strcmp(argv[i], "-s") == 0) data->options[3] = 1;
+		else return -1;
+	}
+	return 0;
+}
+void lecture(char* ligne, donnees_t* data) {
+     
+}
 void affichage(Compteur_t* compte) {
   float moyTA = 0;
   float moyTH = 0;
