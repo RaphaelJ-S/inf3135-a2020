@@ -1,7 +1,8 @@
-*.o
+
 *.bin
+/data
+*.guy
+*.o
 *.out
 t*[a21]
 tcv.[oh]
-/data
-
