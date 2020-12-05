@@ -9,8 +9,11 @@ all: tp3 test_tp3
 tp3: lib tp3.c malib.c malib.h 
 	@$(OPT_GCC) -o tp3 tp3.c malib.c tcv.o -lm
 
-test_tp3: tp3 lib malib.c malib.h
+test_tp3: tp3.c lib malib.c malib.h
 	@$(OPT_GCC) -D_ERR_ -o test_tp3 tp3.c malib.c tcv.o -lm
+
+run: tp3 data.txt 
+	@cat data.txt | ./tp3 
 
 clean: 
 	@rm -rf ./data/ t*[321] tcv.[oh]

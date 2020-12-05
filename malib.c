@@ -10,16 +10,108 @@
 
 int cmd(int argc, char** argv, donnees_t* data) {
 	for(int i = 1; i < argc; ++i) {
-		if(strcmp(argv[i], "-t") == 0) data->options[0] = 1;
-		else if (strcmp(argv[i], "-i") == 0) data->options[1] = 1;
-		else if (strcmp(argv[i], "-d") == 0) data->options[2] = 1;
-		else if (strcmp(argv[i], "-s") == 0) data->options[3] = 1;
+		if(strcmp(argv[i], "-t") == 0) data->options[0] = (char)1;
+		else if (strcmp(argv[i], "-i") == 0) data->options[1] = (char)1;
+		else if (strcmp(argv[i], "-d") == 0) data->options[2] = (char)1;
+		else if (strcmp(argv[i], "-s") == 0) data->options[3] = (char)1;
 		else return -1;
 	}
 	return 0;
 }
 void lecture(char* ligne, donnees_t* data) {
-     
+	if(ligne != NULL) {
+  	char* delim =" ";
+		bool valide = true; 
+		int i = 0;
+		if(*ligne != '\0') {
+  		char* partie = strtok(ligne,delim);
+    	while(partie && valide) {
+      	if(i == 0) valide = confirmeTimestamp(partie, data); 
+				else if (i == 1) valide = confirmeEvenement(partie, data);
+				else if (i == 2) valide = confirmeDeux(partie, data);
+				else if (i == 3) valide = confirmeTrois(partie, data);
+				partie = strtok(NULL,delim);
+      	++i;
+    	}
+			#ifdef _ERR_
+				printf("\n\ndata : \nVersion: %d.%d.%d\nOptions: %d%d%d%d\nidentifidant :%ld %d\nIDPN : %d\nTime : %ld\nEvenement : %c\nUnion : %d %f %d %s\n\n",data->version->major, data->version->minor, data->version->build,data->options[0], data->options[1], data->options[2], data->options[3], data->identif_s->id, data->identif_s->puissance, data->id_s->size, data->timestamp,data->event, data->idPwr, data->degSig, data->pwrSig, data->string);
+				#endif
+			validerNbrParam(i, data);
+		}
+  }     
+}
+
+bool confirmeDeux(char* partie, donnees_t* data) {
+	char event = data->event;
+	int err = strcmp(partie, "ERREUR");
+	if(event == 0) {
+		data->identif_s->id = atol(partie);
+	}else if (event == 1 || event == 2 || event == 3){
+		if(err == 0){
+			data->string = partie;
+			if(event == 1) data->cmpt_s->manifErrTA += 1;
+			if(event == 2) data->cmpt_s->manifErrTH += 1;
+			if(event == 3) data->cmpt_s->manifErrPulse += 1;
+		}else data->degSig = atof(partie);
+
+	}else if (event == 4) {
+		data->pwrSig = (short)atoi(partie);
+  }
+	return true;
+}
+bool confirmeTrois(char* partie, donnees_t* data) {
+	char event = data->event;
+	if(event == 0) {
+		int pwr = atoi(partie);
+		if(pwr == 2||pwr == 3||pwr == 4) {
+			data->identif_s->puissance = (unsigned char)pwr;	
+		}else {
+			data->cmpt_s->trxInval += 1; 
+			return false;
+		}
+	}else if(event == 4) {
+		ajouterIdPN(data->id_s, atol(partie));
+	}
+	return true;
+}
+
+bool confirmeEvenement(char* partie, donnees_t* data) {
+	int evenement = validerEvenement(partie, data);
+  if(evenement == -1) return false;
+	else {
+		data->event = evenement;
+		return true;
+	}
+}
+int validerEvenement(char* partie, donnees_t* data) {
+  int i = 0;
+  char eveneVal[6][2] = {{"00"},{"01"},{"02"},{"03"},{"04"},{"05"}};
+
+  if(strlen(partie) == 2) {
+    while(i < 6) {
+       if((int)partie[0] == (int)eveneVal[i][0] && (int)partie[1] == (int)eveneVal[i][1]) return atoi(partie); 
+       ++i;
+    }
+  }
+	data->cmpt_s->trxInval += 1;
+  return -1;
+}
+bool confirmeTimestamp(char* partie, donnees_t* data) {
+	size_t timestamp = atol(partie);
+	if(data->timestamp > timestamp) {
+		data->cmpt_s->nbrNonSeq += 1;
+		return false;
+	}else {
+		data->timestamp = timestamp;
+		return true;
+	}
+}
+bool validerNbrParam(int size, donnees_t* data) {
+  int evenement = data->event; 
+  return ((evenement == 0 ||evenement == 4) ? (size != 4 ? false : true) 
+         : (evenement == 1 ||evenement == 2 ||evenement ==3) ? (size != 3 ? false : true)
+         : (evenement == 5) ? (size < 4 ? false : true) 
+         : false);
 }
 void affichage(Compteur_t* compte) {
   float moyTA = 0;
@@ -37,12 +129,12 @@ void affichage(Compteur_t* compte) {
   printf("23 %ld %ld %ld\n", compte->cumulErrTH, compte->cumulErrTA, compte->cumulErrPulse); 
 }
 
-static void ajouterIdPN(idPN_t* idPN, size_t nvElem) {
+void ajouterIdPN(idPN_t* idPN, size_t nvElem) {
   idPN->tab = realloc(idPN->tab, sizeof(size_t) * (idPN->size+1));
   idPN->tab[idPN->size] = nvElem;
   idPN->size += 1; 
 }
-
+/*
 static void opEvent05(char** tab, identifiant_t* identification, idPN_t* idPN) {
   printf("15 %ld %ld ", atol(tab[0]), identification->id);
   for(int i = 0; i < idPN->size; ++i) {
@@ -125,7 +217,6 @@ static void opEvent01(char* temperature, Compteur_t* compte) {
       compte->nbrTH += 1;
   } else compte->valInvTH += 1;
 }
-
 static void opEvent00(char** tab, identifiant_t* precedent) {
   int puissance= atoi(tab[3]);
   precedent->id = atol(tab[2]);
@@ -155,85 +246,8 @@ void opAiguillage(char** tab, identifiant_t* identification, Compteur_t* compte,
       break;
   } 
 }
+*/
 
-char** creerTab(char* ligne, char** entreeTab, int size) {
-  char** tmpTab = (char**)realloc(entreeTab,size *sizeof(*entreeTab));
-  assert(tmpTab);
-  if(ligne != NULL) {
-    char* delim =" ";
-    int i = 0;
 
-    if(*ligne != '\0') {
-      char* partie = strtok(ligne,delim);
-      while(partie != NULL) {
-        tmpTab[i] =(char*) malloc(strlen(partie));
-        tmpTab[i] = partie;
-        partie = strtok(NULL,delim);
-        ++i;
-      }
-    }
-  }
-  return tmpTab;
-}
 
-int dimensionX(char*ligne) {
-  int x = 0;
-  if(ligne != NULL) {
-    char tmp[200];
-    strcpy(tmp,ligne);
-
-    char* partie = strtok(tmp, " ");
-    while(partie != NULL) {
-      partie = strtok(NULL, " ");
-      ++x;
-    }
-  }
-  return x;
-}
-
-bool validerTab(char** param, int size, size_t prevTimestamp) {
-  int evenement ;
-  size_t timeStamp;
-   
-  if(size > 2) {
-    evenement = atoi(param[1]);
-    timeStamp = atol(param[0]);
- 
-    if(!validerEvenement(param[1]))return false;
-    if(!validerNbrParam(evenement, size)) return false;
-    if(!validerTimestamp(timeStamp, prevTimestamp)) return false;
-    return true; 
-  }
-  return false;
-}
-
-bool validerTimestamp(size_t timeStamp, size_t prevTimestamp) {
-  return timeStamp >= prevTimestamp;
-}
-
-size_t actualiserTimestamp(size_t timestamp, size_t prevTimestamp) {
-  if (validerTimestamp(timestamp, prevTimestamp)) return timestamp;
-  else return prevTimestamp; 
-}
-
-bool validerEvenement(char* param) {
-  int i = 0;
-  char eveneVal[6][2] = {{"00"},{"01"},{"02"},{"03"},{"04"},{"05"}};
-
-  if(strlen(param) == 2) {
-    while(i < 6) {
-       if((int)param[0] == (int)eveneVal[i][0] && (int)param[1] == (int)eveneVal[i][1]) return true; 
-       ++i;
-    }
-  }
-  return false;
-}
-
-bool validerNbrParam(int evenement, int size) {
-  
-  return ((evenement == 0 ||evenement == 4) ? (size != 4 ? false : true) 
-         : (evenement == 1 ||evenement == 2 ||evenement ==3) ? (size != 3 ? false : true)
-         : (evenement == 5) ? (size < 4 ? false : true) 
-         : false);
-}
 
