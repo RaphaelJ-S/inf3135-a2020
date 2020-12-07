@@ -3,6 +3,7 @@
 #include "tcv.h"
 //Les idpn sauvés
 typedef struct idPN_s {
+  size_t id;
   size_t* tab;
   int size;
 } idPN_t;
@@ -15,26 +16,32 @@ typedef struct {
 
 //tous les compteurs (il y en a beaucoup :)
 typedef struct {
+	//partie générale
 	size_t nbrTrxTot;
 	size_t trxInval;
 	size_t nbrNonSeq; 
-	size_t sumPulse;
-  double sumTA;
-  double sumTH;
-  size_t nbrPulse;
-  size_t nbrTA; 
-  size_t nbrTH;
+	//partie event 04
 	size_t nbrSignal;
+	//partie event 05
 	size_t nbrIdPn;
-  size_t valInvPulse;
+	//Partie event 03
+	size_t valInvPulse;
   size_t manifErrPulse;
   size_t cumulErrPulse;
-  size_t valInvTA;
+  size_t nbrPulse;
+	size_t sumPulse;
+	//partie event 01
+	size_t valInvTA;
   size_t manifErrTA;
   size_t cumulErrTA;
-  size_t valInvTH;
+  double sumTA;
+  size_t nbrTA;
+	//partie event 02
+	size_t valInvTH;
   size_t manifErrTH;
   size_t cumulErrTH;
+  double sumTH;
+	size_t nbrTH;
 } Compteur_t;
 
 //structure contenant toutes les données nécessaires
@@ -54,15 +61,17 @@ typedef struct args_s {
 	};	
 } donnees_t;
 
-void lecture(char*, donnees_t*);
+void lecture(char*, donnees_t*i);
 int cmd(int, char**, donnees_t*);
 bool confirmeTimestamp(char*, donnees_t*);
 bool confirmeEvenement(char*, donnees_t*);
+void affLigne(donnees_t*);
 bool confirmeDeux(char*, donnees_t*);
 bool confirmeTrois(char*, donnees_t*);
 void ajouterIdPN(idPN_t*, size_t);
 void affichage(Compteur_t*);
 //void opAiguillage(char**, identifiant_t*, Compteur_t*, idPN_t*);
-bool validerNbrParam(int, donnees_t*);
-int validerEvenement(char*, donnees_t*);
+bool validerNbrParam(donnees_t*, int);
+int validerEvenement(char*);
+bool validerDegSig(donnees_t*);
 #endif

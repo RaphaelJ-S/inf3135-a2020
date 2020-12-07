@@ -11,7 +11,7 @@ int main(int argc, char** argv) {
 	unsigned char flags[4]={0,0,0,0};
   identifiant_t identification = {9999, 2};
   Compteur_t compte = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-  idPN_t idPN = {malloc(sizeof(size_t)), 0};
+  idPN_t idPN = {0, malloc(sizeof(size_t)), 0};
 	version_t vers;   
   getVersion(&vers);
 //ne pas oublier de reset ces valeurs
