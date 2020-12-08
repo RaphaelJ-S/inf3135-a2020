@@ -10,10 +10,10 @@
 
 int cmd(int argc, char** argv, donnees_t* data) {
 	for(int i = 1; i < argc; ++i) {
-		if(strcmp(argv[i], "-t") == 0) data->options[0] = (char)1;
-		else if (strcmp(argv[i], "-i") == 0) data->options[1] = (char)1;
-		else if (strcmp(argv[i], "-d") == 0) data->options[2] = (char)1;
-		else if (strcmp(argv[i], "-s") == 0) data->options[3] = (char)1;
+		if(strcmp(argv[i], "-t") == 0) data->options[0] = (unsigned char)1;
+		else if (strcmp(argv[i], "-i") == 0) data->options[1] = (unsigned char)1;
+		else if (strcmp(argv[i], "-d") == 0) data->options[2] = (unsigned char)1;
+		else if (strcmp(argv[i], "-s") == 0) data->options[3] = (unsigned char)1;
 		else return -1;
 	}
 	return 0;
@@ -32,9 +32,9 @@ void lecture(char* ligne, donnees_t* data) {
 				else if (i == 3) valide = confirmeTrois(partie, data);
 				partie = strtok(NULL,delim);
       	++i;
-    	
+    	}
 			#ifdef _ERR_
-				printf("\n\n--Data--\n");
+				printf("\n--Data--\n");
 				printf("\nOptions : -t_%d, -i_%d, -d_%d, -s_%d",data->options[0], data->options[1], data->options[2], data->options[3]);
 				printf("\nVersion : %d.%d.%d", data->version->major, data->version->minor, data->version->build);
 				printf("\nIdentifiant : %ld %d", data->identif_s->id, data->identif_s->puissance);
@@ -42,10 +42,14 @@ void lecture(char* ligne, donnees_t* data) {
 				printf("\nTimestamp : %ld", data->timestamp);
 				printf("\nEvenement : %d", data->event);
 				printf("\nUnion : %d, %f, %d\n\n", data->idPwr, data->degSig, data->pwrSig);
+				printf("\nCompteurs TA : \n	valInv : %ld Err : %ld sum : %.1f nbr : %ld",data->cmpt_s->valInvTA, data->cmpt_s->manifErrTA, data->cmpt_s->sumTA, data->cmpt_s->nbrTA);
+				printf("\nCompteurs TH : \n	valInv : %ld Err : %ld sum : %.1f nbr : %ld",data->cmpt_s->valInvTH, data->cmpt_s->manifErrTH, data->cmpt_s->sumTH, data->cmpt_s->nbrTH);
+				printf("\nCompteurs Pulse: \n	valInv : %ld Err : %ld sum : %.ld nbr : %ld",data->cmpt_s->valInvPulse, data->cmpt_s->manifErrPulse, data->cmpt_s->sumPulse, data->cmpt_s->nbrPulse);
+				printf("\nCompteurs : \n	E4 : %ld E5 : %ld nbrTot : %ld trxInval : %ld nbrNonSeq : %ld\n\n", data->cmpt_s->nbrSignal, data->cmpt_s->nbrIdPn, data->cmpt_s->nbrTrxTot, data->cmpt_s->trxInval, data->cmpt_s->nbrNonSeq);	
 			#endif
-			}
+			
 		}
-		if(validerNbrParam(data, i)) {
+		if(validerNbrParam(data, i) && data->options[0] == 0 && valide) {
 			affLigne(data);
 		}
   }     
@@ -58,12 +62,12 @@ bool confirmeDeux(char* partie, donnees_t* data) {
 		data->identif_s->id = atol(partie);
 	}else if (event == 1 || event == 2 || event == 3 || event == 4){
 		if(err == 0){
-			if(event == 1) data->cmpt_s->manifErrTA += 1;
-			if(event == 2) data->cmpt_s->manifErrTH += 1;
+			if(event == 1) data->cmpt_s->manifErrTH += 1;
+			if(event == 2) data->cmpt_s->manifErrTA += 1;
 			if(event == 3) data->cmpt_s->manifErrPulse += 1;
 			return false;
 		}else {
-			data->degSig = atol(partie);
+			data->degSig = atof(partie);
 			data->pwrSig = atoi(partie);
 			return validerDegSig(data);
 		}
@@ -84,7 +88,7 @@ bool confirmeTrois(char* partie, donnees_t* data) {
 	}else if(event == 4) {
 		ajouterIdPN(data->id_s, atol(partie));
 		data->id_s->id = atol(partie);
-	} else return false;
+	} 
 	return true;
 }
 
@@ -93,8 +97,8 @@ bool confirmeEvenement(char* partie, donnees_t* data) {
   if(evenement == -1) { 
 		data->cmpt_s->trxInval += 1;
 		return false;	
-	}else if ( evenement == 1) data->cmpt_s->nbrTA += 1;
-	else if ( evenement == 2) data->cmpt_s->nbrTH += 1;
+	}else if ( evenement == 1) data->cmpt_s->nbrTH += 1;
+	else if ( evenement == 2) data->cmpt_s->nbrTA += 1;
 	else if ( evenement == 3) data->cmpt_s->nbrPulse += 1;
 	else if ( evenement == 4) data->cmpt_s->nbrSignal += 1;
 	else if ( evenement == 5) data->cmpt_s->nbrIdPn += 1;
@@ -110,33 +114,24 @@ bool validerDegSig(donnees_t* data) {
 	bool valide = false;
 //evaluation de la valeur pour event 1
 	if(event == 1) {
-		valide = foncAPrendre == 1 || foncAPrendre == 2 ? validerTH_1((int)degSig * 10) : false;
+		valide = foncAPrendre == 1 || foncAPrendre == 2 ? validerTH_1((int)(degSig * 10)) : false;
 		if(valide) data->cmpt_s->sumTH += degSig; 
-		else {
-			data->cmpt_s->valInvTA += 1; 
-			return false;
-		}
+		else data->cmpt_s->valInvTA += 1; 
 //evaluation de la valeur pour event 2
 	}else if (event == 2) {
-		valide = foncAPrendre == 1 ? validerTA_1((int)degSig*10) : foncAPrendre == 2 ? validerTA_3((short)degSig * 10) : false;
+		valide = foncAPrendre == 1 ? validerTA_1((int)(degSig*10)) : foncAPrendre == 2 ? validerTA_3((short)(degSig * 10)) : false;
 		if(valide) data->cmpt_s->sumTA += degSig;
-		else {
-			data->cmpt_s->valInvTH += 1;
-			return false;
-		}
+		else data->cmpt_s->valInvTH += 1;
 //evaluation de la valeur pour event 3
 	}else if (event == 3) {
 		valide = foncAPrendre == 1 ? validerPulsation_1((int)degSig) : foncAPrendre == 2 ? validerPulsation_3((short)degSig) : false;
 		if(valide)	data->cmpt_s->sumPulse += degSig;
-		else {
-			data->cmpt_s->valInvPulse += 1;
-			return false;
-		}
+		else 	data->cmpt_s->valInvPulse += 1;
 //evaluation de la valeur pour event 4
 	}else if (event == 4) {
 		valide = foncAPrendre == 1 ? validerSignal_3((short)degSig) : foncAPrendre == 2 ? validerSignal_2((char)degSig) : false;
 	}
-	return true;
+	return valide;
 }
 int validerEvenement(char* partie) {
   int i = 0;
@@ -168,155 +163,35 @@ bool validerNbrParam(donnees_t* data, int size) {
          : (evenement == 5) ? (size < 4 ? false : true) 
          : false);
 }
-void affFin(donnees_t* data) {
-	if(data->options[0]==0) {
-		
-	}
-}
+
 void affLigne(donnees_t* data) {
 	if(data->event == 0) printf("\n10 %ld %ld %d", data->timestamp, data->identif_s->id, data->identif_s->puissance);
 	if(data->event == 4) printf("\n14 %ld %ld %.1f", data->timestamp, data->id_s->id, round(pow(10.0, ((-69 - (data->pwrSig))/(10.0*data->identif_s->puissance)))*10.0)/10); 
 	if(data->event == 5){
 		printf("\n15 %ld %ld ", data->timestamp, data->identif_s->id);
 		for(int i = 0; i < data->id_s->size; ++i) {
-			printf("%ld", data->id_s->tab[i]);
+			printf("%ld ", data->id_s->tab[i]);
 		}
 	}
 }
-void affichage(Compteur_t* compte) {
-  float moyTA = 0;
+void affichageCompt(donnees_t* data) {
+  Compteur_t* compte = data->cmpt_s;
+	float moyTA = 0;
   float moyTH = 0;
-  size_t moyP = 0;
-
-  if(compte->nbrTA != 0) moyTA = compte->sumTA/compte->nbrTA;
-  if(compte->nbrTH != 0) moyTH = compte->sumTH/compte->nbrTH;
-  if(compte->nbrPulse != 0 ) moyP = round(compte->sumPulse/compte->nbrPulse);
-
-  printf("21 %.1f %.1f %ld\n",moyTH, moyTA, moyP);
-
-  printf("22 %ld %ld %ld\n", compte->valInvTH, compte->valInvTA, compte->valInvPulse);
- 
-  printf("23 %ld %ld %ld\n", compte->cumulErrTH, compte->cumulErrTA, compte->cumulErrPulse); 
+  float moyP = 0;
+	size_t THvalide = compte->nbrTH - compte->manifErrTH - compte->valInvTH;
+	size_t TAvalide = compte->nbrTA - compte->manifErrTA - compte->valInvTA;
+	size_t Pvalide = compte->nbrPulse - compte->manifErrPulse - compte->valInvPulse;
+  if(TAvalide > 0) moyTA = compte->sumTA/TAvalide;
+  if(THvalide > 0) moyTH = compte->sumTH/THvalide;
+  if(Pvalide > 0) moyP = compte->sumPulse/(double)Pvalide;
+  printf("\n21 %.1f %.1f %.0f",moyTH, moyTA, moyP);
+  printf("\n22 %ld %ld %ld", compte->valInvTH, compte->valInvTA, compte->valInvPulse);
+  printf("\n23 %ld %ld %ld", compte->manifErrTH/3, compte->manifErrTA/3, compte->manifErrPulse/3); 
 }
 void ajouterIdPN(idPN_t* idPN, size_t nvElem) {
   idPN->tab = realloc(idPN->tab, sizeof(size_t) * (idPN->size+1));
   idPN->tab[idPN->size] = nvElem;
   idPN->size += 1; 
 }
-/*
-static void opEvent05(char** tab, identifiant_t* identification, idPN_t* idPN) {
-  printf("15 %ld %ld ", atol(tab[0]), identification->id);
-  for(int i = 0; i < idPN->size; ++i) {
-    printf("%ld ", idPN->tab[i]);
-  }
-  printf("\n");
-}
-
-static void opEvent04(char** tab, identifiant_t* identification, idPN_t* idPN) {
-  int sig = atoi(tab[2]);
-  version_t v;
-  getVersion(&v);
-  bool valide = v.build >= 1005 && v.build <= 1008 ? validerSignal_3((short)sig) 
-              : v.build <= 1003 ? validerSignal_2((char)sig) : false;  
-  if(valide) {
-    size_t timestamp = atol(tab[0]);
-    size_t id = atol(tab[3]);
-    float metre = pow(10.0, ((-69 - (sig))/(10.0*identification->puissance))); 
-    ajouterIdPN(idPN, id);
-    printf("14 %ld %ld %.1f\n", timestamp, id, round(metre*10)/10); 
-
-  } 
-}
-static void opEvent03(char* temperature, Compteur_t* compte) {
-  int pulse = atoi(temperature);
-  version_t v;
-  getVersion(&v);
-  bool valide = v.build >= 1005 && v.build <= 1008 ? validerPulsation_1(pulse) 
-              : v.build <= 1003 ? validerPulsation_3((short)pulse) : false;  
-
-  if(strcmp(temperature, "ERREUR") == 0) {
-    compte->manifErrPulse += 1;
-    if(compte->manifErrPulse == 3) {
-      compte->manifErrPulse = 0;
-      compte->cumulErrPulse += 1;
-    }
-  } else if(valide) {
-      compte->sumPulse += pulse;
-      compte->nbrPulse += 1;
-  } else compte->valInvPulse += 1;
-}
-
-static void opEvent02(char* temperature, Compteur_t* compte) {
-  int tempA = atof(temperature) * 10;
-  version_t v;
-  getVersion(&v);
-  bool valide = v.build >= 1005 && v.build <= 1008 ? validerTA_1(tempA) 
-              : v.build <= 1003 ? validerTA_3((short)tempA) : false;  
-
- 
-  if(strcmp(temperature, "ERREUR") == 0) {
-    compte->manifErrTA +=1;
-    if(compte->manifErrTA == 3) {
-      compte->manifErrTA = 0;
-      compte->cumulErrTA += 1;
-    }
-  } else if(valide){
-      compte->sumTA += (float)tempA/10.0;
-      compte->nbrTA += 1;
-  } else compte->valInvTA += 1; 
-}
-
-static void opEvent01(char* temperature, Compteur_t* compte) {
-  int tempH = atof(temperature)* 10; 
-
-  version_t v;
-  getVersion(&v);
-  bool valide = v.build >= 1005 && v.build <= 1008 ? validerTH_1(tempH) 
-              : v.build <= 1003 ? validerTH_1(tempH) : false;  
-
-
-  if(strcmp(temperature, "ERREUR") == 0){
-    compte->manifErrTH += 1;
-    if(compte->manifErrTH == 3) {
-      compte->manifErrTH = 0;
-      compte->cumulErrTH += 1;
-    }
-  } else if (valide) {
-      compte->sumTH += (float)(tempH/10.0);
-      compte->nbrTH += 1;
-  } else compte->valInvTH += 1;
-}
-static void opEvent00(char** tab, identifiant_t* precedent) {
-  int puissance= atoi(tab[3]);
-  precedent->id = atol(tab[2]);
-  precedent->puissance = puissance==2||puissance==3||puissance==4 ? puissance : 2;
-  printf("10 %ld %ld %d\n",atol(tab[0]), precedent->id, precedent->puissance);
-}
-void opAiguillage(char** tab, identifiant_t* identification, Compteur_t* compte, idPN_t* idPN) {
-  char* mesure = tab[2];
-  switch (atol(tab[1])) {
-    case(0):
-      opEvent00(tab, identification);
-      break;
-    case(1):
-      opEvent01(mesure, compte);     
-      break;
-    case(2):
-      opEvent02(mesure, compte);
-      break;
-    case(3):
-      opEvent03(mesure, compte);
-      break;
-    case(4):
-      opEvent04(tab, identification, idPN);
-      break;
-    case(5):
-      opEvent05(tab, identification,  idPN);
-      break;
-  } 
-}
-*/
-
-
-
 

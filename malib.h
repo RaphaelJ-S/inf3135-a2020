@@ -27,19 +27,16 @@ typedef struct {
 	//Partie event 03
 	size_t valInvPulse;
   size_t manifErrPulse;
-  size_t cumulErrPulse;
   size_t nbrPulse;
 	size_t sumPulse;
-	//partie event 01
+	//partie event 02
 	size_t valInvTA;
   size_t manifErrTA;
-  size_t cumulErrTA;
   double sumTA;
   size_t nbrTA;
-	//partie event 02
+	//partie event 01
 	size_t valInvTH;
   size_t manifErrTH;
-  size_t cumulErrTH;
   double sumTH;
 	size_t nbrTH;
 } Compteur_t;
@@ -53,12 +50,9 @@ typedef struct args_s {
   idPN_t* id_s;
   size_t timestamp;
 	char event;
-	union {
-		unsigned char idPwr;
-		float degSig;
-		signed short pwrSig;
-		char* string;
-	};	
+	unsigned char idPwr;
+	float degSig;
+	signed short pwrSig;
 } donnees_t;
 
 void lecture(char*, donnees_t*i);
@@ -69,8 +63,7 @@ void affLigne(donnees_t*);
 bool confirmeDeux(char*, donnees_t*);
 bool confirmeTrois(char*, donnees_t*);
 void ajouterIdPN(idPN_t*, size_t);
-void affichage(Compteur_t*);
-//void opAiguillage(char**, identifiant_t*, Compteur_t*, idPN_t*);
+void affichageCompt(donnees_t*);
 bool validerNbrParam(donnees_t*, int);
 int validerEvenement(char*);
 bool validerDegSig(donnees_t*);
