@@ -4,6 +4,7 @@
 #include <math.h>
 #include "tcv.h"
 #include "malib.h"
+#include "outil3.h"
 
 int main(int argc, char** argv) {
   char str[200];

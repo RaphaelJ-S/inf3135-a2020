@@ -1,6 +1,7 @@
+#include "tcv.h"
 #ifndef MALIB_H
 #define MALIB_H
-#include "tcv.h"
+
 //Les idpn sauvés
 typedef struct idPN_s {
   size_t id;
