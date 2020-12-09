@@ -1,0 +1,12 @@
+
+*** compilation ***
+ 
+**** differences ****
+1
+2
+1
+4
+0
+15
+ 
+Correction fin.
