@@ -1,11 +1,4 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <math.h>
-#include <stdbool.h>
 #include "malib.h"
-#include "outil3.h"
-#include "tcv.h"
 
 void lecture(char* ligne, donnees_t* data) {
 	if(ligne != NULL) {
@@ -156,8 +149,9 @@ bool validerNbrParam(donnees_t* data, int size) {
 }
 
 void affLigne(donnees_t* data) {
+	float (*dist)(int, int) = distance;
 	if(data->event == 0) printf("\n10 %ld %ld %d", data->timestamp, data->identif_s->id, data->identif_s->puissance);
-	if(data->event == 4) printf("\n14 %ld %ld %.1f", data->timestamp, data->id_s->id, distance(data->pwrSig, data->identif_s->puissance)); 
+	if(data->event == 4) printf("\n14 %ld %ld %.1f", data->timestamp, data->id_s->id, (*dist)(data->pwrSig, data->identif_s->puissance)); 
 	if(data->event == 5){
 		printf("\n15 %ld %ld ", data->timestamp, data->identif_s->id);
 		for(int i = 0; i < data->id_s->size; ++i) {

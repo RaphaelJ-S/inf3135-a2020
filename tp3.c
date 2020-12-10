@@ -1,10 +1,5 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <math.h>
-#include "tcv.h"
-#include "malib.h"
 #include "outil3.h"
+#include "malib.h"
 
 int main(int argc, char** argv) {
   char str[200];

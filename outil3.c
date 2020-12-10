@@ -1,10 +1,5 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <math.h>
-#include "malib.h"
 #include "outil3.h"
-
+#include <math.h>
 #define _BASE_ 10.0
 #define _M_ -69
 
@@ -23,5 +18,4 @@ int cmd(int argc, char** argv, donnees_t* data) {
 float distance(int _signal, int _power) {
 	return round(pow(_BASE_, (_M_ - _signal)/(_BASE_* _power)));
 }
-
 
