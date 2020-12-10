@@ -16,13 +16,13 @@ run: tp3 data.txt
 	@cat data.txt | ./tp3 
 
 clean: 
-	@rm -rf ./data/ t*[321] tcv.[oh]
+	@rm -rf ./data/ tp3 test_tp3 tcv.[oh]
 
 lib: 
 ifeq ($(wildcard ./tcv.h),) 
-	@wget -q $(WEB_TCV)tp1.zip $(WEB_TCV)tp2.zip $(WEB_TCV)tp3.zip ; mkdir -p ./data ; mv ./tp[123].zip ./data ; unzip -uq ./data/tp[123].zip 
+	@wget -qN --directory-prefix=./data/ $(WEB_TCV)tp1.zip $(WEB_TCV)tp2.zip $(WEB_TCV)tp3.zip ; unzip -uoq "./data/tp[123].zip"
 else ifeq ($(wildcard ./tcv.o),)
-	@wget -q $(WEB_TCV)tp1.zip $(WEB_TCV)tp2.zip $(WEB_TCV)tp3.zip ; mkdir -p ./data ; mv ./tp[123].zip ./data/ ; unzip -uq ./data/tp[123].zip 
+	@wget -qN --directory-prefix=./data/ $(WEB_TCV)tp1.zip $(WEB_TCV)tp2.zip $(WEB_TCV)tp3.zip ; unzip -uoq "./data/tp[123].zip"
 endif
 
 .PHONY:clean lib all default

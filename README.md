@@ -1,11 +1,12 @@
-![tp2 compilation](https://github.com/RaphaelJ-S/inf3135-a2020/workflows/tp2%20compilation/badge.svg)
-# Travail pratique 2
+![tp2 compilation](https://github.com/RaphaelJ-S/inf3135-a2020/workflows/tp2%20compilation/badge.svg) 
+
+### Travail pratique 3 
 
 ## Description
 
-Ce projet est réalisé pour le cours Construction et maintenance de logiciels (INF3135) de l'automne 2020 à l'université du québec à montréal (UQAM). Ce projet est le deuxième livrable du cours et est à remettre au plus tard le 22 novembre 2020. 
+Ce projet est réalisé pour le cours Construction et maintenance de logiciels (INF3135) de l'automne 2020 à l'université du québec à montréal (UQAM). Ce projet est le troisième livrable du cours et est à remettre au plus tard le 20 décembre 2020. 
 
-Le but du projet tp2 est de construire un logiciel qui prend les données venant de stdin (un fichier, une commande ou l'entrée manuelle) et afficher les information résultantes. Ce logiciel simule le fonctionnement d'une puce utilisée dans la détection de la COVID-19.
+Le but du projet tp3 est de construire un logiciel qui prend les données venant de stdin (un fichier, une commande ou l'entrée manuelle) et afficher les information résultantes. Ce logiciel simule le fonctionnement d'une puce utilisée dans la détection de la COVID-19.
 
 ## Auteur
 
@@ -17,11 +18,11 @@ Code permanent : JACR26038907
 
 Il y a deux manière de faire fonctionner ce programme. 
 
-* En tapant `./tp2` et en entrant les données manuellement. 
+* En tapant `./tp3` et en entrant les données manuellement. 
 
-* En utilisant une pipe pour donner des données au logiciel avec, par exemple `cat data.txt | ./tp2`.
+* En utilisant une pipe pour donner des données au logiciel avec, par exemple `cat data.txt | ./tp3`.
 
-Dans les deux cas, le fichier "tp2" et ses dépendances doivent exister. Cela est réalisé avec la commande `make` ou `make tp2`
+Dans les deux cas, le fichier "tp3" et ses dépendances doivent exister. Cela est réalisé avec la commande `make` ou `make tp3`
 
 ## Contenu du projet
 
@@ -29,24 +30,16 @@ Dans les deux cas, le fichier "tp2" et ses dépendances doivent exister. Cela es
 * Makefile : Le fichier contenant les raccourcis pour des commandes. Les raccourcis sont : 
 
   1. `default` : Dépend de la commande `make tp2`.
-  2. `make tp1` : Crée l'exécutable 'tp1' et ses dépendances.
-  3. `make tp2` : Crée l'exécutable 'tp2' et ses dépendances.
-  4. `make test-tp1a` : Exécute l'exécutable 'tp1'.
-  5. `make test-tp1b` : Exécute l'exécutable 'tp1' avec liste.sh pour lister les fonctions valides.
-  6. `make test-tp2` : Exécute l'exécutable 'tp2'.
-  7. `make lib` : Crée le dossier ./data et y télécharge le dossier compressé contenant les fichiers 'tcv.o' et 'tcv.h'. Ensuite, décompresse le fichier télécharger dans le dossier courant.
-  8. `make clean` : Efface les exécutables, les fichiers "tcv.o" et "tcv.h" et le dossier ./data.
+  2. `make tp3` : Crée l'exécutable 'tp2' et ses dépendances.
+  3. `make lib` : Crée le dossier ./data et y télécharge le dossier compressé contenant les fichiers 'tcv.o' et 'tcv.h'. Ensuite, décompresse le fichier télécharger dans le dossier courant.
+  4. `make clean` : Efface les exécutables, les fichiers "tcv.o" et "tcv.h" et le dossier ./data.
 
-* simple.c : Contient les fonction du tp1.
-* simple.h : Contient les entetes du tp1.
-* malib.c : Contient les fonctions du tp2.
-* malib.h : Contient les entetes du tp2.
-* tp1.c : Contient le main du tp1. 
-* tp2.c : Contient le main du tp2.
-* liste.sh : Exécute une commande de filtrage pour afficher les fonction qui ont passées les tests du tp1. 
+* malib.c : Contient les fonctions du tp3.
+* malib.h : Contient les entetes du tp3.
+* tp3.c : Contient le main du tp3.
 * cp.txt : Contient le code permanent en majuscule.
 * reflexion.md : Contient mes reflexions lors de l'écriture du tp2.
-* tp2.yml: Contient des objets en notation YAML définissant les différents fichiers.
+* tp3.yml: Contient des objets en notation YAML définissant les différents fichiers.
 
 ## Processus de réflexion et démarche
 
@@ -61,7 +54,7 @@ Dans les deux cas, le fichier "tp2" et ses dépendances doivent exister. Cela es
 
 ## Statut
 
-Le projet est complété, les sorties et les calculation sont conformes aux exigences. Par contre, il y a toujours une petite fuite de mémoire.
+Le projet est complété, les sorties et les calculation sont conformes aux exigences. 
 
 ## Autoévaluation
 
