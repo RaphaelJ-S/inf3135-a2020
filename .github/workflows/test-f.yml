@@ -27,5 +27,5 @@ jobs:
         make tp3
         cat tests/event00_in.txt | ./tp3 | diff -b tests/event00_out.txt -
     -name : evenement 01
-      run:
+      run: |
         cat tests/event01_in.txt | ./tp3 -s -d -i | diff -b tests/event01_out.txt -
