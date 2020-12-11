@@ -16,7 +16,7 @@ jobs:
         gcc -v
         ls -la
     - name: Tests 
-      runs: |
+      run: |
         make clean
         make tp3
         cat tests/event00_in.txt | ./tp3 | diff -b tests/event00_out.txt -

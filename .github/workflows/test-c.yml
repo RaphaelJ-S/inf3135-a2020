@@ -16,7 +16,7 @@ jobs:
         gcc -v
         ls -la
     - name: Compilation
-      runs: |
+      run: |
         make clean
         make tp3
         make run
