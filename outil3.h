@@ -6,5 +6,5 @@
 
 int cmd(int, char**, donnees_t*);
 float distance(int _signal, int _power);
-
+int comparer(const void*, const void*);
 #endif

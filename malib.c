@@ -53,8 +53,10 @@ bool confirmeDeux(char* partie, donnees_t* data) {
 			data->pwrSig = atoi(partie);
 			return validerDegSig(data);
 		}
-  }
-	
+  } else if( event == 5 ) { 
+		int (*comp)(const void*, const void*) = comparer;
+		qsort( data->id_s->tab, data->id_s->size, sizeof(size_t), (*comp));
+	}	
 	return true;
 }
 bool confirmeTrois(char* partie, donnees_t* data) {
@@ -100,12 +102,12 @@ bool validerDegSig(donnees_t* data) {
 	if(event == 1) {
 		valide = foncAPrendre == 1 || foncAPrendre == 2 ? validerTH_1((int)(degSig * 10)) : false;
 		if(valide) data->cmpt_s->sumTH += degSig; 
-		else data->cmpt_s->valInvTA += 1; 
+		else data->cmpt_s->valInvTH += 1; 
 	
 	}else if (event == 2) {
 		valide = foncAPrendre == 1 ? validerTA_1((int)(degSig*10)) : foncAPrendre == 2 ? validerTA_3((short)(degSig * 10)) : false;
 		if(valide) data->cmpt_s->sumTA += degSig;
-		else data->cmpt_s->valInvTH += 1;
+		else data->cmpt_s->valInvTA += 1;
 	
 	}else if (event == 3) {
 		valide = foncAPrendre == 1 ? validerPulsation_1((int)degSig) : foncAPrendre == 2 ? validerPulsation_3((short)degSig) : false;

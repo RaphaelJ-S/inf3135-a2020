@@ -1,0 +1,22 @@
+name: Compilation du tp3
+on:
+	push:
+		branches:
+			- tp3
+jobs:
+	job1:
+		name: Verification
+		runs-on: ubuntu-latest
+		timeout-minutes: 20
+		steps:
+		- uses: actions/checkout@v2
+		- name: affichage
+			run: |
+				echo $OSTYPE
+				gcc -v
+				ls -la
+		- name: Compilation
+			runs: |
+				make clean
+				make tp3
+				make run

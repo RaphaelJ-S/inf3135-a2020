@@ -12,8 +12,8 @@ tp3: lib tp3.c malib.c malib.h
 test_tp3: tp3.c lib malib.c malib.h
 	@$(OPT_GCC) -D_ERR_ -o test_tp3 tp3.c malib.c outil3.c tcv.o -lm
 
-run: tp3 data.txt 
-	@cat data.txt | ./tp3 
+run: tp3 tests/data.txt 
+	@cat tests/data.txt | ./tp3 -d -i -s 
 
 clean: 
 	@rm -rf ./data/ tp3 test_tp3 tcv.[oh]

@@ -16,6 +16,11 @@ int cmd(int argc, char** argv, donnees_t* data) {
 }
 
 float distance(int _signal, int _power) {
-	return round(pow(_BASE_, (_M_ - _signal)/(_BASE_* _power)));
+	return round(pow(_BASE_, (_M_ - _signal)/(_BASE_ * _power)));
 }
+
+int comparer(const void* arg1, const void* arg2) {
+	return ( *(size_t*)arg1 - *(size_t*)arg2 );
+}
+
 
