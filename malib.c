@@ -55,7 +55,11 @@ bool confirmeDeux(char* partie, donnees_t* data) {
 		}
   } else if( event == 5 ) { 
 		int (*comp)(const void*, const void*) = comparer;
-		qsort( data->id_s->tab, data->id_s->size, sizeof(size_t), (*comp));
+		size_t id = atol(partie);
+		if(data->id_s->size > 1) qsort( data->id_s->tab, data->id_s->size, sizeof(size_t), (*comp) ); 		
+		if( !(bsearch( (void*)&id, data->id_s->tab, data->id_s->size, sizeof(size_t), (*comp))) ) ajouterIdPN(data->id_s, id);
+
+		qsort( data->id_s->tab, data->id_s->size, sizeof(size_t), (*comp) );
 	}	
 	return true;
 }
