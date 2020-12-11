@@ -19,4 +19,4 @@ jobs:
       runs: |
         make clean
         make tp3
-				cat tests/event00_in.txt | ./tp3 | diff -b tests/event00_out.txt -
+        cat tests/event00_in.txt | ./tp3 | diff -b tests/event00_out.txt -
