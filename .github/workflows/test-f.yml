@@ -1,0 +1,22 @@
+name: Tests fonctionnels du tp3
+on:
+  push:
+    branches:
+      - tp3
+jobs:
+  job1:
+    name: Verification
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+    - uses: actions/checkout@v2
+    - name: affichage
+      run: |
+        echo $OSTYPE
+        gcc -v
+        ls -la
+    - name: Tests 
+      runs: |
+        make clean
+        make tp3
+				cat tests/event00_in.txt | ./tp3 | diff -b tests/event00_out.txt -
