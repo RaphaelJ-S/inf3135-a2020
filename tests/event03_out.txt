@@ -5,7 +5,7 @@ version #: 0.1.1008
 information detaillee
   trx 01 : 0
   trx 02 : 0
-  trx 03 : 12
+  trx 03 : 9
   trx 04 : 0
   trx 05 : 0
   le dernier ts lu : 11
