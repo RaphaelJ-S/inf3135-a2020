@@ -1,0 +1,11 @@
+version #: 0.1.1008
+21 0.0 -11.6 0
+22 0 2 0
+23 0 2 0
+information detaillee
+  trx 01 : 0
+  trx 02 : 12
+  trx 03 : 0
+  trx 04 : 0
+  trx 05 : 0
+  le dernier ts lu : 11
