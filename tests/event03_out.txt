@@ -1,7 +1,7 @@
 version #: 0.1.1008
 21 0.0 0.0 123
 22 0 0 3
-23 0 0 1
+23 0 0 0
 information detaillee
   trx 01 : 0
   trx 02 : 0

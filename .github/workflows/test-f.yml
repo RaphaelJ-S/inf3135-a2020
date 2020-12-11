@@ -35,3 +35,6 @@ jobs:
     - name : evenement 03
       run: |
         cat tests/event03_in.txt | ./tp3 -d | diff -b tests/event03_out.txt -
+    - name : evenement 04
+      run: |
+        cat tests/event04_in.txt | ./tp3 -d | diff -b tests/event04_out.txt -
