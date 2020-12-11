@@ -1,4 +1,4 @@
-![tp2 compilation](https://github.com/RaphaelJ-S/inf3135-a2020/workflows/tp2%20compilation/badge.svg) 
+![Tests fonctionnels du tp3](https://github.com/RaphaelJ-S/inf3135-a2020/workflows/Tests%20fonctionnels%20du%20tp3/badge.svg?branch=tp3)
 
 ### Travail pratique 3 
 
