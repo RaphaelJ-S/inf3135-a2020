@@ -18,26 +18,9 @@ int main(int argc, char** argv) {
   	while(fgets(str,200, stdin) != NULL) {
 				ptr = strtok(str, "\n");
    		 	data.cmpt_s->nbrTrxTot += 1;
-				#ifdef _ERR_
-					printf("\nEntree : %s", ptr);
-				#endif
 				lecture(ptr, &data);
   	}
 		affichageOptions(&data);
-	  /*	
-		if(data.options[0] == 0) {
-			affichageCompt(&data);			
-		}
-		if (data.options[1] == 1){
-			printf("\ninformation invalide\n  trx non reconnue : %ld\n  trx avec ts non sequentiel : %ld", data.cmpt_s->trxInval, data.cmpt_s->nbrNonSeq);		
-		}
-		if (data.options[2] == 1) {
-			printf("\ninformation detaillee\n  trx 01 : %ld\n  trx 02 : %ld\n  trx 03 : %ld\n  trx 04 : %ld\n  trx 05 : %ld\n  le dernier ts lu : %ld", data.cmpt_s->nbrTH, data.cmpt_s->nbrTA, data.cmpt_s->nbrPulse, data.cmpt_s->nbrSignal, data.cmpt_s->nbrIdPn, data.timestamp);
-		}
-		if (data.options[3] == 1) {
-			printf("\ninformation sommaire\n  nbr trx valides : %ld\n  nbr trx (total) : %ld", data.cmpt_s->nbrTrxTot - data.cmpt_s->trxInval - data.cmpt_s->nbrNonSeq, data.cmpt_s->nbrTrxTot);
-		}
-    */	
 	}else printf("\n\nUne option n'est pas valide. Les options sont : -d -t -i -s\n\n");
   
 	free(idPN.tab);

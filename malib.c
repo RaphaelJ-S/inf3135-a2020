@@ -148,34 +148,7 @@ bool validerNbrParam(donnees_t* data, int size) {
          : (evenement == 5) ? (size < 4 ? false : true) 
          : false);
 }
-/*
-void affLigne(donnees_t* data) {
-	float (*dist)(int, int) = distance;
-	
-	if(data->event == 0) printf("\n10 %ld %ld %d", data->timestamp, data->identif_s->id, data->identif_s->puissance);
-	if(data->event == 4) printf("\n14 %ld %ld %.1f", data->timestamp, data->id_s->id, (*dist)(data->pwrSig, data->identif_s->puissance)); 
-	if(data->event == 5){
-		printf("\n15 %ld %ld ", data->timestamp, data->identif_s->id);
-		for(int i = 0; i < data->id_s->size; ++i) {
-			printf("%ld ", data->id_s->tab[i]);
-		}
-	}
-}
 
-void affichageCompt(donnees_t* data) {
-  Compteur_t* compte = data->cmpt_s;
-	size_t THvalide = compte->nbrTH - compte->manifErrTH - compte->valInvTH;
-	size_t TAvalide = compte->nbrTA - compte->manifErrTA - compte->valInvTA;
-	size_t Pvalide = compte->nbrPulse - compte->manifErrPulse - compte->valInvPulse;
-  float moyTA = TAvalide > 0 ? compte->sumTA/TAvalide : 0;
-  float moyTH = THvalide > 0 ? compte->sumTH/THvalide : 0;
-	float moyP = Pvalide > 0 ? compte->sumPulse/Pvalide : 0;
-	
-	printf("\n21 %.1f %.1f %.0f",moyTH, moyTA, moyP);
-  printf("\n22 %ld %ld %ld", compte->valInvTH, compte->valInvTA, compte->valInvPulse);
-  printf("\n23 %ld %ld %ld", compte->manifErrTH/3, compte->manifErrTA/3, compte->manifErrPulse/3); 
-}
-*/
 void ajouterIdPN(idPN_t* idPN, size_t nvElem) {
   idPN->tab = realloc(idPN->tab, sizeof(size_t) * (idPN->size+1));
   idPN->tab[idPN->size] = nvElem;
