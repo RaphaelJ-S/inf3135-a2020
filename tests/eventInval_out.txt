@@ -6,7 +6,7 @@
 22 0 0 0
 23 0 0 0
 information invalide
-  trx non reconnue : 4
+  trx non reconnue : 6
   trx avec ts non sequentiel : 0
 information detaillee
   trx 01 : 1
@@ -14,7 +14,7 @@ information detaillee
   trx 03 : 1
   trx 04 : 2
   trx 05 : 1
-  le dernier ts lu : 11
+  le dernier ts lu : 12
 information sommaire
-  nbr trx valides : 6
-  nbr trx (total) : 10
+  nbr trx valides : 7
+  nbr trx (total) : 13
