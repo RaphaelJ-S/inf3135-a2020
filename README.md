@@ -1,6 +1,5 @@
 ![Compilation du tp3](https://github.com/RaphaelJ-S/inf3135-a2020/workflows/Compilation%20du%20tp3/badge.svg)
-![Tests fonctionnels du tp3](https://github.com/RaphaelJ-S/inf3135-a2020/workflows/Tests%20fonctionnels%20du%20tp3/badge.svg?branch=tp3)
-
+![Tests fonctionnels du tp3](https://github.com/RaphaelJ-S/inf3135-a2020/workflows/Tests%20fonctionnels%20du%20tp3/badge.svg)
 ### Travail pratique 3 
 
 ## Description
