@@ -5,12 +5,12 @@ on:
       - tp3
 jobs:
   job1:
-    name: Verification
+    name: Compilation 
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
     - uses: actions/checkout@v2
-    - name: affichage
+    - name: Verification 
       run: |
         echo $OSTYPE
         gcc -v

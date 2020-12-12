@@ -5,22 +5,16 @@ on:
       - tp3
 jobs:
   job1:
-    name: Verification
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    steps:
-    - uses: actions/checkout@v2
-    - name: affichage
-      run: |
-        echo $OSTYPE
-        gcc -v
-        ls -la
-  job2:
     name: Tests fonctionnels
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
     - uses: actions/checkout@v2
+    - name: verification
+      run: |
+        echo $OSTYPE
+        gcc -v
+        ls -la
     - name: evenement 00
       run: |
         make clean
