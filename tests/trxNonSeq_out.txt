@@ -1,0 +1,17 @@
+version #: 0.1.1008
+21 23.8 0.0 54
+22 0 0 0
+23 0 0 0
+information invalide
+  trx non reconnue : 0
+  trx avec ts non sequentiel : 6
+information detaillee
+  trx 01 : 1
+  trx 02 : 1
+  trx 03 : 1
+  trx 04 : 0
+  trx 05 : 0
+  le dernier ts lu : 12
+information sommaire
+  nbr trx valides : 3
+  nbr trx (total) : 9

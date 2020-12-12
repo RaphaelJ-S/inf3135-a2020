@@ -38,3 +38,6 @@ jobs:
     - name : evenement invalide
       run : |
         cat tests/eventInval_in.txt | ./tp3 -i -d -s | diff -b tests/eventInval_out.txt -
+    - name : evenement non sequentiel
+      run : |
+        cat tests/trxNonSeq_in.txt | ./tp3 -i -d -s | diff -b tests/trxNonSeq_out.txt -

@@ -1,7 +1,7 @@
 *.o
 *.bin
 *.out
-t*[a213]
 tcv.[oh]
 /data
 *.guy
+tp3
