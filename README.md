@@ -34,13 +34,18 @@ Dans les deux cas, le fichier "tp3" et ses dépendances doivent exister. Cela es
   3. `make lib` : Crée le dossier ./data et y télécharge le dossier compressé contenant les fichiers 'tcv.o' et 'tcv.h'. Ensuite, décompresse le fichier télécharger dans le dossier courant.
   4. `make clean` : Efface les exécutables, les fichiers "tcv.o" et "tcv.h" et le dossier ./data.
 
-* malib.c : Contient les fonctions du tp3.
-* malib.h : Contient les entetes du tp3.
+* malib.c : Contient les fonctions principales du tp3.
+* malib.h : Contient les entetes de malib.c.
 * tp3.c : Contient le main du tp3.
 * cp.txt : Contient le code permanent en majuscule.
-* reflexion.md : Contient mes reflexions lors de l'écriture du tp2.
-* tp3.yml: Contient des objets en notation YAML définissant les différents fichiers.
-
+* reflexion.md : Contient mes reflexions lors de l'écriture du tp3.
+* outil3.c : Contient les fonctions de support du tp3.
+* outil3.h : Contient les entetes de outil3.c. 
+* struct.h : Contient les stuctures du tp3.
+* tests/ : Contient les fichiers de tests fonctionnels du tp3.
+* test-c.yml : Contient le code yml de la compilation pour les actions github.
+* test-f.yml : Contient le code yml des tests fonctionnels pour les actions github.
+* .gitignore : Contient les fichiers indésirables pour le dépot distant.
 ## Processus de réflexion et démarche
 
 [reflexion](./reflexion.md)
@@ -66,3 +71,6 @@ Je pense que j'ai bien répondu aux attentes formulées dans l'énoncé du TP2 :
 * Le programme utilise les fonctions définies dans tcv.h.
 * Les sorties sont conformes à l'énoncé.
 * gitignore present.
+* fichiers yml presents.
+* fichiers de tests presents.
+
