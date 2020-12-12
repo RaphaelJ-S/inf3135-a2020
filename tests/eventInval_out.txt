@@ -1,0 +1,20 @@
+10 6 1000 3
+14 10 1929292 3.4
+14 11 1929298 0.1
+15 12 1000 1929292 1929298
+21 38.2 -10.2 157
+22 0 0 0
+23 0 0 0
+information invalide
+  trx non reconnue : 4
+  trx avec ts non sequentiel : 0
+information detaillee
+  trx 01 : 1
+  trx 02 : 1
+  trx 03 : 1
+  trx 04 : 2
+  trx 05 : 1
+  le dernier ts lu : 11
+information sommaire
+  nbr trx valides : 6
+  nbr trx (total) : 10

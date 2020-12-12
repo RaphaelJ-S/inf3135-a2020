@@ -41,3 +41,6 @@ jobs:
     - name : evenement 05
       run: |
         cat tests/event05_in.txt | ./tp3 -d | diff -b tests/event05_out.txt -
+    - name : evenement invalide
+      run : |
+        cat tests/eventInval_in.txt | ./tp3 -i -d -s | diff -b tests/eventInval_out.txt -
