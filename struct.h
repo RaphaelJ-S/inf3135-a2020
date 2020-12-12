@@ -22,29 +22,29 @@ typedef struct {
 
 //tous les compteurs (il y en a beaucoup :)
 typedef struct {
-	//partie générale
-	size_t nbrTrxTot;
-	size_t trxInval;
-	size_t nbrNonSeq; 
-	//partie event 04
-	size_t nbrSignal;
-	//partie event 05
-	size_t nbrIdPn;
-	//Partie event 03
-	size_t valInvPulse;
+  //partie générale
+  size_t nbrTrxTot;
+  size_t trxInval;
+  size_t nbrNonSeq; 
+  //partie event 04
+  size_t nbrSignal;
+  //partie event 05
+  size_t nbrIdPn;
+  //Partie event 03
+  size_t valInvPulse;
   size_t manifErrPulse;
   size_t nbrPulse;
-	size_t sumPulse;
-	//partie event 02
-	size_t valInvTA;
+  size_t sumPulse;
+  //partie event 02
+  size_t valInvTA;
   size_t manifErrTA;
   double sumTA;
   size_t nbrTA;
-	//partie event 01
-	size_t valInvTH;
+  //partie event 01
+  size_t valInvTH;
   size_t manifErrTH;
   double sumTH;
-	size_t nbrTH;
+  size_t nbrTH;
 } Compteur_t;
 
 //structure contenant toutes les données nécessaires
@@ -52,13 +52,13 @@ typedef struct args_s {
   version_t* version;
   unsigned char* options;//0 -t, 1 -i, 2 -d,3 -s
   Compteur_t* cmpt_s;
-	identifiant_t* identif_s;
+  identifiant_t* identif_s;
   idPN_t* id_s;
   size_t timestamp;
-	char event;
-	float degSig;
-	unsigned char idPwr;
-	signed short pwrSig;
+  char event;
+  float degSig;
+  unsigned char idPwr;
+  signed short pwrSig;
 } donnees_t;
 
 #endif
