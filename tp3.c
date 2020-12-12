@@ -23,6 +23,8 @@ int main(int argc, char** argv) {
 				#endif
 				lecture(ptr, &data);
   	}
+		affichageOptions(&data);
+	  /*	
 		if(data.options[0] == 0) {
 			affichageCompt(&data);			
 		}
@@ -35,7 +37,9 @@ int main(int argc, char** argv) {
 		if (data.options[3] == 1) {
 			printf("\ninformation sommaire\n  nbr trx valides : %ld\n  nbr trx (total) : %ld", data.cmpt_s->nbrTrxTot - data.cmpt_s->trxInval - data.cmpt_s->nbrNonSeq, data.cmpt_s->nbrTrxTot);
 		}
+    */	
 	}else printf("\n\nUne option n'est pas valide. Les options sont : -d -t -i -s\n\n");
-  free(idPN.tab);
+  
+	free(idPN.tab);
   return 0;
 }

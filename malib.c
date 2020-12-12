@@ -1,13 +1,15 @@
 #include "malib.h"
 
-void lecture(char* ligne, donnees_t* data) {
+void lecture( char* ligne, donnees_t* data ) {
 	if(ligne != NULL) {
-  	char* delim =" ";
+		char* delim =" ";
 		bool valide = true; 
 		int i = 0;
+		
 		if(*ligne != '\0') {
-  		char* partie = strtok(ligne,delim);
-    	while(partie && valide) {
+			char* partie = strtok(ligne,delim);
+    	
+			while(partie && valide) {
       	if(i == 0) valide = confirmeTimestamp(partie, data); 
 				else if (i == 1) valide = confirmeEvenement(partie, data);
 				else if (i == 2) valide = confirmeDeux(partie, data);
@@ -15,24 +17,9 @@ void lecture(char* ligne, donnees_t* data) {
 				partie = strtok(NULL,delim);
       	++i;
     	}
-			#ifdef _ERR_
-				printf("\n--Data--\n");
-				printf("\nOptions : -t_%d, -i_%d, -d_%d, -s_%d",data->options[0], data->options[1], data->options[2], data->options[3]);
-				printf("\nVersion : %d.%d.%d", data->version->major, data->version->minor, data->version->build);
-				printf("\nIdentifiant : %ld %d", data->identif_s->id, data->identif_s->puissance);
-				printf("\nIDPN : %d", data->id_s->size);
-				printf("\nTimestamp : %ld", data->timestamp);
-				printf("\nEvenement : %d", data->event);
-				printf("\nUnion : %d, %f, %d\n\n", data->idPwr, data->degSig, data->pwrSig);
-				printf("\nCompteurs TA : \n	valInv : %ld Err : %ld sum : %.1f nbr : %ld",data->cmpt_s->valInvTA, data->cmpt_s->manifErrTA, data->cmpt_s->sumTA, data->cmpt_s->nbrTA);
-				printf("\nCompteurs TH : \n	valInv : %ld Err : %ld sum : %.1f nbr : %ld",data->cmpt_s->valInvTH, data->cmpt_s->manifErrTH, data->cmpt_s->sumTH, data->cmpt_s->nbrTH);
-				printf("\nCompteurs Pulse: \n	valInv : %ld Err : %ld sum : %.ld nbr : %ld",data->cmpt_s->valInvPulse, data->cmpt_s->manifErrPulse, data->cmpt_s->sumPulse, data->cmpt_s->nbrPulse);
-				printf("\nCompteurs : \n	E4 : %ld E5 : %ld nbrTot : %ld trxInval : %ld nbrNonSeq : %ld\n\n", data->cmpt_s->nbrSignal, data->cmpt_s->nbrIdPn, data->cmpt_s->nbrTrxTot, data->cmpt_s->trxInval, data->cmpt_s->nbrNonSeq);	
-			#endif
-			
 		}
 		if(validerNbrParam(data, i) && data->options[0] == 0 && valide) {
-			affLigne(data);
+			affichageLigne(data);
 		}
   }     
 }
@@ -40,6 +27,7 @@ void lecture(char* ligne, donnees_t* data) {
 bool confirmeDeux(char* partie, donnees_t* data) {
 	char event = data->event;
 	int err = strcmp(partie, "ERREUR");
+	
 	if(event == 0) {
 		data->identif_s->id = atol(partie);
 	}else if (event == 1 || event == 2 || event == 3 || event == 4){
@@ -56,6 +44,7 @@ bool confirmeDeux(char* partie, donnees_t* data) {
   } else if( event == 5 ) { 
 		int (*comp)(const void*, const void*) = comparer;
 		size_t id = atol(partie);
+		
 		if(data->id_s->size > 1) qsort( data->id_s->tab, data->id_s->size, sizeof(size_t), (*comp) ); 		
 		if( !(bsearch( (void*)&id, data->id_s->tab, data->id_s->size, sizeof(size_t), (*comp))) ) ajouterIdPN(data->id_s, id);
 
@@ -63,28 +52,30 @@ bool confirmeDeux(char* partie, donnees_t* data) {
 	}	
 	return true;
 }
+
 bool confirmeTrois(char* partie, donnees_t* data) {
 	char event = data->event;
+	
 	if(event == 0) {
 		int pwr = atoi(partie);
+		
 		if(pwr == 2||pwr == 3||pwr == 4) {
 			data->identif_s->puissance = (unsigned char)pwr;	
 		}else {
-			data->cmpt_s->trxInval += 1; 
+			data->identif_s->puissance = (unsigned char)2;
 			return false;
 		}
 	}else if(event == 4) {
 		ajouterIdPN(data->id_s, atol(partie));
 		data->id_s->id = atol(partie);
-	}else if(event == 5) {
-		
-	} 
+	}
 	return true;
 }
 
 bool confirmeEvenement(char* partie, donnees_t* data) {
 	int evenement = validerEvenement(partie);
-  if(evenement == -1) { 
+  
+	if(evenement == -1) { 
 		data->cmpt_s->trxInval += 1;
 		return false;	
 	}else if ( evenement == 1) data->cmpt_s->nbrTH += 1;
@@ -123,6 +114,7 @@ bool validerDegSig(donnees_t* data) {
 	}
 	return valide;
 }
+
 int validerEvenement(char* partie) {
   int i = 0;
   char eveneVal[6][2] = {{"00"},{"01"},{"02"},{"03"},{"04"},{"05"}};
@@ -135,8 +127,10 @@ int validerEvenement(char* partie) {
   }
   return -1;
 }
+
 bool confirmeTimestamp(char* partie, donnees_t* data) {
 	size_t timestamp = atol(partie);
+	
 	if(data->timestamp > timestamp) {
 		data->cmpt_s->nbrNonSeq += 1;
 		return false;
@@ -147,15 +141,17 @@ bool confirmeTimestamp(char* partie, donnees_t* data) {
 }
 bool validerNbrParam(donnees_t* data, int size) {
   int evenement = data->event;
+	
 	if(size < 3)return false;
 	return ((evenement == 0 ||evenement == 4) ? (size != 4 ? false : true) 
          : (evenement == 1 ||evenement == 2 ||evenement ==3) ? (size != 3 ? false : true)
          : (evenement == 5) ? (size < 4 ? false : true) 
          : false);
 }
-
+/*
 void affLigne(donnees_t* data) {
 	float (*dist)(int, int) = distance;
+	
 	if(data->event == 0) printf("\n10 %ld %ld %d", data->timestamp, data->identif_s->id, data->identif_s->puissance);
 	if(data->event == 4) printf("\n14 %ld %ld %.1f", data->timestamp, data->id_s->id, (*dist)(data->pwrSig, data->identif_s->puissance)); 
 	if(data->event == 5){
@@ -165,6 +161,7 @@ void affLigne(donnees_t* data) {
 		}
 	}
 }
+
 void affichageCompt(donnees_t* data) {
   Compteur_t* compte = data->cmpt_s;
 	size_t THvalide = compte->nbrTH - compte->manifErrTH - compte->valInvTH;
@@ -173,10 +170,12 @@ void affichageCompt(donnees_t* data) {
   float moyTA = TAvalide > 0 ? compte->sumTA/TAvalide : 0;
   float moyTH = THvalide > 0 ? compte->sumTH/THvalide : 0;
 	float moyP = Pvalide > 0 ? compte->sumPulse/Pvalide : 0;
+	
 	printf("\n21 %.1f %.1f %.0f",moyTH, moyTA, moyP);
   printf("\n22 %ld %ld %ld", compte->valInvTH, compte->valInvTA, compte->valInvPulse);
   printf("\n23 %ld %ld %ld", compte->manifErrTH/3, compte->manifErrTA/3, compte->manifErrPulse/3); 
 }
+*/
 void ajouterIdPN(idPN_t* idPN, size_t nvElem) {
   idPN->tab = realloc(idPN->tab, sizeof(size_t) * (idPN->size+1));
   idPN->tab[idPN->size] = nvElem;
