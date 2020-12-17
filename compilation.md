@@ -24,24 +24,25 @@ information detaillee
 information sommaire
   nbr trx valides : 36
   nbr trx (total) : 36total 104
-drwxr-xr-x 6 runner docker  4096 Dec 17 14:28 .
-drwxr-xr-x 3 runner docker  4096 Dec 17 14:28 ..
-drwxr-xr-x 8 runner docker  4096 Dec 17 14:28 .git
-drwxr-xr-x 3 runner docker  4096 Dec 17 14:28 .github
--rw-r--r-- 1 runner docker    41 Dec 17 14:28 .gitignore
--rw-r--r-- 1 runner docker   740 Dec 17 14:28 Makefile
--rw-r--r-- 1 runner docker  3409 Dec 17 14:28 README.md
--rw-r--r-- 1 runner docker   531 Dec 17 14:28 compilation.md
--rw-r--r-- 1 runner docker    13 Dec 17 14:28 cp.txt
-drwxr-xr-x 2 runner docker  4096 Dec 17 14:28 data
--rw-r--r-- 1 runner docker  4866 Dec 17 14:28 malib.c
--rw-r--r-- 1 runner docker   465 Dec 17 14:28 malib.h
--rw-r--r-- 1 runner docker  2821 Dec 17 14:28 outil3.c
--rw-r--r-- 1 runner docker   284 Dec 17 14:28 outil3.h
--rw-r--r-- 1 runner docker  1135 Dec 17 14:28 reflexion.md
--rw-r--r-- 1 runner docker  1207 Dec 17 14:28 struct.h
+drwxr-xr-x 6 runner docker  4096 Dec 17 14:48 .
+drwxr-xr-x 3 runner docker  4096 Dec 17 14:48 ..
+drwxr-xr-x 8 runner docker  4096 Dec 17 14:48 .git
+drwxr-xr-x 3 runner docker  4096 Dec 17 14:48 .github
+-rw-r--r-- 1 runner docker    41 Dec 17 14:48 .gitignore
+-rw-r--r-- 1 runner docker   740 Dec 17 14:48 Makefile
+-rw-r--r-- 1 runner docker  3410 Dec 17 14:48 README.md
+-rw-r--r-- 1 runner docker   531 Dec 17 14:48 compilation.md
+-rw-r--r-- 1 runner docker    13 Dec 17 14:48 cp.txt
+drwxr-xr-x 2 runner docker  4096 Dec 17 14:48 data
+-rw-r--r-- 1 runner docker     0 Dec 17 14:48 fonctionnel.md
+-rw-r--r-- 1 runner docker  4866 Dec 17 14:48 malib.c
+-rw-r--r-- 1 runner docker   465 Dec 17 14:48 malib.h
+-rw-r--r-- 1 runner docker  2821 Dec 17 14:48 outil3.c
+-rw-r--r-- 1 runner docker   284 Dec 17 14:48 outil3.h
+-rw-r--r-- 1 runner docker  1135 Dec 17 14:48 reflexion.md
+-rw-r--r-- 1 runner docker  1207 Dec 17 14:48 struct.h
 -rw-r----- 1 runner docker   583 Nov 30 13:58 tcv.h
 -rw-r----- 1 runner docker  2944 Nov 30 16:50 tcv.o
-drwxr-xr-x 2 runner docker  4096 Dec 17 14:28 tests
--rwxr-xr-x 1 runner docker 18424 Dec 17 14:28 tp3
--rw-r--r-- 1 runner docker   837 Dec 17 14:28 tp3.c
+drwxr-xr-x 2 runner docker  4096 Dec 17 14:48 tests
+-rwxr-xr-x 1 runner docker 18424 Dec 17 14:48 tp3
+-rw-r--r-- 1 runner docker   837 Dec 17 14:48 tp3.c
