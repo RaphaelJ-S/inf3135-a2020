@@ -19,25 +19,32 @@ jobs:
       run: |
         make clean
         make tp3
-        cat tests/event00_in.txt | ./tp3 | diff -b tests/event00_out.txt -
+        cat tests/event00_in.txt | ./tp3 | diff -b tests/event00_out.txt - > fonctionnel.md
     - name : evenement 01
       run: |
-        cat tests/event01_in.txt | ./tp3 -d | diff -b tests/event01_out.txt -
+        cat tests/event01_in.txt | ./tp3 -d | diff -b tests/event01_out.txt - >> fonctionnel.md
     - name : evenement 02
       run: |
-        cat tests/event02_in.txt | ./tp3 -d | diff -b tests/event02_out.txt -
+        cat tests/event02_in.txt | ./tp3 -d | diff -b tests/event02_out.txt - >> fonctionnel.md
     - name : evenement 03
       run: |
-        cat tests/event03_in.txt | ./tp3 -d | diff -b tests/event03_out.txt -
+        cat tests/event03_in.txt | ./tp3 -d | diff -b tests/event03_out.txt - >> fonctionnel.md
     - name : evenement 04
       run: |
-        cat tests/event04_in.txt | ./tp3 -d | diff -b tests/event04_out.txt -
+        cat tests/event04_in.txt | ./tp3 -d | diff -b tests/event04_out.txt - >> fonctionnel.md
     - name : evenement 05
       run: |
-        cat tests/event05_in.txt | ./tp3 -d | diff -b tests/event05_out.txt -
+        cat tests/event05_in.txt | ./tp3 -d | diff -b tests/event05_out.txt - >> fonctionnel.md
     - name : evenement invalide
       run : |
-        cat tests/eventInval_in.txt | ./tp3 -i -d -s | diff -b tests/eventInval_out.txt -
+        cat tests/eventInval_in.txt | ./tp3 -i -d -s | diff -b tests/eventInval_out.txt - >> fonctionnel.md
     - name : evenement non sequentiel
       run : |
-        cat tests/trxNonSeq_in.txt | ./tp3 -i -d -s | diff -b tests/trxNonSeq_out.txt -
+        cat tests/trxNonSeq_in.txt | ./tp3 -i -d -s | diff -b tests/trxNonSeq_out.txt - >> fonctionnel.md
+
+    - name: push
+      uses: actions-x/commit@v1
+      with:
+        name: GitHub Actions Autocommitter
+        branch: tp3
+        files: fonctionnel.md
