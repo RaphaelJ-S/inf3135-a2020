@@ -20,4 +20,11 @@ jobs:
         make clean
         make tp3
         make run > compilation.md
+        ls -la >> compilation.md
+    - name: push
+      uses: actions-x/commit@v1
+      with:
+        name: GitHub Actions Autocommitter
+        branch: tp3
+        files: compilation.md
 
